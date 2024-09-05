@@ -44,6 +44,7 @@ class UnitController extends Controller
             'driver' => 'required',
             'rent'=> 'required',
             'rent_type'=> 'required',
+            'images'=> 'required|image',
             'features'=> 'required',
             'details'=> 'required',
         ]);
@@ -53,7 +54,14 @@ class UnitController extends Controller
         // $unit->country = $request->country;
         // $unit->city = $request->city;
 
-        // $unit->save()
+        // image submit
+        if ($request->hasFile('image')) {
+            $images = $request->file('image');
+            $path = $images->store('vendors/units-img/car', 'public'); // Store the image in the specified director
+            $validateData['images'] = $path; // Add the image path to the validated data
+        }
+
+        //$unit->save();
 
         $unit = Unit::create($validateData);
         // DB::table('unit')->insert([
@@ -71,7 +79,8 @@ class UnitController extends Controller
         //     'details'=> $validateData['details'],
         // ]);
 
-        return redirect()->route('listing-car.index')->with('success','form sending');
+        //return redirect()->route('listing-car.index')->with('success','form sending');
+        return $request->all();
     }
 
     /**

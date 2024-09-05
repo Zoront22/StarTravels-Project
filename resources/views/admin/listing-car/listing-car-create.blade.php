@@ -35,7 +35,8 @@
                         </div><!-- End column -->
                     </div><!-- end row -->
                     <div class="car-listing-form">
-                        <form class="text-center" action="{{ route('listing-car.store') }}" method="POST">
+                        <form class="text-center" action="{{ route('listing-car.store') }}" method="POST"
+                            enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <div class="col-md">
@@ -316,7 +317,8 @@
                             </div><!-- end row -->
 
                             <div action="/upload" class="dropzone needsclick dz-clickable" id="demo-upload">
-                                <i class="fas fa-cloud-upload-alt"></i>
+                                <i class="fas fa-cloud-upload-alt"><input type="file" name="images" id="image"
+                                        accept="image" class="form-control"></i>
                                 <div class="dz-message needsclick">
                                     <p>
                                         Drop files here or click to upload.

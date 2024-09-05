@@ -22,6 +22,7 @@ class Unit extends Model
         'driver' ,
         'rent',
         'rent_type',
+        'images',
         'features',
         'details',
     ];
