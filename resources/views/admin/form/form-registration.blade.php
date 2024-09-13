@@ -26,30 +26,33 @@
                     </div>
                     <div class="col-sm-7 col-md-5 col-lg-4 me-sm-auto ps-sm-0">
                         <div class="white-box sh-above flex-centering">
-                            <form>
+                            <form action="{{ route('register.store') }}" method="POST">
+                                @csrf
                                 <h4>Sign Up</h4>
                                 <p class="new-acc">Already have an account? <a href="form-login">Login!</a>
                                 </p>
                                 <div class="row mt-4">
                                     <div class="col">
-                                        <input type="text" class="form-control " placeholder="Your Name" required>
+                                        <input type="text" class="form-control " name="name" placeholder="Your Name"
+                                            required>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <input type="email" class="form-control " id="exampleInputEmail1"
+                                        <input type="email" class="form-control " name="email" id="exampleInputEmail1"
                                             aria-describedby="emailHelp" placeholder="Enter email" required>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <input type="text" class="form-control " placeholder="Phone No:" required>
+                                        <input type="text" class="form-control " name="phone" placeholder="Phone No:"
+                                            required>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col">
-                                        <input type="password" class="form-control " id="exampleInputPassword1"
-                                            placeholder="Password" required>
+                                        <input type="password" class="form-control " name="password"
+                                            id="exampleInputPassword1" placeholder="Password" required>
                                     </div>
                                 </div>
                                 <ul class="list-unstyled  list-inline info">
@@ -65,4 +68,4 @@
                 </div>
             </div>
 
-@endsection
+        @endsection

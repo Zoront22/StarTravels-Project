@@ -178,9 +178,9 @@
                         </a>
                         <div class="collapse sub-menu" id="users">
                             <a class="items-list1 {{ Request::is('admin/users/users-create-user') ? 'active' : '' }}"
-                                href="{{ url('admin/users/users-create-user') }}">Create User</a>
+                                href="{{ url('users.create') }}">Create User</a>
                             <a class="items-list1 {{ Request::is('admin/users/users-list') ? 'active' : '' }}"
-                                href="{{ url('admin/users/users-list') }}">List</a>
+                                href="{{ url('user.index') }}">List</a>
                         </div><!-- End sub-menu -->
                     </li>
                     <li class="nav-item">

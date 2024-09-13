@@ -2,19 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AdminUsers;
+use Illuminate\Support\Facades\Auth;
+use Validator;
+use Illuminate\Validation\Rules;
 use Illuminate\Http\Request;
-use App\Models\User;
 
-class ListUserController extends Controller
+class AdminUsersController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        // $user = DB::select('select * from users');
-        $user = User::all();
-        return view('admin/users/users-list')->with('user', $user);
+        return view('admin.form.form-registration');
     }
 
     /**
@@ -22,7 +23,7 @@ class ListUserController extends Controller
      */
     public function create()
     {
-        return view('admin.users.users-create-user');
+        //
     }
 
     /**
@@ -31,18 +32,15 @@ class ListUserController extends Controller
     public function store(Request $request)
     {
         $validateData = $request->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'username' => 'required',
-            'email' => 'required',
-            'password' => 'required',
+            'name' => 'required',
+            'email' => 'required'|'email'|'unique:user',
             'phone' => 'required',
-            'birth' => 'required',
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $user = User::create($validateData);
+        $admin = AdminUsers::create($validateData);
 
-        return route('users.index');
+        return $request->all();
     }
 
     /**

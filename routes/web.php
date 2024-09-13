@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminUsersController;
 use App\Http\Controllers\ListUserController;
 use App\Http\Controllers\UnitHotelController;
 use App\Http\Controllers\UnitController;
@@ -8,6 +9,7 @@ use App\Http\Controllers\UnidadesImagenesController;
 use App\Http\Controllers\UnitCruiseController;
 use App\Http\Controllers\UnitTourController;
 use App\Http\Controllers\UnitFlightController;
+use App\Models\AdminUsers;
 
 Route::prefix('admin')->group(function () {
 
@@ -29,7 +31,10 @@ Route::prefix('admin')->group(function () {
     //Forms
     Route::view('/form/form-forgot-password', 'admin/form/form-forgot-password');
     Route::view('/form/form-login', 'admin/form/form-login');
-    Route::view('/form/form-registration', 'admin/form/form-registration');
+    Route::resource('/register', AdminUsersController::class)->parameters([
+        'register' => 'admin',
+    ]);//Pending...
+    // Route::view('/form/form-registration', 'admin/form/form-registration');
     //end Forms
 
     //others
@@ -93,7 +98,7 @@ Route::prefix('admin')->group(function () {
     //End profile
 
     //Users
-    Route::view('/users/users-create-user', 'admin/users/users-create-user');
-    Route::get('/users/users-list', [ListUserController::class, 'index']);
+    // Route::view('/users/users-create-user', 'admin/users/users-create-user');
+    Route::resource('/users', ListUserController::class);
     //End users
 });
