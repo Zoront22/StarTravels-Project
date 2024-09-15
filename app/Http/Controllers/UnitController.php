@@ -79,8 +79,8 @@ class UnitController extends Controller
         //     'details'=> $validateData['details'],
         // ]);
 
-        //return redirect()->route('listing-car.index')->with('success','form sending');
-        return $request->all();
+        return redirect()->route('listing-car.index')->with('success','form sending');
+        // return $request->all();
     }
 
     /**

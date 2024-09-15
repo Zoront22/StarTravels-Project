@@ -33,7 +33,7 @@ class AdminUsersController extends Controller
     {
         $validateData = $request->validate([
             'name' => 'required',
-            'email' => 'required'|'email'|'unique:user',
+            'email' => ['required', 'unique:admin'],
             'phone' => 'required',
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);

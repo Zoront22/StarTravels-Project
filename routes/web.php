@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminUsersController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ListUserController;
 use App\Http\Controllers\UnitHotelController;
 use App\Http\Controllers\UnitController;
@@ -9,7 +10,6 @@ use App\Http\Controllers\UnidadesImagenesController;
 use App\Http\Controllers\UnitCruiseController;
 use App\Http\Controllers\UnitTourController;
 use App\Http\Controllers\UnitFlightController;
-use App\Models\AdminUsers;
 
 Route::prefix('admin')->group(function () {
 
@@ -31,9 +31,8 @@ Route::prefix('admin')->group(function () {
     //Forms
     Route::view('/form/form-forgot-password', 'admin/form/form-forgot-password');
     Route::view('/form/form-login', 'admin/form/form-login');
-    Route::resource('/register', AdminUsersController::class)->parameters([
-        'register' => 'admin',
-    ]);//Pending...
+    Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');//Pending...
+    Route::post('/register', [RegisterController::class, 'register'])->name('register.post');//Pending... Error
     // Route::view('/form/form-registration', 'admin/form/form-registration');
     //end Forms
 

@@ -162,8 +162,8 @@
             <div class="side-menu">
                 <ul class="navbar-nav">
                     <li class="nav-item" id="dashboard-link">
-                        <a href="{{ url('admin/index/index') }}"
-                            class="items-list first {{ Request::is('admin/index/index') ? 'active' : '' }}">
+                        <a href="{{ url('admin/') }}"
+                            class="items-list first {{ Request::is('admin/index') ? 'active' : '' }}">
                             <span><i class="fa fa-home link-icon" data-bs-toggle="tooltip" data-html="true"
                                     title="Dashboard"></i></span>
                             <span class="items-list-text">Dashboard</span>
@@ -177,10 +177,10 @@
                             <span><i class="fa fa-chevron-down arrow"></i></span>
                         </a>
                         <div class="collapse sub-menu" id="users">
-                            <a class="items-list1 {{ Request::is('admin/users/users-create-user') ? 'active' : '' }}"
-                                href="{{ url('users.create') }}">Create User</a>
-                            <a class="items-list1 {{ Request::is('admin/users/users-list') ? 'active' : '' }}"
-                                href="{{ url('user.index') }}">List</a>
+                            <a class="items-list1 {{ Request::is('admin/users/create') ? 'active' : '' }}"
+                                href="{{ route('users.create') }}">Create User</a>
+                            <a class="items-list1 {{ Request::is('admin/users') ? 'active' : '' }}"
+                                href="{{ route('users.index') }}">List</a>
                         </div><!-- End sub-menu -->
                     </li>
                     <li class="nav-item">

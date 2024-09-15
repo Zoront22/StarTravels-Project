@@ -1,66 +1,20 @@
-<!doctype html>
-<html lang="en">
+@extends('layouts.forms')
 
-<head>
-    <title>Registration</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+@section('title', 'Registration')
+
+@section('content')
 
 
-    <!-- Framework Stylesheets Start-->
-
-
-    	<style>
-		.loader {
-	position: fixed;
-	left: 0px;
-	top: 0px;
-	width: 100%;
-	height: 100%;
-	z-index: 9999;
-	background: url(../images/loader-red.gif) center no-repeat #fff;
-}
-	</style>
-	<link rel="stylesheet" href="css/loader.css">
-
-    <!-- Bootstrap Stylesheet -->
-    <link rel="stylesheet" href="css/bootstrap-5.3.2.min.css">
-
-    <!-- Framework Stylesheets End-->
-
-
-
-    <!-- Font Awsome Stylesheet -->
-    <link rel="stylesheet" href="vendors/fontawesome5.7.2/css/all.min.css">
-
-
-    <!-- Custom Stylesheet Start-->
-
-
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <link rel="stylesheet" type="text/css" href="css/responsive.css">
-    <link rel="stylesheet" href="css/custom.css">
-
-    <!-- Custom Stylesheet End-->
-
-
-
-
-    <link rel="icon" href="images/favicon.png" type="image/x-icon">
-</head>
-
-<body>
     <!--====== LOADER =====-->
     <div class="loader"></div>
-    <a href="index.html" class="btn btn-primary ms-5 mt-5 sh-above position-absolute">Go Back</a>
+    <a href="{{ url('admin/index/index') }}" class="btn btn-primary ms-5 mt-5 sh-above position-absolute">Go Back</a>
     <section class="reg-form common-form bg-image flex-centering">
         <div class="container-fluid">
             <div class="meta">
                 <div class="row">
                     <div class="col-sm-5 col-md-4 col-lg-3 ms-sm-auto pe-sm-0">
                         <div class="white-box left-side sh-above">
-                            <img src="images/logo.png" alt="logo-img" class="img-fluid ">
+                            <img src="{{ asset('vendors/admin/images/logo.png') }}" alt="logo-img" class="img-fluid ">
                             <h2 class="">Welcome to Star Travels</h2>
                             <ul class="social list-unstyled ">
                                 <li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
@@ -72,37 +26,40 @@
                     </div>
                     <div class="col-sm-7 col-md-5 col-lg-4 me-sm-auto ps-sm-0">
                         <div class="white-box sh-above flex-centering">
-                            <form>
+                            <form action="{{ route('register.post') }}" method="POST">
+                                @csrf
                                 <h4>Sign Up</h4>
-                                <p class="new-acc">Already have an account? <a href="form-login.html">Login!</a>
+                                <p class="new-acc">Already have an account? <a href="form-login">Login!</a>
                                 </p>
                                 <div class="row mt-4">
                                     <div class="col">
-                                        <input type="text" class="form-control " placeholder="Your Name" required>
+                                        <input type="text" class="form-control " name="name" placeholder="Your Name"
+                                            required>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <input type="email" class="form-control " id="exampleInputEmail1"
+                                        <input type="email" class="form-control " name="email" id="exampleInputEmail1"
                                             aria-describedby="emailHelp" placeholder="Enter email" required>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <input type="text" class="form-control " placeholder="Phone No:" required>
+                                        <input type="text" class="form-control " name="phone" placeholder="Phone No:"
+                                            required>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col">
-                                        <input type="password" class="form-control " id="exampleInputPassword1"
-                                            placeholder="Password" required>
+                                        <input type="password" class="form-control " name="password"
+                                            id="exampleInputPassword1" placeholder="Password" required>
                                     </div>
                                 </div>
                                 <ul class="list-unstyled  list-inline info">
                                     <li><button type="submit" class="btn d-block">Create</button></li>
 
                                     <li class="list-inline-item">
-                                        <a href="form-forgot-password.html" class="new-acc">Forgot Password?</a>
+                                        <a href="form-forgot-password" class="new-acc">Forgot Password?</a>
                                     </li>
                                 </ul>
                             </form>
@@ -110,35 +67,5 @@
                     </div>
                 </div>
             </div>
-            <footer class="sh-above">
-                <p>Designed By <span>Star Travels</span></p>
-            </footer>
-        </div><!-- end container-fluid -->
-    </section><!-- end login-form -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <!-- Optional JavaScript, Not optional it's need too -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap-5.3.2.min.js"></script>
-    <script src="js/customscriptfile.js"></script>
-    <!-- Page Scripts Ends -->
-
-
-
-</body>
-
-</html>
+        @endsection
