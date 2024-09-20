@@ -27,20 +27,21 @@
                     </div>
                     <div class="col-sm-7 col-md-5 col-lg-4 me-sm-auto ps-sm-0">
                         <div class="white-box sh-above flex-centering">
-                            <form>
+                            <form method="POST" action="{{ route('login.auth') }}">
+                                @csrf
                                 <h4>Login</h4>
-                                <p class="new-acc">Don't have an account? <a href="form-registration">Create
+                                <p class="new-acc">Don't have an account? <a href="{{ url('admin/register') }}">Create
                                         one!</a></p>
                                 <div class="form-group mt">
-                                    <input type="email" class="form-control " id="exampleInputEmail1"
+                                    <input type="email" class="form-control " name="email" id="exampleInputEmail1"
                                         aria-describedby="emailHelp" placeholder="Enter Email" required>
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" class="form-control " id="exampleInputPassword1"
+                                    <input type="password" class="form-control " name="password" id="exampleInputPassword1"
                                         aria-describedby="passwordHelp" placeholder="Enter Password" required>
                                 </div>
                                 <div class="custom-control custom-checkbox ">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck1" required>
+                                    <input type="checkbox" class="custom-control-input" id="customCheck1">
                                     <label class="custom-control-label" for="customCheck1">Remember Me</label>
                                 </div>
                                 <ul class="list-unstyled  info">
@@ -54,4 +55,4 @@
                     </div>
                 </div>
             </div>
-@endsection
+        @endsection

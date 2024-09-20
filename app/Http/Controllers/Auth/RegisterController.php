@@ -28,6 +28,8 @@ class RegisterController extends Controller
      *
      * @var string
      */
+
+    // redirect
     protected $redirectTo = '/admin';
 
     /**

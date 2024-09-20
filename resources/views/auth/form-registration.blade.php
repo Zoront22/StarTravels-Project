@@ -29,7 +29,7 @@
                             <form action="{{ route('register.post') }}" method="POST">
                                 @csrf
                                 <h4>Sign Up</h4>
-                                <p class="new-acc">Already have an account? <a href="form-login">Login!</a>
+                                <p class="new-acc">Already have an account? <a href="{{ url('admin/login') }}">Login!</a>
                                 </p>
                                 <div class="row mt-4">
                                     <div class="col">

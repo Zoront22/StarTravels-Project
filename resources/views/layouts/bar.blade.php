@@ -163,7 +163,7 @@
                 <ul class="navbar-nav">
                     <li class="nav-item" id="dashboard-link">
                         <a href="{{ url('admin/') }}"
-                            class="items-list first {{ Request::is('admin/index') ? 'active' : '' }}">
+                            class="items-list first {{ Request::is('admin/') ? 'active' : '' }}">
                             <span><i class="fa fa-home link-icon" data-bs-toggle="tooltip" data-html="true"
                                     title="Dashboard"></i></span>
                             <span class="items-list-text">Dashboard</span>
@@ -382,9 +382,9 @@
                             </a>
                             <div class="collapse sub-sub-menu" id="forms">
                                 <a class="items-list3 {{ Request::is('admin/form/form-login') ? 'active' : '' }}"
-                                    href="{{ url('admin/form/form-login') }}">Login</a>
+                                    href="{{ url('admin/login') }}">Login</a>
                                 <a class="items-list3 {{ Request::is('admin/form/form-registration') ? 'active' : '' }}"
-                                    href="{{ url('admin/form/form-registration') }}">Sign Up</a>
+                                    href="{{ url('admin/register') }}">Sign Up</a>
                                 <a class="items-list3 {{ Request::is('admin/form/form-forgot-password') ? 'active' : '' }}"
                                     href="{{ url('admin/form/form-forgot-password') }}">Forgot Password</a>
                             </div>
