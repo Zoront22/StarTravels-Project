@@ -78,5 +78,7 @@ php artisan serve
 
 Warning: Before running the project, have [XAMPP](https://www.apachefriends.org/es/index.html "XAMPP") installed, running the project in the "htdocs" folder, and start the apache servers and your "[MySQL](https://www.mysql.com "MySQL")" database.
 
-![MySQL](https://1000marcas.net/wp-content/uploads/2020/11/MySQL-logo.png "MySQL")
-![Xampp](https://draftdesignweb.com/wp-content/uploads/2023/12/logo-xampp-draftdesignweb-code.png "Xampp")
+<div align="center">
+  <img src="https://1000marcas.net/wp-content/uploads/2020/11/MySQL-logo.png" alt="MySQL" width="150" />
+  <img src="https://draftdesignweb.com/wp-content/uploads/2023/12/logo-xampp-draftdesignweb-code.png" alt="Xampp" width="150" />
+</div>
