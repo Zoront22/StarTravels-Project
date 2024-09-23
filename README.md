@@ -1,50 +1,68 @@
-#START TRAVELS :fa-plane:
+# ✈️ Start Travels
 
-<p>
-"**START TRAVELS**" is a comprehensive project designed to revolutionize how people plan their trips and acquire related services. The platform offers two types of personalized experiences: one for customers and another for vendors.
-</p>
+**Start Travels** is a comprehensive platform designed to revolutionize how people plan their trips and acquire related services. We offer two personalized experiences: one for **customers** and another for **vendors**.
 
-On the customer page, users have access to a wide range of services including: 
-- Competitive prices.
-- Detailed travel plans.
-- High-quality images of the services offered. 
-- The ability to purchase what they need for their trip.
+---
 
-The experience is designed to be seamless and satisfying, allowing users to find and purchase everything they need for their travels in one place.
+## 🌍 For Customers
 
-On the other hand, the vendor page is focused on providing powerful tools to manage and optimize their businesses. Vendors can access:
-- Detailed sales charts. 
-- Allowing them to accurately track the performance of their products and services. 
-- The ability to add, activate, delete, and edit the services they offer.
-- The platform facilitates payment management as well.
-- Vendors can communicate directly with customers through messages.
-- Receive and manage reviews of their services.
+On the customer page, users can access a wide range of services, including:
 
-## Installing project dependencies and tools
-**1. Install Composer**
-Laravel uses Composer as its dependency manager. If you don't have it installed yet, download and install it by following the instructions in [Composer](http://getcomposer.org "Composer")
-<div style="text-align: center;">
-  <img src="https://getcomposer.org/img/logo-composer-transparent.png" alt="composer" />
+- **Competitive prices.**
+- **Detailed travel plans.**
+- **High-quality images** of the services offered.
+- The ability to **purchase everything** they need for their trip in one place.
+
+The experience is designed to be seamless and satisfying, allowing users to find and buy all they need for their travels easily.
+
+---
+
+## 🏷️ For Vendors
+
+The vendor page provides powerful tools to manage and optimize their business, such as:
+
+- **Detailed sales charts** to accurately track the performance of their products and services.
+- The ability to **add, activate, delete, and edit** the services they offer.
+- **Payment management** made easy through the platform.
+- **Direct communication** with customers through messages.
+- Management of **service reviews** received from customers.
+
+---
+
+## 🚀 Installing Dependencies and Tools
+
+### 1. Install Composer
+Laravel uses Composer as its dependency manager. If you don't have it installed yet, download and install it by following the instructions on the official website: [Composer](http://getcomposer.org)
+
+<div align="center">
+  <img src="https://getcomposer.org/img/logo-composer-transparent.png" alt="Composer logo" width="300" />
 </div>
 
-**2. Install Laravel Globally (Optional)**
+### 2. Install Laravel Globally (Optional)
 You can install Laravel globally using Composer. This makes it easier to create new Laravel projects.
-<div style="text-align: center;">
+
+<div align="center">
   <a href="https://laravel.com/docs/11.x">
-  <img src="https://media.licdn.com/dms/image/v2/D4E12AQEhSWRTreXYew/article-cover_image-shrink_600_2000/article-cover_image-shrink_600_2000/0/1694479065771?e=2147483647&v=beta&t=0AspTC8wC-hiRAaORRGWn1gnw2RHbenMsmbAHZTBHqU" alt="Laravel" />
+    <img src="https://media.licdn.com/dms/image/v2/D4E12AQEhSWRTreXYew/article-cover_image-shrink_600_2000/article-cover_image-shrink_600_2000/0/1694479065771?e=2147483647&v=beta&t=0AspTC8wC-hiRAaORRGWn1gnw2RHbenMsmbAHZTBHqU" alt="Laravel logo" width="300" />
   </a>
 </div>
 
-**3. Install Node.js (and npm) on Windows/MacOS/Linux**
-The easiest way to install Node.js and npm is by downloading the installer from the official [Node.js website](https://nodejs.org/en "Node.js website").
-<div style="text-align: center;">
-  <img src="https://miro.medium.com/v2/resize:fit:900/1*TY9uBBO9leUbRtlXmQBiug.png" alt="nodeJS" />
+### 3. Install Node.js (and npm) on Windows/MacOS/Linux
+The easiest way to install Node.js and npm is by downloading the installer from the official website: [Node.js](https://nodejs.org/en)
+
+<div align="center">
+  <img src="https://miro.medium.com/v2/resize:fit:900/1*TY9uBBO9leUbRtlXmQBiug.png" alt="Node.js logo" width="300" />
 </div>
 
-**Install "[npm](https://www.npmjs.com/package/express "npm")"**
-``
+---
+
+## 📦 Installing Dependencies
+
+Install the **express** dependency with the following command:
+
+```bash
 npm i express
-``
+````
 
 **The commands to run locally are:**
 
