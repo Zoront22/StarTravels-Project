@@ -6,7 +6,7 @@
 
     <!--====== LOADER =====-->
     <div class="loader"></div>
-    <a href="{{ url('admin/index/index') }}" class="btn btn-primary ms-5 mt-5 sh-above position-absolute">Go Back</a>
+    <a href="{{ url('admin/') }}" class="btn btn-primary ms-5 mt-5 sh-above position-absolute">Go Back</a>
     <section class="login-form common-form bg-image flex-centering">
         <div class="container-fluid">
             <div class="meta">

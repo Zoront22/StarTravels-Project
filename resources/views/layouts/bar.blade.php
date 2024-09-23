@@ -162,8 +162,8 @@
             <div class="side-menu">
                 <ul class="navbar-nav">
                     <li class="nav-item" id="dashboard-link">
-                        <a href="{{ url('admin/') }}"
-                            class="items-list first {{ Request::is('admin/') ? 'active' : '' }}">
+                        <a class="items-list first {{ Request::is('admin/index/index') ? 'active' : '' }}"
+                            href="{{ url('admin/') }}">
                             <span><i class="fa fa-home link-icon" data-bs-toggle="tooltip" data-html="true"
                                     title="Dashboard"></i></span>
                             <span class="items-list-text">Dashboard</span>

@@ -15,7 +15,7 @@ use App\Http\Controllers\UnitFlightController;
 Route::prefix('admin')->group(function () {
 
     //Dashboard
-    Route::view('/index/index', 'admin/index/index');
+    // Route::view('/index/index', 'admin/index/index');
     Route::view('', 'admin/index/index');
 
     //Error 404
