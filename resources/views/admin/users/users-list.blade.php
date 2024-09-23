@@ -73,349 +73,361 @@
                                             <td>{{ $users->phone }}</td>
                                             <td class="active"><a href="#">Active</a></td>
                                             <td>
-                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                <a href="{{ route('users.edit', $users->id) }}"><i
+                                                        class="fas fa-edit"></i></a>
+
+                                                <!--Method delete-->
+                                                <a href="{{ route('users.destroy', $users->id) }}"
+                                                    onclick="event.preventDefault(); if(confirm('Are you sure you want to delete this user?')) document.getElementById('delete-form-{{ $users->id }}').submit();"><i
+                                                        class="fas fa-trash-alt"></i></a>
+
+                                                <form id="delete-form-{{ $users->id }}"
+                                                    action="{{ route('users.destroy', $users->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                </form>
+                                                <!--End method DELETE-->
                                             </td>
                                         </tr>
                                     @endforeach
                                     <!--
-              <tr>
-               <td><img src="{{ asset('vendors/admin/images/car2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px"></td>
-               <td>120</td>
-               <td><a href="#">Maria</a></td>
-               <td><a href="#">Ben</a></td>
-               <td>maria22145</td>
-               <td>maria22145@yahoo.com</td>
-               <td>923312440</td>
-               <td class="expired"><a href="#">Expired</a></td>
-               <td>
-                <a href="#"><i class="fas fa-edit"></i></a>
-                <a href="#"><i class="fas fa-trash-alt"></i></a>
-               </td>
-              </tr>
-              <tr>
-               <td><img src="{{ asset('vendors/admin/images/car3.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
-               <td>212</td>
-               <td><a href="#">Vensel</a></td>
-               <td><a href="#">Den</a></td>
-               <td>vensel22145</td>
-               <td>vensel22145@yahoo.com</td>
-               <td>923312440</td>
-               <td class="draft"><a href="#">Draft</a></td>
-               <td>
-                <a href="#"><i class="fas fa-edit"></i></a>
-                <a href="#"><i class="fas fa-trash-alt"></i></a>
-               </td>
-              </tr>
-              <tr>
-               <td><img src="{{ asset('vendors/admin/images/car1.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
-               <td>214</td>
-               <td><a href="#">Habbil</a></td>
-               <td><a href="#">Nave</a></td>
-               <td>habbil22145</td>
-               <td>habbil22145@gmail.com</td>
-               <td>923312440</td>
-               <td class="featured"><a href="#">Featured</a></td>
-               <td>
-                <a href="#"><i class="fas fa-edit"></i></a>
-                <a href="#"><i class="fas fa-trash-alt"></i></a>
-               </td>
-              </tr>
-              <tr>
-               <td><img src="{{ asset('vendors/admin/images/car2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px"></td>
-               <td>214</td>
-               <td><a href="#">Numan</a></td>
-               <td><a href="#">Foog</a></td>
-               <td>foog22145</td>
-               <td>foog22145@yahoo.com</td>
-               <td>923312440</td>
-               <td class="featured"><a href="#">Featured</a></td>
-               <td>
-                <a href="#"><i class="fas fa-edit"></i></a>
-                <a href="#"><i class="fas fa-trash-alt"></i></a>
-               </td>
-              </tr>
-              <tr>
-               <td><img src="{{ asset('vendors/admin/images/car1.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px"></td>
-               <td>110</td>
-               <td><a href="#">John</a></td>
-               <td><a href="#">Doe</a></td>
-               <td>Doe22145</td>
-               <td>Doe22145@yahoo.com</td>
-               <td>923312440</td>
-               <td class="active"><a href="#">Active</a></td>
-               <td>
-                <a href="#"><i class="fas fa-edit"></i></a>
-                <a href="#"><i class="fas fa-trash-alt"></i></a>
-               </td>
-              </tr>
-              <tr>
-               <td><img src="{{ asset('vendors/admin/images/car2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px"></td>
-               <td>120</td>
-               <td><a href="#">Maria</a></td>
-               <td><a href="#">Ben</a></td>
-               <td>maria22145</td>
-               <td>maria22145@yahoo.com</td>
-               <td>923312440</td>
-               <td class="expired"><a href="#">Expired</a></td>
-               <td>
-                <a href="#"><i class="fas fa-edit"></i></a>
-                <a href="#"><i class="fas fa-trash-alt"></i></a>
-               </td>
-              </tr>
-              <tr>
-               <td><img src="{{ asset('vendors/admin/images/car3.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
-               <td>212</td>
-               <td><a href="#">Vensel</a></td>
-               <td><a href="#">Den</a></td>
-               <td>vensel22145</td>
-               <td>vensel22145@yahoo.com</td>
-               <td>923312440</td>
-               <td class="draft"><a href="#">Draft</a></td>
-               <td>
-                <a href="#"><i class="fas fa-edit"></i></a>
-                <a href="#"><i class="fas fa-trash-alt"></i></a>
-               </td>
-              </tr>
-              <tr>
-               <td><img src="{{ asset('vendors/admin/images/car1.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
-               <td>214</td>
-               <td><a href="#">Habbil</a></td>
-               <td><a href="#">Nave</a></td>
-               <td>habbil22145</td>
-               <td>habbil22145@gmail.com</td>
-               <td>923312440</td>
-               <td class="featured"><a href="#">Featured</a></td>
-               <td>
-                <a href="#"><i class="fas fa-edit"></i></a>
-                <a href="#"><i class="fas fa-trash-alt"></i></a>
-               </td>
-              </tr>
-              <tr>
-               <td><img src="{{ asset('vendors/admin/images/car2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px"></td>
-               <td>214</td>
-               <td><a href="#">Numan</a></td>
-               <td><a href="#">Foog</a></td>
-               <td>foog22145</td>
-               <td>foog22145@yahoo.com</td>
-               <td>923312440</td>
-               <td class="featured"><a href="#">Featured</a></td>
-               <td>
-                <a href="#"><i class="fas fa-edit"></i></a>
-                <a href="#"><i class="fas fa-trash-alt"></i></a>
-               </td>
-              </tr>
-              <tr>
-               <td><img src="{{ asset('vendors/admin/images/car1.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px"></td>
-               <td>110</td>
-               <td><a href="#">John</a></td>
-               <td><a href="#">Doe</a></td>
-               <td>Doe22145</td>
-               <td>Doe22145@yahoo.com</td>
-               <td>923312440</td>
-               <td class="active"><a href="#">Active</a></td>
-               <td>
-                <a href="#"><i class="fas fa-edit"></i></a>
-                <a href="#"><i class="fas fa-trash-alt"></i></a>
-               </td>
-              </tr>
-              <tr>
-               <td><img src="{{ asset('vendors/admin/images/car2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px"></td>
-               <td>120</td>
-               <td><a href="#">Maria</a></td>
-               <td><a href="#">Ben</a></td>
-               <td>maria22145</td>
-               <td>maria22145@yahoo.com</td>
-               <td>923312440</td>
-               <td class="expired"><a href="#">Expired</a></td>
-               <td>
-                <a href="#"><i class="fas fa-edit"></i></a>
-                <a href="#"><i class="fas fa-trash-alt"></i></a>
-               </td>
-              </tr>
-              <tr>
-               <td><img src="{{ asset('vendors/admin/images/car3.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
-               <td>212</td>
-               <td><a href="#">Vensel</a></td>
-               <td><a href="#">Den</a></td>
-               <td>vensel22145</td>
-               <td>vensel22145@yahoo.com</td>
-               <td>923312440</td>
-               <td class="draft"><a href="#">Draft</a></td>
-               <td>
-                <a href="#"><i class="fas fa-edit"></i></a>
-                <a href="#"><i class="fas fa-trash-alt"></i></a>
-               </td>
-              </tr>
-              <tr>
-               <td><img src="{{ asset('vendors/admin/images/car1.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
-               <td>214</td>
-               <td><a href="#">Habbil</a></td>
-               <td><a href="#">Nave</a></td>
-               <td>habbil22145</td>
-               <td>habbil22145@gmail.com</td>
-               <td>923312440</td>
-               <td class="featured"><a href="#">Featured</a></td>
-               <td>
-                <a href="#"><i class="fas fa-edit"></i></a>
-                <a href="#"><i class="fas fa-trash-alt"></i></a>
-               </td>
-              </tr>
-              <tr>
-               <td><img src="{{ asset('vendors/admin/images/car2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px"></td>
-               <td>214</td>
-               <td><a href="#">Numan</a></td>
-               <td><a href="#">Foog</a></td>
-               <td>foog22145</td>
-               <td>foog22145@yahoo.com</td>
-               <td>923312440</td>
-               <td class="featured"><a href="#">Featured</a></td>
-               <td>
-                <a href="#"><i class="fas fa-edit"></i></a>
-                <a href="#"><i class="fas fa-trash-alt"></i></a>
-               </td>
-              </tr>
-              <tr>
-               <td><img src="{{ asset('vendors/admin/images/car1.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px"></td>
-               <td>110</td>
-               <td><a href="#">John</a></td>
-               <td><a href="#">Doe</a></td>
-               <td>Doe22145</td>
-               <td>Doe22145@yahoo.com</td>
-               <td>923312440</td>
-               <td class="active"><a href="#">Active</a></td>
-               <td>
-                <a href="#"><i class="fas fa-edit"></i></a>
-                <a href="#"><i class="fas fa-trash-alt"></i></a>
-               </td>
-              </tr>
-              <tr>
-               <td><img src="{{ asset('vendors/admin/images/car2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px"></td>
-               <td>120</td>
-               <td><a href="#">Maria</a></td>
-               <td><a href="#">Ben</a></td>
-               <td>maria22145</td>
-               <td>maria22145@yahoo.com</td>
-               <td>923312440</td>
-               <td class="expired"><a href="#">Expired</a></td>
-               <td>
-                <a href="#"><i class="fas fa-edit"></i></a>
-                <a href="#"><i class="fas fa-trash-alt"></i></a>
-               </td>
-              </tr>
-              <tr>
-               <td><img src="{{ asset('vendors/admin/images/car3.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
-               <td>212</td>
-               <td><a href="#">Vensel</a></td>
-               <td><a href="#">Den</a></td>
-               <td>vensel22145</td>
-               <td>vensel22145@yahoo.com</td>
-               <td>923312440</td>
-               <td class="draft"><a href="#">Draft</a></td>
-               <td>
-                <a href="#"><i class="fas fa-edit"></i></a>
-                <a href="#"><i class="fas fa-trash-alt"></i></a>
-               </td>
-              </tr>
-              <tr>
-               <td><img src="{{ asset('vendors/admin/images/car1.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
-               <td>214</td>
-               <td><a href="#">Habbil</a></td>
-               <td><a href="#">Nave</a></td>
-               <td>habbil22145</td>
-               <td>habbil22145@gmail.com</td>
-               <td>923312440</td>
-               <td class="featured"><a href="#">Featured</a></td>
-               <td>
-                <a href="#"><i class="fas fa-edit"></i></a>
-                <a href="#"><i class="fas fa-trash-alt"></i></a>
-               </td>
-              </tr>
-              <tr>
-               <td><img src="{{ asset('vendors/admin/images/car2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px"></td>
-               <td>214</td>
-               <td><a href="#">Numan</a></td>
-               <td><a href="#">Foog</a></td>
-               <td>foog22145</td>
-               <td>foog22145@yahoo.com</td>
-               <td>923312440</td>
-               <td class="featured"><a href="#">Featured</a></td>
-               <td>
-                <a href="#"><i class="fas fa-edit"></i></a>
-                <a href="#"><i class="fas fa-trash-alt"></i></a>
-               </td>
-              </tr>
-              <tr>
-               <td><img src="{{ asset('vendors/admin/images/car1.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px"></td>
-               <td>110</td>
-               <td><a href="#">John</a></td>
-               <td><a href="#">Doe</a></td>
-               <td>Doe22145</td>
-               <td>Doe22145@yahoo.com</td>
-               <td>923312440</td>
-               <td class="active"><a href="#">Active</a></td>
-               <td>
-                <a href="#"><i class="fas fa-edit"></i></a>
-                <a href="#"><i class="fas fa-trash-alt"></i></a>
-               </td>
-              </tr>
-              <tr>
-               <td><img src="{{ asset('vendors/admin/images/car2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px"></td>
-               <td>120</td>
-               <td><a href="#">Maria</a></td>
-               <td><a href="#">Ben</a></td>
-               <td>maria22145</td>
-               <td>maria22145@yahoo.com</td>
-               <td>923312440</td>
-               <td class="expired"><a href="#">Expired</a></td>
-               <td>
-                <a href="#"><i class="fas fa-edit"></i></a>
-                <a href="#"><i class="fas fa-trash-alt"></i></a>
-               </td>
-              </tr>
-              <tr>
-               <td><img src="{{ asset('vendors/admin/images/car3.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
-               <td>212</td>
-               <td><a href="#">Vensel</a></td>
-               <td><a href="#">Den</a></td>
-               <td>vensel22145</td>
-               <td>vensel22145@yahoo.com</td>
-               <td>923312440</td>
-               <td class="draft"><a href="#">Draft</a></td>
-               <td>
-                <a href="#"><i class="fas fa-edit"></i></a>
-                <a href="#"><i class="fas fa-trash-alt"></i></a>
-               </td>
-              </tr>
-              <tr>
-               <td><img src="{{ asset('vendors/admin/images/car1.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
-               <td>214</td>
-               <td><a href="#">Habbil</a></td>
-               <td><a href="#">Nave</a></td>
-               <td>habbil22145</td>
-               <td>habbil22145@gmail.com</td>
-               <td>923312440</td>
-               <td class="featured"><a href="#">Featured</a></td>
-               <td>
-                <a href="#"><i class="fas fa-edit"></i></a>
-                <a href="#"><i class="fas fa-trash-alt"></i></a>
-               </td>
-              </tr>
-              <tr>
-               <td><img src="{{ asset('vendors/admin/images/car2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px"></td>
-               <td>214</td>
-               <td><a href="#">Numan</a></td>
-               <td><a href="#">Foog</a></td>
-               <td>foog22145</td>
-               <td>foog22145@yahoo.com</td>
-               <td>923312440</td>
-               <td class="featured"><a href="#">Featured</a></td>
-               <td>
-                <a href="#"><i class="fas fa-edit"></i></a>
-                <a href="#"><i class="fas fa-trash-alt"></i></a>
-               </td>
-              </tr>
-                                        -->
+                                                                  <tr>
+                                                                   <td><img src="{{ asset('vendors/admin/images/car2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px"></td>
+                                                                   <td>120</td>
+                                                                   <td><a href="#">Maria</a></td>
+                                                                   <td><a href="#">Ben</a></td>
+                                                                   <td>maria22145</td>
+                                                                   <td>maria22145@yahoo.com</td>
+                                                                   <td>923312440</td>
+                                                                   <td class="expired"><a href="#">Expired</a></td>
+                                                                   <td>
+                                                                    <a href="#"><i class="fas fa-edit"></i></a>
+                                                                    <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                   </td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                   <td><img src="{{ asset('vendors/admin/images/car3.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
+                                                                   <td>212</td>
+                                                                   <td><a href="#">Vensel</a></td>
+                                                                   <td><a href="#">Den</a></td>
+                                                                   <td>vensel22145</td>
+                                                                   <td>vensel22145@yahoo.com</td>
+                                                                   <td>923312440</td>
+                                                                   <td class="draft"><a href="#">Draft</a></td>
+                                                                   <td>
+                                                                    <a href="#"><i class="fas fa-edit"></i></a>
+                                                                    <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                   </td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                   <td><img src="{{ asset('vendors/admin/images/car1.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
+                                                                   <td>214</td>
+                                                                   <td><a href="#">Habbil</a></td>
+                                                                   <td><a href="#">Nave</a></td>
+                                                                   <td>habbil22145</td>
+                                                                   <td>habbil22145@gmail.com</td>
+                                                                   <td>923312440</td>
+                                                                   <td class="featured"><a href="#">Featured</a></td>
+                                                                   <td>
+                                                                    <a href="#"><i class="fas fa-edit"></i></a>
+                                                                    <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                   </td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                   <td><img src="{{ asset('vendors/admin/images/car2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px"></td>
+                                                                   <td>214</td>
+                                                                   <td><a href="#">Numan</a></td>
+                                                                   <td><a href="#">Foog</a></td>
+                                                                   <td>foog22145</td>
+                                                                   <td>foog22145@yahoo.com</td>
+                                                                   <td>923312440</td>
+                                                                   <td class="featured"><a href="#">Featured</a></td>
+                                                                   <td>
+                                                                    <a href="#"><i class="fas fa-edit"></i></a>
+                                                                    <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                   </td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                   <td><img src="{{ asset('vendors/admin/images/car1.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px"></td>
+                                                                   <td>110</td>
+                                                                   <td><a href="#">John</a></td>
+                                                                   <td><a href="#">Doe</a></td>
+                                                                   <td>Doe22145</td>
+                                                                   <td>Doe22145@yahoo.com</td>
+                                                                   <td>923312440</td>
+                                                                   <td class="active"><a href="#">Active</a></td>
+                                                                   <td>
+                                                                    <a href="#"><i class="fas fa-edit"></i></a>
+                                                                    <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                   </td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                   <td><img src="{{ asset('vendors/admin/images/car2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px"></td>
+                                                                   <td>120</td>
+                                                                   <td><a href="#">Maria</a></td>
+                                                                   <td><a href="#">Ben</a></td>
+                                                                   <td>maria22145</td>
+                                                                   <td>maria22145@yahoo.com</td>
+                                                                   <td>923312440</td>
+                                                                   <td class="expired"><a href="#">Expired</a></td>
+                                                                   <td>
+                                                                    <a href="#"><i class="fas fa-edit"></i></a>
+                                                                    <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                   </td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                   <td><img src="{{ asset('vendors/admin/images/car3.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
+                                                                   <td>212</td>
+                                                                   <td><a href="#">Vensel</a></td>
+                                                                   <td><a href="#">Den</a></td>
+                                                                   <td>vensel22145</td>
+                                                                   <td>vensel22145@yahoo.com</td>
+                                                                   <td>923312440</td>
+                                                                   <td class="draft"><a href="#">Draft</a></td>
+                                                                   <td>
+                                                                    <a href="#"><i class="fas fa-edit"></i></a>
+                                                                    <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                   </td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                   <td><img src="{{ asset('vendors/admin/images/car1.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
+                                                                   <td>214</td>
+                                                                   <td><a href="#">Habbil</a></td>
+                                                                   <td><a href="#">Nave</a></td>
+                                                                   <td>habbil22145</td>
+                                                                   <td>habbil22145@gmail.com</td>
+                                                                   <td>923312440</td>
+                                                                   <td class="featured"><a href="#">Featured</a></td>
+                                                                   <td>
+                                                                    <a href="#"><i class="fas fa-edit"></i></a>
+                                                                    <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                   </td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                   <td><img src="{{ asset('vendors/admin/images/car2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px"></td>
+                                                                   <td>214</td>
+                                                                   <td><a href="#">Numan</a></td>
+                                                                   <td><a href="#">Foog</a></td>
+                                                                   <td>foog22145</td>
+                                                                   <td>foog22145@yahoo.com</td>
+                                                                   <td>923312440</td>
+                                                                   <td class="featured"><a href="#">Featured</a></td>
+                                                                   <td>
+                                                                    <a href="#"><i class="fas fa-edit"></i></a>
+                                                                    <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                   </td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                   <td><img src="{{ asset('vendors/admin/images/car1.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px"></td>
+                                                                   <td>110</td>
+                                                                   <td><a href="#">John</a></td>
+                                                                   <td><a href="#">Doe</a></td>
+                                                                   <td>Doe22145</td>
+                                                                   <td>Doe22145@yahoo.com</td>
+                                                                   <td>923312440</td>
+                                                                   <td class="active"><a href="#">Active</a></td>
+                                                                   <td>
+                                                                    <a href="#"><i class="fas fa-edit"></i></a>
+                                                                    <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                   </td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                   <td><img src="{{ asset('vendors/admin/images/car2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px"></td>
+                                                                   <td>120</td>
+                                                                   <td><a href="#">Maria</a></td>
+                                                                   <td><a href="#">Ben</a></td>
+                                                                   <td>maria22145</td>
+                                                                   <td>maria22145@yahoo.com</td>
+                                                                   <td>923312440</td>
+                                                                   <td class="expired"><a href="#">Expired</a></td>
+                                                                   <td>
+                                                                    <a href="#"><i class="fas fa-edit"></i></a>
+                                                                    <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                   </td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                   <td><img src="{{ asset('vendors/admin/images/car3.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
+                                                                   <td>212</td>
+                                                                   <td><a href="#">Vensel</a></td>
+                                                                   <td><a href="#">Den</a></td>
+                                                                   <td>vensel22145</td>
+                                                                   <td>vensel22145@yahoo.com</td>
+                                                                   <td>923312440</td>
+                                                                   <td class="draft"><a href="#">Draft</a></td>
+                                                                   <td>
+                                                                    <a href="#"><i class="fas fa-edit"></i></a>
+                                                                    <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                   </td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                   <td><img src="{{ asset('vendors/admin/images/car1.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
+                                                                   <td>214</td>
+                                                                   <td><a href="#">Habbil</a></td>
+                                                                   <td><a href="#">Nave</a></td>
+                                                                   <td>habbil22145</td>
+                                                                   <td>habbil22145@gmail.com</td>
+                                                                   <td>923312440</td>
+                                                                   <td class="featured"><a href="#">Featured</a></td>
+                                                                   <td>
+                                                                    <a href="#"><i class="fas fa-edit"></i></a>
+                                                                    <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                   </td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                   <td><img src="{{ asset('vendors/admin/images/car2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px"></td>
+                                                                   <td>214</td>
+                                                                   <td><a href="#">Numan</a></td>
+                                                                   <td><a href="#">Foog</a></td>
+                                                                   <td>foog22145</td>
+                                                                   <td>foog22145@yahoo.com</td>
+                                                                   <td>923312440</td>
+                                                                   <td class="featured"><a href="#">Featured</a></td>
+                                                                   <td>
+                                                                    <a href="#"><i class="fas fa-edit"></i></a>
+                                                                    <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                   </td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                   <td><img src="{{ asset('vendors/admin/images/car1.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px"></td>
+                                                                   <td>110</td>
+                                                                   <td><a href="#">John</a></td>
+                                                                   <td><a href="#">Doe</a></td>
+                                                                   <td>Doe22145</td>
+                                                                   <td>Doe22145@yahoo.com</td>
+                                                                   <td>923312440</td>
+                                                                   <td class="active"><a href="#">Active</a></td>
+                                                                   <td>
+                                                                    <a href="#"><i class="fas fa-edit"></i></a>
+                                                                    <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                   </td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                   <td><img src="{{ asset('vendors/admin/images/car2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px"></td>
+                                                                   <td>120</td>
+                                                                   <td><a href="#">Maria</a></td>
+                                                                   <td><a href="#">Ben</a></td>
+                                                                   <td>maria22145</td>
+                                                                   <td>maria22145@yahoo.com</td>
+                                                                   <td>923312440</td>
+                                                                   <td class="expired"><a href="#">Expired</a></td>
+                                                                   <td>
+                                                                    <a href="#"><i class="fas fa-edit"></i></a>
+                                                                    <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                   </td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                   <td><img src="{{ asset('vendors/admin/images/car3.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
+                                                                   <td>212</td>
+                                                                   <td><a href="#">Vensel</a></td>
+                                                                   <td><a href="#">Den</a></td>
+                                                                   <td>vensel22145</td>
+                                                                   <td>vensel22145@yahoo.com</td>
+                                                                   <td>923312440</td>
+                                                                   <td class="draft"><a href="#">Draft</a></td>
+                                                                   <td>
+                                                                    <a href="#"><i class="fas fa-edit"></i></a>
+                                                                    <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                   </td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                   <td><img src="{{ asset('vendors/admin/images/car1.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
+                                                                   <td>214</td>
+                                                                   <td><a href="#">Habbil</a></td>
+                                                                   <td><a href="#">Nave</a></td>
+                                                                   <td>habbil22145</td>
+                                                                   <td>habbil22145@gmail.com</td>
+                                                                   <td>923312440</td>
+                                                                   <td class="featured"><a href="#">Featured</a></td>
+                                                                   <td>
+                                                                    <a href="#"><i class="fas fa-edit"></i></a>
+                                                                    <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                   </td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                   <td><img src="{{ asset('vendors/admin/images/car2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px"></td>
+                                                                   <td>214</td>
+                                                                   <td><a href="#">Numan</a></td>
+                                                                   <td><a href="#">Foog</a></td>
+                                                                   <td>foog22145</td>
+                                                                   <td>foog22145@yahoo.com</td>
+                                                                   <td>923312440</td>
+                                                                   <td class="featured"><a href="#">Featured</a></td>
+                                                                   <td>
+                                                                    <a href="#"><i class="fas fa-edit"></i></a>
+                                                                    <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                   </td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                   <td><img src="{{ asset('vendors/admin/images/car1.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px"></td>
+                                                                   <td>110</td>
+                                                                   <td><a href="#">John</a></td>
+                                                                   <td><a href="#">Doe</a></td>
+                                                                   <td>Doe22145</td>
+                                                                   <td>Doe22145@yahoo.com</td>
+                                                                   <td>923312440</td>
+                                                                   <td class="active"><a href="#">Active</a></td>
+                                                                   <td>
+                                                                    <a href="#"><i class="fas fa-edit"></i></a>
+                                                                    <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                   </td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                   <td><img src="{{ asset('vendors/admin/images/car2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px"></td>
+                                                                   <td>120</td>
+                                                                   <td><a href="#">Maria</a></td>
+                                                                   <td><a href="#">Ben</a></td>
+                                                                   <td>maria22145</td>
+                                                                   <td>maria22145@yahoo.com</td>
+                                                                   <td>923312440</td>
+                                                                   <td class="expired"><a href="#">Expired</a></td>
+                                                                   <td>
+                                                                    <a href="#"><i class="fas fa-edit"></i></a>
+                                                                    <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                   </td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                   <td><img src="{{ asset('vendors/admin/images/car3.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
+                                                                   <td>212</td>
+                                                                   <td><a href="#">Vensel</a></td>
+                                                                   <td><a href="#">Den</a></td>
+                                                                   <td>vensel22145</td>
+                                                                   <td>vensel22145@yahoo.com</td>
+                                                                   <td>923312440</td>
+                                                                   <td class="draft"><a href="#">Draft</a></td>
+                                                                   <td>
+                                                                    <a href="#"><i class="fas fa-edit"></i></a>
+                                                                    <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                   </td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                   <td><img src="{{ asset('vendors/admin/images/car1.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
+                                                                   <td>214</td>
+                                                                   <td><a href="#">Habbil</a></td>
+                                                                   <td><a href="#">Nave</a></td>
+                                                                   <td>habbil22145</td>
+                                                                   <td>habbil22145@gmail.com</td>
+                                                                   <td>923312440</td>
+                                                                   <td class="featured"><a href="#">Featured</a></td>
+                                                                   <td>
+                                                                    <a href="#"><i class="fas fa-edit"></i></a>
+                                                                    <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                   </td>
+                                                                  </tr>
+                                                                  <tr>
+                                                                   <td><img src="{{ asset('vendors/admin/images/car2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px"></td>
+                                                                   <td>214</td>
+                                                                   <td><a href="#">Numan</a></td>
+                                                                   <td><a href="#">Foog</a></td>
+                                                                   <td>foog22145</td>
+                                                                   <td>foog22145@yahoo.com</td>
+                                                                   <td>923312440</td>
+                                                                   <td class="featured"><a href="#">Featured</a></td>
+                                                                   <td>
+                                                                    <a href="#"><i class="fas fa-edit"></i></a>
+                                                                    <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                   </td>
+                                                                  </tr>
+                                                                                            -->
 
                                 </tbody>
                             </table>

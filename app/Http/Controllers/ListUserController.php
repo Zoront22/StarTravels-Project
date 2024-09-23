@@ -58,7 +58,11 @@ class ListUserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        // Search the element by id
+        $user = User::find($id);
+
+        // return view
+        return view('admin.users.users-edit-user', compact('user'));
     }
 
     /**
@@ -66,7 +70,22 @@ class ListUserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // validate data
+        $validateData = $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'username' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'phone' => 'required',
+            'birth' => 'required',
+        ]);
+
+        // update the registry
+        $user = User::find($id)->update(array_merge($request->all(), $validateData));
+
+        // redirect
+        return redirect()->route('users.index');
     }
 
     /**
@@ -74,6 +93,12 @@ class ListUserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // find the element by id
+        $users = User::findOrFail($id);
+
+        // delete resource
+        $users->delete();
+
+        return redirect()->route('users.index')->with('success', 'user eliminated');
     }
 }

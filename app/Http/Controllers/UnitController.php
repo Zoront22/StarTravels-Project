@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Unit ;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 
 class UnitController extends Controller
@@ -56,9 +57,12 @@ class UnitController extends Controller
 
         // image submit
         if ($request->hasFile('image')) {
-            $images = $request->file('image');
-            $path = $images->store('vendors/units-img/car', 'public'); // Store the image in the specified director
-            $validateData['images'] = $path; // Add the image path to the validated data
+            $path = $request->file('image')->store('cars', 'storage');
+            // $path = storage::disk('cars')->put('image', file_get_contents($request->file($images)->getPathname()) ); // Store the image in the specified director
+            // $validateData['images'] = $path; // Add the image path to the validated data
+            $url = storage::url($path);
+
+            // return back()->with('success', 'Imagen subida con éxito')->with('url', $url);
         }
 
         //$unit->save();
