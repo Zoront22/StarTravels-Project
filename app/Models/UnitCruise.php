@@ -26,6 +26,7 @@ class UnitCruise extends Model
         'crew',
         'features',
         'details',
+        'status',
     ];
 
     public $timestamps = false;

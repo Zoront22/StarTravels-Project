@@ -54,12 +54,10 @@ Route::prefix('admin')->group(function () {
 
 
     //Cruise
-    Route::resource('/listing-cruise', UnitCruiseController::class)
-    ->parameters([
+    Route::resource('/listing-cruise', UnitCruiseController::class)->parameters([
         'listing-cruise' => 'unit',
-    ]);//method create/store INSERT DATA ERROR
-    //Method edit PENDING...
-    //Method delete PENDING...
+    ]);
+    Route::post('listing-cruise/status',  [UnitCruiseController::class, 'updateStatus'])->name('listing-cruise.updateStatus');
 
     //Flight
     Route::resource('/listing-flight', UnitFlightController::class)->parameters([

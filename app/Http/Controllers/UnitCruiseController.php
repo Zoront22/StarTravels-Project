@@ -73,6 +73,25 @@ class UnitCruiseController extends Controller
     }
 
     /**
+     * Update Status (active/inactive)
+     */
+    public function updateStatus(Request $request)
+    {
+        // search the element by id
+        $unit = UnitCruise::findOrFail($request->id);
+
+        // Update status
+        $unit->status = $request->status;
+        $unit->save();
+
+        // Return request
+        return response()->json([
+            'message' => 'Status Updated',
+            'unit' => $unit,
+        ], 200);
+    }
+
+    /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
