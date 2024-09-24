@@ -63,17 +63,20 @@ Route::prefix('admin')->group(function () {
     Route::resource('/listing-flight', UnitFlightController::class)->parameters([
         'listing-flight' => 'unit',
     ]);
-    Route::post('listing-flight', [UnitFlightController::class, 'updateStatus'])->name('listing-flight.updateStatus');
+    Route::post('listing-flight/status', [UnitFlightController::class, 'updateStatus'])->name('listing-flight.updateStatus');
 
     //Hotel
     Route::resource('/listing-hotel', UnitHotelController::class)->parameters([
         'listing-hotel' => 'unit',
     ]);
+    Route::post('/listing-hotel/status', [UnitHotelController::class, 'updateStatus'])->name('listing-hotel.updateStatus');
 
     //Tour
     Route::resource('/listing-tour', UnitTourController::class)->parameters([
         'listing-tour' => 'unit',
     ]);
+    Route::post('/listing-tour/status', [UnitTourController::class, 'updateStatus'])->name('listing-tour.updateStatus');
+
     //End listing
 
     //Messages

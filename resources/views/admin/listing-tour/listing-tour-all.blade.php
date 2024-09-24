@@ -71,7 +71,18 @@
                                             <td><a href="#">{{ $unit->country }}</a></td>
                                             <td>{{ $unit->duration }}</td>
                                             <td>${{ $unit->price }}</td>
-                                            <td class="active"><a href="#">Active</a></td>
+                                            <!--Status-->
+                                            <td
+                                                class="
+                                                @if ($unit->status === 'draft') draft
+                                                @elseif ($unit->status === 'active') active
+                                                @elseif ($unit->status === 'expired') expired
+                                                @elseif ($unit->status === 'featured') featured @endif">
+                                                <a href="javascript:void(0);"
+                                                    onclick="updateStatus('{{ $unit->id }}', getNextStatus('{{ $unit->status }}'))">
+                                                    {{ ucfirst($unit->status) }}
+                                                </a>
+                                            </td>
                                             <td>
                                                 <!--Method edit-->
                                                 <a href="{{ route('listing-tour.edit', $unit->id) }}"><i
@@ -92,401 +103,401 @@
                                     @endforeach
 
                                     <!--
-                                                                                          <tr>
-                                                                                           <td><img src="{{ asset('vendors/admin/images/tour2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
-                                                                                           </td>
-                                                                                           <td>120</td>
-                                                                                           <td><a href="#">Business Tour</a></td>
-                                                                                           <td><a href="#">UAE</a></td>
-                                                                                           <td>3 days</td>
-                                                                                           <td>350$</td>
-                                                                                           <td class="expired"><a href="#">Expired</a></td>
-                                                                                           <td>
-                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                           </td>
-                                                                                          </tr>
-                                                                                          <tr>
-                                                                                           <td><img src="{{ asset('vendors/admin/images/tour1.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
-                                                                                           <td>212</td>
-                                                                                           <td><a href="#">Vacational Tour</a></td>
-                                                                                           <td><a href="#">Canada</a></td>
-                                                                                           <td>1 Week</td>
-                                                                                           <td>200$</td>
-                                                                                           <td class="draft"><a href="#">Draft</a></td>
-                                                                                           <td>
-                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                           </td>
-                                                                                          </tr>
-                                                                                          <tr>
-                                                                                           <td><img src="{{ asset('vendors/admin/images/tour4.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
-                                                                                           <td>214</td>
-                                                                                           <td><a href="#">Business Tour</a></td>
-                                                                                           <td><a href="#">Paris</a></td>
-                                                                                           <td>4 Days</td>
-                                                                                           <td>300$</td>
-                                                                                           <td class="featured"><a href="#">Featured</a></td>
-                                                                                           <td>
-                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                           </td>
-                                                                                          </tr>
-                                                                                          <tr>
-                                                                                           <td><img src="{{ asset('vendors/admin/images/tour4.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
-                                                                                           </td>
-                                                                                           <td>214</td>
-                                                                                           <td><a href="#">Vacational Tour</a></td>
-                                                                                           <td><a href="#">USA</a></td>
-                                                                                           <td>1 Day</td>
-                                                                                           <td>100$</td>
-                                                                                           <td class="featured"><a href="#">Featured</a></td>
-                                                                                           <td>
-                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                           </td>
-                                                                                          </tr>
-                                                                                          <tr>
-                                                                                           <td><img src="{{ asset('vendors/admin/images/tour3.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
-                                                                                           </td>
-                                                                                           <td>110</td>
-                                                                                           <td><a href="#">Visit</a></td>
-                                                                                           <td><a href="#">USA</a></td>
-                                                                                           <td>1 Day</td>
-                                                                                           <td>100$</td>
-                                                                                           <td class="active"><a href="#">Active</a></td>
-                                                                                           <td>
-                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                           </td>
-                                                                                          </tr>
-                                                                                          <tr>
-                                                                                           <td><img src="{{ asset('vendors/admin/images/tour2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
-                                                                                           </td>
-                                                                                           <td>120</td>
-                                                                                           <td><a href="#">Business Tour</a></td>
-                                                                                           <td><a href="#">UAE</a></td>
-                                                                                           <td>3 days</td>
-                                                                                           <td>350$</td>
-                                                                                           <td class="expired"><a href="#">Expired</a></td>
-                                                                                           <td>
-                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                           </td>
-                                                                                          </tr>
-                                                                                          <tr>
-                                                                                           <td><img src="{{ asset('vendors/admin/images/tour1.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
-                                                                                           <td>212</td>
-                                                                                           <td><a href="#">Vacational Tour</a></td>
-                                                                                           <td><a href="#">Canada</a></td>
-                                                                                           <td>1 Week</td>
-                                                                                           <td>200$</td>
-                                                                                           <td class="draft"><a href="#">Draft</a></td>
-                                                                                           <td>
-                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                           </td>
-                                                                                          </tr>
-                                                                                          <tr>
-                                                                                           <td><img src="{{ asset('vendors/admin/images/tour4.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
-                                                                                           <td>214</td>
-                                                                                           <td><a href="#">Business Tour</a></td>
-                                                                                           <td><a href="#">Paris</a></td>
-                                                                                           <td>4 Days</td>
-                                                                                           <td>300$</td>
-                                                                                           <td class="featured"><a href="#">Featured</a></td>
-                                                                                           <td>
-                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                           </td>
-                                                                                          </tr>
-                                                                                          <tr>
-                                                                                           <td><img src="{{ asset('vendors/admin/images/tour4.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
-                                                                                           </td>
-                                                                                           <td>214</td>
-                                                                                           <td><a href="#">Vacational Tour</a></td>
-                                                                                           <td><a href="#">USA</a></td>
-                                                                                           <td>1 Day</td>
-                                                                                           <td>100$</td>
-                                                                                           <td class="featured"><a href="#">Featured</a></td>
-                                                                                           <td>
-                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                           </td>
-                                                                                          </tr>
-                                                                                          <tr>
-                                                                                           <td><img src="{{ asset('vendors/admin/images/tour3.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
-                                                                                           </td>
-                                                                                           <td>110</td>
-                                                                                           <td><a href="#">Visit</a></td>
-                                                                                           <td><a href="#">USA</a></td>
-                                                                                           <td>1 Day</td>
-                                                                                           <td>100$</td>
-                                                                                           <td class="active"><a href="#">Active</a></td>
-                                                                                           <td>
-                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                           </td>
-                                                                                          </tr>
-                                                                                          <tr>
-                                                                                           <td><img src="{{ asset('vendors/admin/images/tour2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
-                                                                                           </td>
-                                                                                           <td>120</td>
-                                                                                           <td><a href="#">Business Tour</a></td>
-                                                                                           <td><a href="#">UAE</a></td>
-                                                                                           <td>3 days</td>
-                                                                                           <td>350$</td>
-                                                                                           <td class="expired"><a href="#">Expired</a></td>
-                                                                                           <td>
-                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                           </td>
-                                                                                          </tr>
-                                                                                          <tr>
-                                                                                           <td><img src="{{ asset('vendors/admin/images/tour1.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
-                                                                                           <td>212</td>
-                                                                                           <td><a href="#">Vacational Tour</a></td>
-                                                                                           <td><a href="#">Canada</a></td>
-                                                                                           <td>1 Week</td>
-                                                                                           <td>200$</td>
-                                                                                           <td class="draft"><a href="#">Draft</a></td>
-                                                                                           <td>
-                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                           </td>
-                                                                                          </tr>
-                                                                                          <tr>
-                                                                                           <td><img src="{{ asset('vendors/admin/images/tour4.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
-                                                                                           <td>214</td>
-                                                                                           <td><a href="#">Business Tour</a></td>
-                                                                                           <td><a href="#">Paris</a></td>
-                                                                                           <td>4 Days</td>
-                                                                                           <td>300$</td>
-                                                                                           <td class="featured"><a href="#">Featured</a></td>
-                                                                                           <td>
-                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                           </td>
-                                                                                          </tr>
-                                                                                          <tr>
-                                                                                           <td><img src="{{ asset('vendors/admin/images/tour4.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
-                                                                                           </td>
-                                                                                           <td>214</td>
-                                                                                           <td><a href="#">Vacational Tour</a></td>
-                                                                                           <td><a href="#">USA</a></td>
-                                                                                           <td>1 Day</td>
-                                                                                           <td>100$</td>
-                                                                                           <td class="featured"><a href="#">Featured</a></td>
-                                                                                           <td>
-                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                           </td>
-                                                                                          </tr>
-                                                                                          <tr>
-                                                                                           <td><img src="{{ asset('vendors/admin/images/tour3.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
-                                                                                           </td>
-                                                                                           <td>110</td>
-                                                                                           <td><a href="#">Visit</a></td>
-                                                                                           <td><a href="#">USA</a></td>
-                                                                                           <td>1 Day</td>
-                                                                                           <td>100$</td>
-                                                                                           <td class="active"><a href="#">Active</a></td>
-                                                                                           <td>
-                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                           </td>
-                                                                                          </tr>
-                                                                                          <tr>
-                                                                                           <td><img src="{{ asset('vendors/admin/images/tour2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
-                                                                                           </td>
-                                                                                           <td>120</td>
-                                                                                           <td><a href="#">Business Tour</a></td>
-                                                                                           <td><a href="#">UAE</a></td>
-                                                                                           <td>3 days</td>
-                                                                                           <td>350$</td>
-                                                                                           <td class="expired"><a href="#">Expired</a></td>
-                                                                                           <td>
-                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                           </td>
-                                                                                          </tr>
-                                                                                          <tr>
-                                                                                           <td><img src="{{ asset('vendors/admin/images/tour1.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
-                                                                                           <td>212</td>
-                                                                                           <td><a href="#">Vacational Tour</a></td>
-                                                                                           <td><a href="#">Canada</a></td>
-                                                                                           <td>1 Week</td>
-                                                                                           <td>200$</td>
-                                                                                           <td class="draft"><a href="#">Draft</a></td>
-                                                                                           <td>
-                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                           </td>
-                                                                                          </tr>
-                                                                                          <tr>
-                                                                                           <td><img src="{{ asset('vendors/admin/images/tour4.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
-                                                                                           <td>214</td>
-                                                                                           <td><a href="#">Business Tour</a></td>
-                                                                                           <td><a href="#">Paris</a></td>
-                                                                                           <td>4 Days</td>
-                                                                                           <td>300$</td>
-                                                                                           <td class="featured"><a href="#">Featured</a></td>
-                                                                                           <td>
-                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                           </td>
-                                                                                          </tr>
-                                                                                          <tr>
-                                                                                           <td><img src="{{ asset('vendors/admin/images/tour4.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
-                                                                                           </td>
-                                                                                           <td>214</td>
-                                                                                           <td><a href="#">Vacational Tour</a></td>
-                                                                                           <td><a href="#">USA</a></td>
-                                                                                           <td>1 Day</td>
-                                                                                           <td>100$</td>
-                                                                                           <td class="featured"><a href="#">Featured</a></td>
-                                                                                           <td>
-                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                           </td>
-                                                                                          </tr>
-                                                                                          <tr>
-                                                                                           <td><img src="{{ asset('vendors/admin/images/tour3.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
-                                                                                           </td>
-                                                                                           <td>110</td>
-                                                                                           <td><a href="#">Visit</a></td>
-                                                                                           <td><a href="#">USA</a></td>
-                                                                                           <td>1 Day</td>
-                                                                                           <td>100$</td>
-                                                                                           <td class="active"><a href="#">Active</a></td>
-                                                                                           <td>
-                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                           </td>
-                                                                                          </tr>
-                                                                                          <tr>
-                                                                                           <td><img src="{{ asset('vendors/admin/images/tour2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
-                                                                                           </td>
-                                                                                           <td>120</td>
-                                                                                           <td><a href="#">Business Tour</a></td>
-                                                                                           <td><a href="#">UAE</a></td>
-                                                                                           <td>3 days</td>
-                                                                                           <td>350$</td>
-                                                                                           <td class="expired"><a href="#">Expired</a></td>
-                                                                                           <td>
-                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                           </td>
-                                                                                          </tr>
-                                                                                          <tr>
-                                                                                           <td><img src="{{ asset('vendors/admin/images/tour1.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
-                                                                                           <td>212</td>
-                                                                                           <td><a href="#">Vacational Tour</a></td>
-                                                                                           <td><a href="#">Canada</a></td>
-                                                                                           <td>1 Week</td>
-                                                                                           <td>200$</td>
-                                                                                           <td class="draft"><a href="#">Draft</a></td>
-                                                                                           <td>
-                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                           </td>
-                                                                                          </tr>
-                                                                                          <tr>
-                                                                                           <td><img src="{{ asset('vendors/admin/images/tour4.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
-                                                                                           <td>214</td>
-                                                                                           <td><a href="#">Business Tour</a></td>
-                                                                                           <td><a href="#">Paris</a></td>
-                                                                                           <td>4 Days</td>
-                                                                                           <td>300$</td>
-                                                                                           <td class="featured"><a href="#">Featured</a></td>
-                                                                                           <td>
-                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                           </td>
-                                                                                          </tr>
-                                                                                          <tr>
-                                                                                           <td><img src="{{ asset('vendors/admin/images/tour4.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
-                                                                                           </td>
-                                                                                           <td>214</td>
-                                                                                           <td><a href="#">Vacational Tour</a></td>
-                                                                                           <td><a href="#">USA</a></td>
-                                                                                           <td>1 Day</td>
-                                                                                           <td>100$</td>
-                                                                                           <td class="featured"><a href="#">Featured</a></td>
-                                                                                           <td>
-                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                           </td>
-                                                                                          </tr>
-                                                                                          <tr>
-                                                                                           <td><img src="{{ asset('vendors/admin/images/tour3.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
-                                                                                           </td>
-                                                                                           <td>110</td>
-                                                                                           <td><a href="#">Visit</a></td>
-                                                                                           <td><a href="#">USA</a></td>
-                                                                                           <td>1 Day</td>
-                                                                                           <td>100$</td>
-                                                                                           <td class="active"><a href="#">Active</a></td>
-                                                                                           <td>
-                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                           </td>
-                                                                                          </tr>
-                                                                                          <tr>
-                                                                                           <td><img src="{{ asset('vendors/admin/images/tour2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
-                                                                                           </td>
-                                                                                           <td>120</td>
-                                                                                           <td><a href="#">Business Tour</a></td>
-                                                                                           <td><a href="#">UAE</a></td>
-                                                                                           <td>3 days</td>
-                                                                                           <td>350$</td>
-                                                                                           <td class="expired"><a href="#">Expired</a></td>
-                                                                                           <td>
-                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                           </td>
-                                                                                          </tr>
-                                                                                          <tr>
-                                                                                           <td><img src="{{ asset('vendors/admin/images/tour1.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
-                                                                                           <td>212</td>
-                                                                                           <td><a href="#">Vacational Tour</a></td>
-                                                                                           <td><a href="#">Canada</a></td>
-                                                                                           <td>1 Week</td>
-                                                                                           <td>200$</td>
-                                                                                           <td class="draft"><a href="#">Draft</a></td>
-                                                                                           <td>
-                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                           </td>
-                                                                                          </tr>
-                                                                                          <tr>
-                                                                                           <td><img src="{{ asset('vendors/admin/images/tour4.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
-                                                                                           <td>214</td>
-                                                                                           <td><a href="#">Business Tour</a></td>
-                                                                                           <td><a href="#">Paris</a></td>
-                                                                                           <td>4 Days</td>
-                                                                                           <td>300$</td>
-                                                                                           <td class="featured"><a href="#">Featured</a></td>
-                                                                                           <td>
-                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                           </td>
-                                                                                          </tr>
-                                                                                          <tr>
-                                                                                           <td><img src="{{ asset('vendors/admin/images/tour4.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
-                                                                                           </td>
-                                                                                           <td>214</td>
-                                                                                           <td><a href="#">Vacational Tour</a></td>
-                                                                                           <td><a href="#">USA</a></td>
-                                                                                           <td>1 Day</td>
-                                                                                           <td>100$</td>
-                                                                                           <td class="featured"><a href="#">Featured</a></td>
-                                                                                           <td>
-                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                           </td>
-                                                                                          </tr>
-                                                                                                                    -->
+                                                                                                          <tr>
+                                                                                                           <td><img src="{{ asset('vendors/admin/images/tour2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
+                                                                                                           </td>
+                                                                                                           <td>120</td>
+                                                                                                           <td><a href="#">Business Tour</a></td>
+                                                                                                           <td><a href="#">UAE</a></td>
+                                                                                                           <td>3 days</td>
+                                                                                                           <td>350$</td>
+                                                                                                           <td class="expired"><a href="#">Expired</a></td>
+                                                                                                           <td>
+                                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                           </td>
+                                                                                                          </tr>
+                                                                                                          <tr>
+                                                                                                           <td><img src="{{ asset('vendors/admin/images/tour1.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
+                                                                                                           <td>212</td>
+                                                                                                           <td><a href="#">Vacational Tour</a></td>
+                                                                                                           <td><a href="#">Canada</a></td>
+                                                                                                           <td>1 Week</td>
+                                                                                                           <td>200$</td>
+                                                                                                           <td class="draft"><a href="#">Draft</a></td>
+                                                                                                           <td>
+                                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                           </td>
+                                                                                                          </tr>
+                                                                                                          <tr>
+                                                                                                           <td><img src="{{ asset('vendors/admin/images/tour4.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
+                                                                                                           <td>214</td>
+                                                                                                           <td><a href="#">Business Tour</a></td>
+                                                                                                           <td><a href="#">Paris</a></td>
+                                                                                                           <td>4 Days</td>
+                                                                                                           <td>300$</td>
+                                                                                                           <td class="featured"><a href="#">Featured</a></td>
+                                                                                                           <td>
+                                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                           </td>
+                                                                                                          </tr>
+                                                                                                          <tr>
+                                                                                                           <td><img src="{{ asset('vendors/admin/images/tour4.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
+                                                                                                           </td>
+                                                                                                           <td>214</td>
+                                                                                                           <td><a href="#">Vacational Tour</a></td>
+                                                                                                           <td><a href="#">USA</a></td>
+                                                                                                           <td>1 Day</td>
+                                                                                                           <td>100$</td>
+                                                                                                           <td class="featured"><a href="#">Featured</a></td>
+                                                                                                           <td>
+                                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                           </td>
+                                                                                                          </tr>
+                                                                                                          <tr>
+                                                                                                           <td><img src="{{ asset('vendors/admin/images/tour3.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
+                                                                                                           </td>
+                                                                                                           <td>110</td>
+                                                                                                           <td><a href="#">Visit</a></td>
+                                                                                                           <td><a href="#">USA</a></td>
+                                                                                                           <td>1 Day</td>
+                                                                                                           <td>100$</td>
+                                                                                                           <td class="active"><a href="#">Active</a></td>
+                                                                                                           <td>
+                                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                           </td>
+                                                                                                          </tr>
+                                                                                                          <tr>
+                                                                                                           <td><img src="{{ asset('vendors/admin/images/tour2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
+                                                                                                           </td>
+                                                                                                           <td>120</td>
+                                                                                                           <td><a href="#">Business Tour</a></td>
+                                                                                                           <td><a href="#">UAE</a></td>
+                                                                                                           <td>3 days</td>
+                                                                                                           <td>350$</td>
+                                                                                                           <td class="expired"><a href="#">Expired</a></td>
+                                                                                                           <td>
+                                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                           </td>
+                                                                                                          </tr>
+                                                                                                          <tr>
+                                                                                                           <td><img src="{{ asset('vendors/admin/images/tour1.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
+                                                                                                           <td>212</td>
+                                                                                                           <td><a href="#">Vacational Tour</a></td>
+                                                                                                           <td><a href="#">Canada</a></td>
+                                                                                                           <td>1 Week</td>
+                                                                                                           <td>200$</td>
+                                                                                                           <td class="draft"><a href="#">Draft</a></td>
+                                                                                                           <td>
+                                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                           </td>
+                                                                                                          </tr>
+                                                                                                          <tr>
+                                                                                                           <td><img src="{{ asset('vendors/admin/images/tour4.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
+                                                                                                           <td>214</td>
+                                                                                                           <td><a href="#">Business Tour</a></td>
+                                                                                                           <td><a href="#">Paris</a></td>
+                                                                                                           <td>4 Days</td>
+                                                                                                           <td>300$</td>
+                                                                                                           <td class="featured"><a href="#">Featured</a></td>
+                                                                                                           <td>
+                                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                           </td>
+                                                                                                          </tr>
+                                                                                                          <tr>
+                                                                                                           <td><img src="{{ asset('vendors/admin/images/tour4.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
+                                                                                                           </td>
+                                                                                                           <td>214</td>
+                                                                                                           <td><a href="#">Vacational Tour</a></td>
+                                                                                                           <td><a href="#">USA</a></td>
+                                                                                                           <td>1 Day</td>
+                                                                                                           <td>100$</td>
+                                                                                                           <td class="featured"><a href="#">Featured</a></td>
+                                                                                                           <td>
+                                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                           </td>
+                                                                                                          </tr>
+                                                                                                          <tr>
+                                                                                                           <td><img src="{{ asset('vendors/admin/images/tour3.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
+                                                                                                           </td>
+                                                                                                           <td>110</td>
+                                                                                                           <td><a href="#">Visit</a></td>
+                                                                                                           <td><a href="#">USA</a></td>
+                                                                                                           <td>1 Day</td>
+                                                                                                           <td>100$</td>
+                                                                                                           <td class="active"><a href="#">Active</a></td>
+                                                                                                           <td>
+                                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                           </td>
+                                                                                                          </tr>
+                                                                                                          <tr>
+                                                                                                           <td><img src="{{ asset('vendors/admin/images/tour2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
+                                                                                                           </td>
+                                                                                                           <td>120</td>
+                                                                                                           <td><a href="#">Business Tour</a></td>
+                                                                                                           <td><a href="#">UAE</a></td>
+                                                                                                           <td>3 days</td>
+                                                                                                           <td>350$</td>
+                                                                                                           <td class="expired"><a href="#">Expired</a></td>
+                                                                                                           <td>
+                                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                           </td>
+                                                                                                          </tr>
+                                                                                                          <tr>
+                                                                                                           <td><img src="{{ asset('vendors/admin/images/tour1.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
+                                                                                                           <td>212</td>
+                                                                                                           <td><a href="#">Vacational Tour</a></td>
+                                                                                                           <td><a href="#">Canada</a></td>
+                                                                                                           <td>1 Week</td>
+                                                                                                           <td>200$</td>
+                                                                                                           <td class="draft"><a href="#">Draft</a></td>
+                                                                                                           <td>
+                                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                           </td>
+                                                                                                          </tr>
+                                                                                                          <tr>
+                                                                                                           <td><img src="{{ asset('vendors/admin/images/tour4.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
+                                                                                                           <td>214</td>
+                                                                                                           <td><a href="#">Business Tour</a></td>
+                                                                                                           <td><a href="#">Paris</a></td>
+                                                                                                           <td>4 Days</td>
+                                                                                                           <td>300$</td>
+                                                                                                           <td class="featured"><a href="#">Featured</a></td>
+                                                                                                           <td>
+                                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                           </td>
+                                                                                                          </tr>
+                                                                                                          <tr>
+                                                                                                           <td><img src="{{ asset('vendors/admin/images/tour4.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
+                                                                                                           </td>
+                                                                                                           <td>214</td>
+                                                                                                           <td><a href="#">Vacational Tour</a></td>
+                                                                                                           <td><a href="#">USA</a></td>
+                                                                                                           <td>1 Day</td>
+                                                                                                           <td>100$</td>
+                                                                                                           <td class="featured"><a href="#">Featured</a></td>
+                                                                                                           <td>
+                                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                           </td>
+                                                                                                          </tr>
+                                                                                                          <tr>
+                                                                                                           <td><img src="{{ asset('vendors/admin/images/tour3.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
+                                                                                                           </td>
+                                                                                                           <td>110</td>
+                                                                                                           <td><a href="#">Visit</a></td>
+                                                                                                           <td><a href="#">USA</a></td>
+                                                                                                           <td>1 Day</td>
+                                                                                                           <td>100$</td>
+                                                                                                           <td class="active"><a href="#">Active</a></td>
+                                                                                                           <td>
+                                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                           </td>
+                                                                                                          </tr>
+                                                                                                          <tr>
+                                                                                                           <td><img src="{{ asset('vendors/admin/images/tour2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
+                                                                                                           </td>
+                                                                                                           <td>120</td>
+                                                                                                           <td><a href="#">Business Tour</a></td>
+                                                                                                           <td><a href="#">UAE</a></td>
+                                                                                                           <td>3 days</td>
+                                                                                                           <td>350$</td>
+                                                                                                           <td class="expired"><a href="#">Expired</a></td>
+                                                                                                           <td>
+                                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                           </td>
+                                                                                                          </tr>
+                                                                                                          <tr>
+                                                                                                           <td><img src="{{ asset('vendors/admin/images/tour1.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
+                                                                                                           <td>212</td>
+                                                                                                           <td><a href="#">Vacational Tour</a></td>
+                                                                                                           <td><a href="#">Canada</a></td>
+                                                                                                           <td>1 Week</td>
+                                                                                                           <td>200$</td>
+                                                                                                           <td class="draft"><a href="#">Draft</a></td>
+                                                                                                           <td>
+                                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                           </td>
+                                                                                                          </tr>
+                                                                                                          <tr>
+                                                                                                           <td><img src="{{ asset('vendors/admin/images/tour4.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
+                                                                                                           <td>214</td>
+                                                                                                           <td><a href="#">Business Tour</a></td>
+                                                                                                           <td><a href="#">Paris</a></td>
+                                                                                                           <td>4 Days</td>
+                                                                                                           <td>300$</td>
+                                                                                                           <td class="featured"><a href="#">Featured</a></td>
+                                                                                                           <td>
+                                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                           </td>
+                                                                                                          </tr>
+                                                                                                          <tr>
+                                                                                                           <td><img src="{{ asset('vendors/admin/images/tour4.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
+                                                                                                           </td>
+                                                                                                           <td>214</td>
+                                                                                                           <td><a href="#">Vacational Tour</a></td>
+                                                                                                           <td><a href="#">USA</a></td>
+                                                                                                           <td>1 Day</td>
+                                                                                                           <td>100$</td>
+                                                                                                           <td class="featured"><a href="#">Featured</a></td>
+                                                                                                           <td>
+                                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                           </td>
+                                                                                                          </tr>
+                                                                                                          <tr>
+                                                                                                           <td><img src="{{ asset('vendors/admin/images/tour3.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
+                                                                                                           </td>
+                                                                                                           <td>110</td>
+                                                                                                           <td><a href="#">Visit</a></td>
+                                                                                                           <td><a href="#">USA</a></td>
+                                                                                                           <td>1 Day</td>
+                                                                                                           <td>100$</td>
+                                                                                                           <td class="active"><a href="#">Active</a></td>
+                                                                                                           <td>
+                                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                           </td>
+                                                                                                          </tr>
+                                                                                                          <tr>
+                                                                                                           <td><img src="{{ asset('vendors/admin/images/tour2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
+                                                                                                           </td>
+                                                                                                           <td>120</td>
+                                                                                                           <td><a href="#">Business Tour</a></td>
+                                                                                                           <td><a href="#">UAE</a></td>
+                                                                                                           <td>3 days</td>
+                                                                                                           <td>350$</td>
+                                                                                                           <td class="expired"><a href="#">Expired</a></td>
+                                                                                                           <td>
+                                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                           </td>
+                                                                                                          </tr>
+                                                                                                          <tr>
+                                                                                                           <td><img src="{{ asset('vendors/admin/images/tour1.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
+                                                                                                           <td>212</td>
+                                                                                                           <td><a href="#">Vacational Tour</a></td>
+                                                                                                           <td><a href="#">Canada</a></td>
+                                                                                                           <td>1 Week</td>
+                                                                                                           <td>200$</td>
+                                                                                                           <td class="draft"><a href="#">Draft</a></td>
+                                                                                                           <td>
+                                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                           </td>
+                                                                                                          </tr>
+                                                                                                          <tr>
+                                                                                                           <td><img src="{{ asset('vendors/admin/images/tour4.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
+                                                                                                           <td>214</td>
+                                                                                                           <td><a href="#">Business Tour</a></td>
+                                                                                                           <td><a href="#">Paris</a></td>
+                                                                                                           <td>4 Days</td>
+                                                                                                           <td>300$</td>
+                                                                                                           <td class="featured"><a href="#">Featured</a></td>
+                                                                                                           <td>
+                                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                           </td>
+                                                                                                          </tr>
+                                                                                                          <tr>
+                                                                                                           <td><img src="{{ asset('vendors/admin/images/tour4.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
+                                                                                                           </td>
+                                                                                                           <td>214</td>
+                                                                                                           <td><a href="#">Vacational Tour</a></td>
+                                                                                                           <td><a href="#">USA</a></td>
+                                                                                                           <td>1 Day</td>
+                                                                                                           <td>100$</td>
+                                                                                                           <td class="featured"><a href="#">Featured</a></td>
+                                                                                                           <td>
+                                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                           </td>
+                                                                                                          </tr>
+                                                                                                          <tr>
+                                                                                                           <td><img src="{{ asset('vendors/admin/images/tour3.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
+                                                                                                           </td>
+                                                                                                           <td>110</td>
+                                                                                                           <td><a href="#">Visit</a></td>
+                                                                                                           <td><a href="#">USA</a></td>
+                                                                                                           <td>1 Day</td>
+                                                                                                           <td>100$</td>
+                                                                                                           <td class="active"><a href="#">Active</a></td>
+                                                                                                           <td>
+                                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                           </td>
+                                                                                                          </tr>
+                                                                                                          <tr>
+                                                                                                           <td><img src="{{ asset('vendors/admin/images/tour2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
+                                                                                                           </td>
+                                                                                                           <td>120</td>
+                                                                                                           <td><a href="#">Business Tour</a></td>
+                                                                                                           <td><a href="#">UAE</a></td>
+                                                                                                           <td>3 days</td>
+                                                                                                           <td>350$</td>
+                                                                                                           <td class="expired"><a href="#">Expired</a></td>
+                                                                                                           <td>
+                                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                           </td>
+                                                                                                          </tr>
+                                                                                                          <tr>
+                                                                                                           <td><img src="{{ asset('vendors/admin/images/tour1.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
+                                                                                                           <td>212</td>
+                                                                                                           <td><a href="#">Vacational Tour</a></td>
+                                                                                                           <td><a href="#">Canada</a></td>
+                                                                                                           <td>1 Week</td>
+                                                                                                           <td>200$</td>
+                                                                                                           <td class="draft"><a href="#">Draft</a></td>
+                                                                                                           <td>
+                                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                           </td>
+                                                                                                          </tr>
+                                                                                                          <tr>
+                                                                                                           <td><img src="{{ asset('vendors/admin/images/tour4.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
+                                                                                                           <td>214</td>
+                                                                                                           <td><a href="#">Business Tour</a></td>
+                                                                                                           <td><a href="#">Paris</a></td>
+                                                                                                           <td>4 Days</td>
+                                                                                                           <td>300$</td>
+                                                                                                           <td class="featured"><a href="#">Featured</a></td>
+                                                                                                           <td>
+                                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                           </td>
+                                                                                                          </tr>
+                                                                                                          <tr>
+                                                                                                           <td><img src="{{ asset('vendors/admin/images/tour4.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
+                                                                                                           </td>
+                                                                                                           <td>214</td>
+                                                                                                           <td><a href="#">Vacational Tour</a></td>
+                                                                                                           <td><a href="#">USA</a></td>
+                                                                                                           <td>1 Day</td>
+                                                                                                           <td>100$</td>
+                                                                                                           <td class="featured"><a href="#">Featured</a></td>
+                                                                                                           <td>
+                                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                           </td>
+                                                                                                          </tr>
+                                                                                                                                    -->
 
                                 </tbody>
                             </table>
@@ -530,6 +541,43 @@
         $(document).ready(function() {
             $('#example').DataTable();
         });
+    </script>
+
+    <script>
+        function getNextStatus(currentStatus) {
+            switch (currentStatus) {
+                case 'active':
+                    return 'draft';
+                case 'draft':
+                    return 'expired';
+                case 'expired':
+                    return 'featured';
+                case 'featured':
+                    return 'active';
+                default:
+                    return 'active';
+            }
+        }
+
+        function updateStatus(unitId, newStatus) {
+            $.ajax({
+                url: '{{ route('listing-tour.updateStatus') }}', // Controller Route
+                type: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}', // Send Token
+                    id: unitId,
+                    status: newStatus
+                },
+                success: function(response) {
+                    // alert('Estado actualizado con éxito');
+                    location.reload(); // Reload page
+                },
+                error: function(xhr) {
+                    console.log(xhr.responseText);
+                    alert('Error al actualizar el estado');
+                }
+            });
+        }
     </script>
 
 @endsection

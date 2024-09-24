@@ -21,6 +21,7 @@ class UnitHotel extends Model
         'phone',
         'rent',
         'details',
+        'status',
     ];
 
     public $timestamps = false;

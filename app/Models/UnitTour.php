@@ -20,6 +20,7 @@ class UnitTour extends Model
         'price',
         'embed',
         'details',
+        'status',
     ];
 
     public $timestamps = false;

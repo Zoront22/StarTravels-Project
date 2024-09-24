@@ -73,7 +73,18 @@
                                             <td><a href="#">{{ $unit->ac }}</a></td>
                                             <td>{{ $unit->meal }}</td>
                                             <td>{{ $unit->capacity }}</td>
-                                            <td class="active"><a href="#">Active</a></td>
+                                            <!--Status-->
+                                            <td
+                                                class="
+                                                @if ($unit->status === 'draft') draft
+                                                @elseif ($unit->status === 'active') active
+                                                @elseif ($unit->status === 'expired') expired
+                                                @elseif ($unit->status === 'featured') featured @endif">
+                                                <a href="javascript:void(0);"
+                                                    onclick="updateStatus('{{ $unit->id }}', getNextStatus('{{ $unit->status }}'))">
+                                                    {{ ucfirst($unit->status) }}
+                                                </a>
+                                            </td>
                                             <td>{{ $unit->phone }}</td>
                                             <td>${{ $unit->rent }}</td>
                                             <td>
@@ -95,555 +106,555 @@
                                     @endforeach
 
                                     <!--
-                                                                              <tr>
-                                                                               <td><img src="{{ asset('vendors/admin/images/hotel2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
-                                                                               </td>
-                                                                               <td>209</td>
-                                                                               <td><a href="#">Double</a></td>
-                                                                               <td><a href="#">AC</a></td>
-                                                                               <td>Free Lunch</td>
-                                                                               <td>4</td>
-                                                                               <td class="expired"><a href="#">Expired</a></td>
-                                                                               <td>12312335</td>
-                                                                               <td>45$</td>
-                                                                               <td>
-                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                               </td>
-                                                                              </tr>
-                                                                              <tr>
-                                                                               <td><img src="{{ asset('vendors/admin/images/hotel1.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
-                                                                               <td>212</td>
-                                                                               <td><a href="#">Double</a></td>
-                                                                               <td><a href="#">Non-AC</a></td>
-                                                                               <td>Free Lunch</td>
-                                                                               <td>4</td>
-                                                                               <td class="draft"><a href="#">Draft</a></td>
-                                                                               <td>12312335</td>
-                                                                               <td>25$</td>
-                                                                               <td>
-                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                               </td>
-                                                                              </tr>
-                                                                              <tr>
-                                                                               <td><img src="{{ asset('vendors/admin/images/hotel4.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
-                                                                               <td>214</td>
-                                                                               <td><a href="#">Single</a></td>
-                                                                               <td><a href="#">AC</a></td>
-                                                                               <td>Free Dinner</td>
-                                                                               <td>1</td>
-                                                                               <td class="featured"><a href="#">Featured</a></td>
-                                                                               <td>12312335</td>
-                                                                               <td>50$</td>
-                                                                               <td>
-                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                               </td>
-                                                                              </tr>
-                                                                              <tr>
-                                                                               <td><img src="{{ asset('vendors/admin/images/hotel4.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
-                                                                               </td>
-                                                                               <td>214</td>
-                                                                               <td><a href="#">Double</a></td>
-                                                                               <td><a href="#">Non-AC</a></td>
-                                                                               <td>Free Lunch</td>
-                                                                               <td>2</td>
-                                                                               <td class="featured"><a href="#">Featured</a></td>
-                                                                               <td>12312335</td>
-                                                                               <td>40$</td>
-                                                                               <td>
-                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                               </td>
-                                                                              </tr>
-                                                                              <tr>
-                                                                               <td><img src="{{ asset('vendors/admin/images/hotel3.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
-                                                                               </td>
-                                                                               <td>214</td>
-                                                                               <td><a href="#">Single</a></td>
-                                                                               <td><a href="#">AC</a></td>
-                                                                               <td>Free Dinner</td>
-                                                                               <td>2</td>
-                                                                               <td class="active"><a href="#">Active</a></td>
-                                                                               <td>12312335</td>
-                                                                               <td>25$</td>
-                                                                               <td>
-                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                               </td>
-                                                                              </tr>
-                                                                              <tr>
-                                                                               <td><img src="{{ asset('vendors/admin/images/hotel3.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
-                                                                               </td>
-                                                                               <td>209</td>
-                                                                               <td><a href="#">Single</a></td>
-                                                                               <td><a href="#">AC</a></td>
-                                                                               <td>Free Dinner</td>
-                                                                               <td>1</td>
-                                                                               <td class="active"><a href="#">Active</a></td>
-                                                                               <td>12312335</td>
-                                                                               <td>30$</td>
-                                                                               <td>
-                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                               </td>
-                                                                              </tr>
-                                                                              <tr>
-                                                                               <td><img src="{{ asset('vendors/admin/images/hotel2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
-                                                                               </td>
-                                                                               <td>209</td>
-                                                                               <td><a href="#">Double</a></td>
-                                                                               <td><a href="#">AC</a></td>
-                                                                               <td>Free Lunch</td>
-                                                                               <td>4</td>
-                                                                               <td class="expired"><a href="#">Expired</a></td>
-                                                                               <td>12312335</td>
-                                                                               <td>45$</td>
-                                                                               <td>
-                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                               </td>
-                                                                              </tr>
-                                                                              <tr>
-                                                                               <td><img src="{{ asset('vendors/admin/images/hotel1.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
-                                                                               <td>212</td>
-                                                                               <td><a href="#">Double</a></td>
-                                                                               <td><a href="#">Non-AC</a></td>
-                                                                               <td>Free Lunch</td>
-                                                                               <td>4</td>
-                                                                               <td class="draft"><a href="#">Draft</a></td>
-                                                                               <td>12312335</td>
-                                                                               <td>25$</td>
-                                                                               <td>
-                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                               </td>
-                                                                              </tr>
-                                                                              <tr>
-                                                                               <td><img src="{{ asset('vendors/admin/images/hotel4.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
-                                                                               <td>214</td>
-                                                                               <td><a href="#">Single</a></td>
-                                                                               <td><a href="#">AC</a></td>
-                                                                               <td>Free Dinner</td>
-                                                                               <td>1</td>
-                                                                               <td class="featured"><a href="#">Featured</a></td>
-                                                                               <td>12312335</td>
-                                                                               <td>50$</td>
-                                                                               <td>
-                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                               </td>
-                                                                              </tr>
-                                                                              <tr>
-                                                                               <td><img src="{{ asset('vendors/admin/images/hotel4.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
-                                                                               </td>
-                                                                               <td>214</td>
-                                                                               <td><a href="#">Double</a></td>
-                                                                               <td><a href="#">Non-AC</a></td>
-                                                                               <td>Free Lunch</td>
-                                                                               <td>2</td>
-                                                                               <td class="featured"><a href="#">Featured</a></td>
-                                                                               <td>12312335</td>
-                                                                               <td>40$</td>
-                                                                               <td>
-                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                               </td>
-                                                                              </tr>
-                                                                              <tr>
-                                                                               <td><img src="{{ asset('vendors/admin/images/hotel3.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
-                                                                               </td>
-                                                                               <td>214</td>
-                                                                               <td><a href="#">Single</a></td>
-                                                                               <td><a href="#">AC</a></td>
-                                                                               <td>Free Dinner</td>
-                                                                               <td>2</td>
-                                                                               <td class="active"><a href="#">Active</a></td>
-                                                                               <td>12312335</td>
-                                                                               <td>25$</td>
-                                                                               <td>
-                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                               </td>
-                                                                              </tr>
-                                                                              <tr>
-                                                                               <td><img src="{{ asset('vendors/admin/images/hotel3.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
-                                                                               </td>
-                                                                               <td>209</td>
-                                                                               <td><a href="#">Single</a></td>
-                                                                               <td><a href="#">AC</a></td>
-                                                                               <td>Free Dinner</td>
-                                                                               <td>1</td>
-                                                                               <td class="active"><a href="#">Active</a></td>
-                                                                               <td>12312335</td>
-                                                                               <td>30$</td>
-                                                                               <td>
-                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                               </td>
-                                                                              </tr>
-                                                                              <tr>
-                                                                               <td><img src="{{ asset('vendors/admin/images/hotel2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
-                                                                               </td>
-                                                                               <td>209</td>
-                                                                               <td><a href="#">Double</a></td>
-                                                                               <td><a href="#">AC</a></td>
-                                                                               <td>Free Lunch</td>
-                                                                               <td>4</td>
-                                                                               <td class="expired"><a href="#">Expired</a></td>
-                                                                               <td>12312335</td>
-                                                                               <td>45$</td>
-                                                                               <td>
-                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                               </td>
-                                                                              </tr>
-                                                                              <tr>
-                                                                               <td><img src="{{ asset('vendors/admin/images/hotel1.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
-                                                                               <td>212</td>
-                                                                               <td><a href="#">Double</a></td>
-                                                                               <td><a href="#">Non-AC</a></td>
-                                                                               <td>Free Lunch</td>
-                                                                               <td>4</td>
-                                                                               <td class="draft"><a href="#">Draft</a></td>
-                                                                               <td>12312335</td>
-                                                                               <td>25$</td>
-                                                                               <td>
-                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                               </td>
-                                                                              </tr>
-                                                                              <tr>
-                                                                               <td><img src="{{ asset('vendors/admin/images/hotel4.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
-                                                                               <td>214</td>
-                                                                               <td><a href="#">Single</a></td>
-                                                                               <td><a href="#">AC</a></td>
-                                                                               <td>Free Dinner</td>
-                                                                               <td>1</td>
-                                                                               <td class="featured"><a href="#">Featured</a></td>
-                                                                               <td>12312335</td>
-                                                                               <td>50$</td>
-                                                                               <td>
-                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                               </td>
-                                                                              </tr>
-                                                                              <tr>
-                                                                               <td><img src="{{ asset('vendors/admin/images/hotel4.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
-                                                                               </td>
-                                                                               <td>214</td>
-                                                                               <td><a href="#">Double</a></td>
-                                                                               <td><a href="#">Non-AC</a></td>
-                                                                               <td>Free Lunch</td>
-                                                                               <td>2</td>
-                                                                               <td class="featured"><a href="#">Featured</a></td>
-                                                                               <td>12312335</td>
-                                                                               <td>40$</td>
-                                                                               <td>
-                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                               </td>
-                                                                              </tr>
-                                                                              <tr>
-                                                                               <td><img src="{{ asset('vendors/admin/images/hotel3.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
-                                                                               </td>
-                                                                               <td>214</td>
-                                                                               <td><a href="#">Single</a></td>
-                                                                               <td><a href="#">AC</a></td>
-                                                                               <td>Free Dinner</td>
-                                                                               <td>2</td>
-                                                                               <td class="active"><a href="#">Active</a></td>
-                                                                               <td>12312335</td>
-                                                                               <td>25$</td>
-                                                                               <td>
-                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                               </td>
-                                                                              </tr>
-                                                                              <tr>
-                                                                               <td><img src="{{ asset('vendors/admin/images/hotel3.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
-                                                                               </td>
-                                                                               <td>209</td>
-                                                                               <td><a href="#">Single</a></td>
-                                                                               <td><a href="#">AC</a></td>
-                                                                               <td>Free Dinner</td>
-                                                                               <td>1</td>
-                                                                               <td class="active"><a href="#">Active</a></td>
-                                                                               <td>12312335</td>
-                                                                               <td>30$</td>
-                                                                               <td>
-                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                               </td>
-                                                                              </tr>
-                                                                              <tr>
-                                                                               <td><img src="{{ asset('vendors/admin/images/hotel2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
-                                                                               </td>
-                                                                               <td>209</td>
-                                                                               <td><a href="#">Double</a></td>
-                                                                               <td><a href="#">AC</a></td>
-                                                                               <td>Free Lunch</td>
-                                                                               <td>4</td>
-                                                                               <td class="expired"><a href="#">Expired</a></td>
-                                                                               <td>12312335</td>
-                                                                               <td>45$</td>
-                                                                               <td>
-                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                               </td>
-                                                                              </tr>
-                                                                              <tr>
-                                                                               <td><img src="{{ asset('vendors/admin/images/hotel1.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
-                                                                               <td>212</td>
-                                                                               <td><a href="#">Double</a></td>
-                                                                               <td><a href="#">Non-AC</a></td>
-                                                                               <td>Free Lunch</td>
-                                                                               <td>4</td>
-                                                                               <td class="draft"><a href="#">Draft</a></td>
-                                                                               <td>12312335</td>
-                                                                               <td>25$</td>
-                                                                               <td>
-                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                               </td>
-                                                                              </tr>
-                                                                              <tr>
-                                                                               <td><img src="{{ asset('vendors/admin/images/hotel4.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
-                                                                               <td>214</td>
-                                                                               <td><a href="#">Single</a></td>
-                                                                               <td><a href="#">AC</a></td>
-                                                                               <td>Free Dinner</td>
-                                                                               <td>1</td>
-                                                                               <td class="featured"><a href="#">Featured</a></td>
-                                                                               <td>12312335</td>
-                                                                               <td>50$</td>
-                                                                               <td>
-                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                               </td>
-                                                                              </tr>
-                                                                              <tr>
-                                                                               <td><img src="{{ asset('vendors/admin/images/hotel4.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
-                                                                               </td>
-                                                                               <td>214</td>
-                                                                               <td><a href="#">Double</a></td>
-                                                                               <td><a href="#">Non-AC</a></td>
-                                                                               <td>Free Lunch</td>
-                                                                               <td>2</td>
-                                                                               <td class="featured"><a href="#">Featured</a></td>
-                                                                               <td>12312335</td>
-                                                                               <td>40$</td>
-                                                                               <td>
-                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                               </td>
-                                                                              </tr>
-                                                                              <tr>
-                                                                               <td><img src="{{ asset('vendors/admin/images/hotel3.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
-                                                                               </td>
-                                                                               <td>214</td>
-                                                                               <td><a href="#">Single</a></td>
-                                                                               <td><a href="#">AC</a></td>
-                                                                               <td>Free Dinner</td>
-                                                                               <td>2</td>
-                                                                               <td class="active"><a href="#">Active</a></td>
-                                                                               <td>12312335</td>
-                                                                               <td>25$</td>
-                                                                               <td>
-                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                               </td>
-                                                                              </tr>
-                                                                              <tr>
-                                                                               <td><img src="{{ asset('vendors/admin/images/hotel3.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
-                                                                               </td>
-                                                                               <td>209</td>
-                                                                               <td><a href="#">Single</a></td>
-                                                                               <td><a href="#">AC</a></td>
-                                                                               <td>Free Dinner</td>
-                                                                               <td>1</td>
-                                                                               <td class="active"><a href="#">Active</a></td>
-                                                                               <td>12312335</td>
-                                                                               <td>30$</td>
-                                                                               <td>
-                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                               </td>
-                                                                              </tr>
-                                                                              <tr>
-                                                                               <td><img src="{{ asset('vendors/admin/images/hotel2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
-                                                                               </td>
-                                                                               <td>209</td>
-                                                                               <td><a href="#">Double</a></td>
-                                                                               <td><a href="#">AC</a></td>
-                                                                               <td>Free Lunch</td>
-                                                                               <td>4</td>
-                                                                               <td class="expired"><a href="#">Expired</a></td>
-                                                                               <td>12312335</td>
-                                                                               <td>45$</td>
-                                                                               <td>
-                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                               </td>
-                                                                              </tr>
-                                                                              <tr>
-                                                                               <td><img src="{{ asset('vendors/admin/images/hotel1.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
-                                                                               <td>212</td>
-                                                                               <td><a href="#">Double</a></td>
-                                                                               <td><a href="#">Non-AC</a></td>
-                                                                               <td>Free Lunch</td>
-                                                                               <td>4</td>
-                                                                               <td class="draft"><a href="#">Draft</a></td>
-                                                                               <td>12312335</td>
-                                                                               <td>25$</td>
-                                                                               <td>
-                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                               </td>
-                                                                              </tr>
-                                                                              <tr>
-                                                                               <td><img src="{{ asset('vendors/admin/images/hotel4.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
-                                                                               <td>214</td>
-                                                                               <td><a href="#">Single</a></td>
-                                                                               <td><a href="#">AC</a></td>
-                                                                               <td>Free Dinner</td>
-                                                                               <td>1</td>
-                                                                               <td class="featured"><a href="#">Featured</a></td>
-                                                                               <td>12312335</td>
-                                                                               <td>50$</td>
-                                                                               <td>
-                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                               </td>
-                                                                              </tr>
-                                                                              <tr>
-                                                                               <td><img src="{{ asset('vendors/admin/images/hotel4.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
-                                                                               </td>
-                                                                               <td>214</td>
-                                                                               <td><a href="#">Double</a></td>
-                                                                               <td><a href="#">Non-AC</a></td>
-                                                                               <td>Free Lunch</td>
-                                                                               <td>2</td>
-                                                                               <td class="featured"><a href="#">Featured</a></td>
-                                                                               <td>12312335</td>
-                                                                               <td>40$</td>
-                                                                               <td>
-                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                               </td>
-                                                                              </tr>
-                                                                              <tr>
-                                                                               <td><img src="{{ asset('vendors/admin/images/hotel3.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
-                                                                               </td>
-                                                                               <td>214</td>
-                                                                               <td><a href="#">Single</a></td>
-                                                                               <td><a href="#">AC</a></td>
-                                                                               <td>Free Dinner</td>
-                                                                               <td>2</td>
-                                                                               <td class="active"><a href="#">Active</a></td>
-                                                                               <td>12312335</td>
-                                                                               <td>25$</td>
-                                                                               <td>
-                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                               </td>
-                                                                              </tr>
-                                                                              <tr>
-                                                                               <td><img src="{{ asset('vendors/admin/images/hotel3.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
-                                                                               </td>
-                                                                               <td>209</td>
-                                                                               <td><a href="#">Single</a></td>
-                                                                               <td><a href="#">AC</a></td>
-                                                                               <td>Free Dinner</td>
-                                                                               <td>1</td>
-                                                                               <td class="active"><a href="#">Active</a></td>
-                                                                               <td>12312335</td>
-                                                                               <td>30$</td>
-                                                                               <td>
-                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                               </td>
-                                                                              </tr>
-                                                                              <tr>
-                                                                               <td><img src="{{ asset('vendors/admin/images/hotel2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
-                                                                               </td>
-                                                                               <td>209</td>
-                                                                               <td><a href="#">Double</a></td>
-                                                                               <td><a href="#">AC</a></td>
-                                                                               <td>Free Lunch</td>
-                                                                               <td>4</td>
-                                                                               <td class="expired"><a href="#">Expired</a></td>
-                                                                               <td>12312335</td>
-                                                                               <td>45$</td>
-                                                                               <td>
-                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                               </td>
-                                                                              </tr>
-                                                                              <tr>
-                                                                               <td><img src="{{ asset('vendors/admin/images/hotel1.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
-                                                                               <td>212</td>
-                                                                               <td><a href="#">Double</a></td>
-                                                                               <td><a href="#">Non-AC</a></td>
-                                                                               <td>Free Lunch</td>
-                                                                               <td>4</td>
-                                                                               <td class="draft"><a href="#">Draft</a></td>
-                                                                               <td>12312335</td>
-                                                                               <td>25$</td>
-                                                                               <td>
-                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                               </td>
-                                                                              </tr>
-                                                                              <tr>
-                                                                               <td><img src="{{ asset('vendors/admin/images/hotel4.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
-                                                                               <td>214</td>
-                                                                               <td><a href="#">Single</a></td>
-                                                                               <td><a href="#">AC</a></td>
-                                                                               <td>Free Dinner</td>
-                                                                               <td>1</td>
-                                                                               <td class="featured"><a href="#">Featured</a></td>
-                                                                               <td>12312335</td>
-                                                                               <td>50$</td>
-                                                                               <td>
-                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                               </td>
-                                                                              </tr>
-                                                                              <tr>
-                                                                               <td><img src="{{ asset('vendors/admin/images/hotel4.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
-                                                                               </td>
-                                                                               <td>214</td>
-                                                                               <td><a href="#">Double</a></td>
-                                                                               <td><a href="#">Non-AC</a></td>
-                                                                               <td>Free Lunch</td>
-                                                                               <td>2</td>
-                                                                               <td class="featured"><a href="#">Featured</a></td>
-                                                                               <td>12312335</td>
-                                                                               <td>40$</td>
-                                                                               <td>
-                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                               </td>
-                                                                              </tr>
-                                                                              <tr>
-                                                                               <td><img src="{{ asset('vendors/admin/images/hotel3.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
-                                                                               </td>
-                                                                               <td>214</td>
-                                                                               <td><a href="#">Single</a></td>
-                                                                               <td><a href="#">AC</a></td>
-                                                                               <td>Free Dinner</td>
-                                                                               <td>2</td>
-                                                                               <td class="active"><a href="#">Active</a></td>
-                                                                               <td>12312335</td>
-                                                                               <td>25$</td>
-                                                                               <td>
-                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                               </td>
-                                                                              </tr>
-                                                    -->
+                                                                                      <tr>
+                                                                                       <td><img src="{{ asset('vendors/admin/images/hotel2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
+                                                                                       </td>
+                                                                                       <td>209</td>
+                                                                                       <td><a href="#">Double</a></td>
+                                                                                       <td><a href="#">AC</a></td>
+                                                                                       <td>Free Lunch</td>
+                                                                                       <td>4</td>
+                                                                                       <td class="expired"><a href="#">Expired</a></td>
+                                                                                       <td>12312335</td>
+                                                                                       <td>45$</td>
+                                                                                       <td>
+                                                                                        <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                        <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                       </td>
+                                                                                      </tr>
+                                                                                      <tr>
+                                                                                       <td><img src="{{ asset('vendors/admin/images/hotel1.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
+                                                                                       <td>212</td>
+                                                                                       <td><a href="#">Double</a></td>
+                                                                                       <td><a href="#">Non-AC</a></td>
+                                                                                       <td>Free Lunch</td>
+                                                                                       <td>4</td>
+                                                                                       <td class="draft"><a href="#">Draft</a></td>
+                                                                                       <td>12312335</td>
+                                                                                       <td>25$</td>
+                                                                                       <td>
+                                                                                        <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                        <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                       </td>
+                                                                                      </tr>
+                                                                                      <tr>
+                                                                                       <td><img src="{{ asset('vendors/admin/images/hotel4.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
+                                                                                       <td>214</td>
+                                                                                       <td><a href="#">Single</a></td>
+                                                                                       <td><a href="#">AC</a></td>
+                                                                                       <td>Free Dinner</td>
+                                                                                       <td>1</td>
+                                                                                       <td class="featured"><a href="#">Featured</a></td>
+                                                                                       <td>12312335</td>
+                                                                                       <td>50$</td>
+                                                                                       <td>
+                                                                                        <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                        <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                       </td>
+                                                                                      </tr>
+                                                                                      <tr>
+                                                                                       <td><img src="{{ asset('vendors/admin/images/hotel4.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
+                                                                                       </td>
+                                                                                       <td>214</td>
+                                                                                       <td><a href="#">Double</a></td>
+                                                                                       <td><a href="#">Non-AC</a></td>
+                                                                                       <td>Free Lunch</td>
+                                                                                       <td>2</td>
+                                                                                       <td class="featured"><a href="#">Featured</a></td>
+                                                                                       <td>12312335</td>
+                                                                                       <td>40$</td>
+                                                                                       <td>
+                                                                                        <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                        <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                       </td>
+                                                                                      </tr>
+                                                                                      <tr>
+                                                                                       <td><img src="{{ asset('vendors/admin/images/hotel3.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
+                                                                                       </td>
+                                                                                       <td>214</td>
+                                                                                       <td><a href="#">Single</a></td>
+                                                                                       <td><a href="#">AC</a></td>
+                                                                                       <td>Free Dinner</td>
+                                                                                       <td>2</td>
+                                                                                       <td class="active"><a href="#">Active</a></td>
+                                                                                       <td>12312335</td>
+                                                                                       <td>25$</td>
+                                                                                       <td>
+                                                                                        <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                        <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                       </td>
+                                                                                      </tr>
+                                                                                      <tr>
+                                                                                       <td><img src="{{ asset('vendors/admin/images/hotel3.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
+                                                                                       </td>
+                                                                                       <td>209</td>
+                                                                                       <td><a href="#">Single</a></td>
+                                                                                       <td><a href="#">AC</a></td>
+                                                                                       <td>Free Dinner</td>
+                                                                                       <td>1</td>
+                                                                                       <td class="active"><a href="#">Active</a></td>
+                                                                                       <td>12312335</td>
+                                                                                       <td>30$</td>
+                                                                                       <td>
+                                                                                        <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                        <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                       </td>
+                                                                                      </tr>
+                                                                                      <tr>
+                                                                                       <td><img src="{{ asset('vendors/admin/images/hotel2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
+                                                                                       </td>
+                                                                                       <td>209</td>
+                                                                                       <td><a href="#">Double</a></td>
+                                                                                       <td><a href="#">AC</a></td>
+                                                                                       <td>Free Lunch</td>
+                                                                                       <td>4</td>
+                                                                                       <td class="expired"><a href="#">Expired</a></td>
+                                                                                       <td>12312335</td>
+                                                                                       <td>45$</td>
+                                                                                       <td>
+                                                                                        <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                        <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                       </td>
+                                                                                      </tr>
+                                                                                      <tr>
+                                                                                       <td><img src="{{ asset('vendors/admin/images/hotel1.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
+                                                                                       <td>212</td>
+                                                                                       <td><a href="#">Double</a></td>
+                                                                                       <td><a href="#">Non-AC</a></td>
+                                                                                       <td>Free Lunch</td>
+                                                                                       <td>4</td>
+                                                                                       <td class="draft"><a href="#">Draft</a></td>
+                                                                                       <td>12312335</td>
+                                                                                       <td>25$</td>
+                                                                                       <td>
+                                                                                        <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                        <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                       </td>
+                                                                                      </tr>
+                                                                                      <tr>
+                                                                                       <td><img src="{{ asset('vendors/admin/images/hotel4.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
+                                                                                       <td>214</td>
+                                                                                       <td><a href="#">Single</a></td>
+                                                                                       <td><a href="#">AC</a></td>
+                                                                                       <td>Free Dinner</td>
+                                                                                       <td>1</td>
+                                                                                       <td class="featured"><a href="#">Featured</a></td>
+                                                                                       <td>12312335</td>
+                                                                                       <td>50$</td>
+                                                                                       <td>
+                                                                                        <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                        <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                       </td>
+                                                                                      </tr>
+                                                                                      <tr>
+                                                                                       <td><img src="{{ asset('vendors/admin/images/hotel4.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
+                                                                                       </td>
+                                                                                       <td>214</td>
+                                                                                       <td><a href="#">Double</a></td>
+                                                                                       <td><a href="#">Non-AC</a></td>
+                                                                                       <td>Free Lunch</td>
+                                                                                       <td>2</td>
+                                                                                       <td class="featured"><a href="#">Featured</a></td>
+                                                                                       <td>12312335</td>
+                                                                                       <td>40$</td>
+                                                                                       <td>
+                                                                                        <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                        <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                       </td>
+                                                                                      </tr>
+                                                                                      <tr>
+                                                                                       <td><img src="{{ asset('vendors/admin/images/hotel3.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
+                                                                                       </td>
+                                                                                       <td>214</td>
+                                                                                       <td><a href="#">Single</a></td>
+                                                                                       <td><a href="#">AC</a></td>
+                                                                                       <td>Free Dinner</td>
+                                                                                       <td>2</td>
+                                                                                       <td class="active"><a href="#">Active</a></td>
+                                                                                       <td>12312335</td>
+                                                                                       <td>25$</td>
+                                                                                       <td>
+                                                                                        <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                        <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                       </td>
+                                                                                      </tr>
+                                                                                      <tr>
+                                                                                       <td><img src="{{ asset('vendors/admin/images/hotel3.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
+                                                                                       </td>
+                                                                                       <td>209</td>
+                                                                                       <td><a href="#">Single</a></td>
+                                                                                       <td><a href="#">AC</a></td>
+                                                                                       <td>Free Dinner</td>
+                                                                                       <td>1</td>
+                                                                                       <td class="active"><a href="#">Active</a></td>
+                                                                                       <td>12312335</td>
+                                                                                       <td>30$</td>
+                                                                                       <td>
+                                                                                        <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                        <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                       </td>
+                                                                                      </tr>
+                                                                                      <tr>
+                                                                                       <td><img src="{{ asset('vendors/admin/images/hotel2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
+                                                                                       </td>
+                                                                                       <td>209</td>
+                                                                                       <td><a href="#">Double</a></td>
+                                                                                       <td><a href="#">AC</a></td>
+                                                                                       <td>Free Lunch</td>
+                                                                                       <td>4</td>
+                                                                                       <td class="expired"><a href="#">Expired</a></td>
+                                                                                       <td>12312335</td>
+                                                                                       <td>45$</td>
+                                                                                       <td>
+                                                                                        <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                        <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                       </td>
+                                                                                      </tr>
+                                                                                      <tr>
+                                                                                       <td><img src="{{ asset('vendors/admin/images/hotel1.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
+                                                                                       <td>212</td>
+                                                                                       <td><a href="#">Double</a></td>
+                                                                                       <td><a href="#">Non-AC</a></td>
+                                                                                       <td>Free Lunch</td>
+                                                                                       <td>4</td>
+                                                                                       <td class="draft"><a href="#">Draft</a></td>
+                                                                                       <td>12312335</td>
+                                                                                       <td>25$</td>
+                                                                                       <td>
+                                                                                        <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                        <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                       </td>
+                                                                                      </tr>
+                                                                                      <tr>
+                                                                                       <td><img src="{{ asset('vendors/admin/images/hotel4.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
+                                                                                       <td>214</td>
+                                                                                       <td><a href="#">Single</a></td>
+                                                                                       <td><a href="#">AC</a></td>
+                                                                                       <td>Free Dinner</td>
+                                                                                       <td>1</td>
+                                                                                       <td class="featured"><a href="#">Featured</a></td>
+                                                                                       <td>12312335</td>
+                                                                                       <td>50$</td>
+                                                                                       <td>
+                                                                                        <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                        <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                       </td>
+                                                                                      </tr>
+                                                                                      <tr>
+                                                                                       <td><img src="{{ asset('vendors/admin/images/hotel4.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
+                                                                                       </td>
+                                                                                       <td>214</td>
+                                                                                       <td><a href="#">Double</a></td>
+                                                                                       <td><a href="#">Non-AC</a></td>
+                                                                                       <td>Free Lunch</td>
+                                                                                       <td>2</td>
+                                                                                       <td class="featured"><a href="#">Featured</a></td>
+                                                                                       <td>12312335</td>
+                                                                                       <td>40$</td>
+                                                                                       <td>
+                                                                                        <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                        <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                       </td>
+                                                                                      </tr>
+                                                                                      <tr>
+                                                                                       <td><img src="{{ asset('vendors/admin/images/hotel3.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
+                                                                                       </td>
+                                                                                       <td>214</td>
+                                                                                       <td><a href="#">Single</a></td>
+                                                                                       <td><a href="#">AC</a></td>
+                                                                                       <td>Free Dinner</td>
+                                                                                       <td>2</td>
+                                                                                       <td class="active"><a href="#">Active</a></td>
+                                                                                       <td>12312335</td>
+                                                                                       <td>25$</td>
+                                                                                       <td>
+                                                                                        <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                        <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                       </td>
+                                                                                      </tr>
+                                                                                      <tr>
+                                                                                       <td><img src="{{ asset('vendors/admin/images/hotel3.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
+                                                                                       </td>
+                                                                                       <td>209</td>
+                                                                                       <td><a href="#">Single</a></td>
+                                                                                       <td><a href="#">AC</a></td>
+                                                                                       <td>Free Dinner</td>
+                                                                                       <td>1</td>
+                                                                                       <td class="active"><a href="#">Active</a></td>
+                                                                                       <td>12312335</td>
+                                                                                       <td>30$</td>
+                                                                                       <td>
+                                                                                        <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                        <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                       </td>
+                                                                                      </tr>
+                                                                                      <tr>
+                                                                                       <td><img src="{{ asset('vendors/admin/images/hotel2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
+                                                                                       </td>
+                                                                                       <td>209</td>
+                                                                                       <td><a href="#">Double</a></td>
+                                                                                       <td><a href="#">AC</a></td>
+                                                                                       <td>Free Lunch</td>
+                                                                                       <td>4</td>
+                                                                                       <td class="expired"><a href="#">Expired</a></td>
+                                                                                       <td>12312335</td>
+                                                                                       <td>45$</td>
+                                                                                       <td>
+                                                                                        <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                        <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                       </td>
+                                                                                      </tr>
+                                                                                      <tr>
+                                                                                       <td><img src="{{ asset('vendors/admin/images/hotel1.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
+                                                                                       <td>212</td>
+                                                                                       <td><a href="#">Double</a></td>
+                                                                                       <td><a href="#">Non-AC</a></td>
+                                                                                       <td>Free Lunch</td>
+                                                                                       <td>4</td>
+                                                                                       <td class="draft"><a href="#">Draft</a></td>
+                                                                                       <td>12312335</td>
+                                                                                       <td>25$</td>
+                                                                                       <td>
+                                                                                        <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                        <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                       </td>
+                                                                                      </tr>
+                                                                                      <tr>
+                                                                                       <td><img src="{{ asset('vendors/admin/images/hotel4.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
+                                                                                       <td>214</td>
+                                                                                       <td><a href="#">Single</a></td>
+                                                                                       <td><a href="#">AC</a></td>
+                                                                                       <td>Free Dinner</td>
+                                                                                       <td>1</td>
+                                                                                       <td class="featured"><a href="#">Featured</a></td>
+                                                                                       <td>12312335</td>
+                                                                                       <td>50$</td>
+                                                                                       <td>
+                                                                                        <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                        <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                       </td>
+                                                                                      </tr>
+                                                                                      <tr>
+                                                                                       <td><img src="{{ asset('vendors/admin/images/hotel4.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
+                                                                                       </td>
+                                                                                       <td>214</td>
+                                                                                       <td><a href="#">Double</a></td>
+                                                                                       <td><a href="#">Non-AC</a></td>
+                                                                                       <td>Free Lunch</td>
+                                                                                       <td>2</td>
+                                                                                       <td class="featured"><a href="#">Featured</a></td>
+                                                                                       <td>12312335</td>
+                                                                                       <td>40$</td>
+                                                                                       <td>
+                                                                                        <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                        <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                       </td>
+                                                                                      </tr>
+                                                                                      <tr>
+                                                                                       <td><img src="{{ asset('vendors/admin/images/hotel3.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
+                                                                                       </td>
+                                                                                       <td>214</td>
+                                                                                       <td><a href="#">Single</a></td>
+                                                                                       <td><a href="#">AC</a></td>
+                                                                                       <td>Free Dinner</td>
+                                                                                       <td>2</td>
+                                                                                       <td class="active"><a href="#">Active</a></td>
+                                                                                       <td>12312335</td>
+                                                                                       <td>25$</td>
+                                                                                       <td>
+                                                                                        <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                        <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                       </td>
+                                                                                      </tr>
+                                                                                      <tr>
+                                                                                       <td><img src="{{ asset('vendors/admin/images/hotel3.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
+                                                                                       </td>
+                                                                                       <td>209</td>
+                                                                                       <td><a href="#">Single</a></td>
+                                                                                       <td><a href="#">AC</a></td>
+                                                                                       <td>Free Dinner</td>
+                                                                                       <td>1</td>
+                                                                                       <td class="active"><a href="#">Active</a></td>
+                                                                                       <td>12312335</td>
+                                                                                       <td>30$</td>
+                                                                                       <td>
+                                                                                        <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                        <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                       </td>
+                                                                                      </tr>
+                                                                                      <tr>
+                                                                                       <td><img src="{{ asset('vendors/admin/images/hotel2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
+                                                                                       </td>
+                                                                                       <td>209</td>
+                                                                                       <td><a href="#">Double</a></td>
+                                                                                       <td><a href="#">AC</a></td>
+                                                                                       <td>Free Lunch</td>
+                                                                                       <td>4</td>
+                                                                                       <td class="expired"><a href="#">Expired</a></td>
+                                                                                       <td>12312335</td>
+                                                                                       <td>45$</td>
+                                                                                       <td>
+                                                                                        <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                        <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                       </td>
+                                                                                      </tr>
+                                                                                      <tr>
+                                                                                       <td><img src="{{ asset('vendors/admin/images/hotel1.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
+                                                                                       <td>212</td>
+                                                                                       <td><a href="#">Double</a></td>
+                                                                                       <td><a href="#">Non-AC</a></td>
+                                                                                       <td>Free Lunch</td>
+                                                                                       <td>4</td>
+                                                                                       <td class="draft"><a href="#">Draft</a></td>
+                                                                                       <td>12312335</td>
+                                                                                       <td>25$</td>
+                                                                                       <td>
+                                                                                        <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                        <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                       </td>
+                                                                                      </tr>
+                                                                                      <tr>
+                                                                                       <td><img src="{{ asset('vendors/admin/images/hotel4.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
+                                                                                       <td>214</td>
+                                                                                       <td><a href="#">Single</a></td>
+                                                                                       <td><a href="#">AC</a></td>
+                                                                                       <td>Free Dinner</td>
+                                                                                       <td>1</td>
+                                                                                       <td class="featured"><a href="#">Featured</a></td>
+                                                                                       <td>12312335</td>
+                                                                                       <td>50$</td>
+                                                                                       <td>
+                                                                                        <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                        <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                       </td>
+                                                                                      </tr>
+                                                                                      <tr>
+                                                                                       <td><img src="{{ asset('vendors/admin/images/hotel4.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
+                                                                                       </td>
+                                                                                       <td>214</td>
+                                                                                       <td><a href="#">Double</a></td>
+                                                                                       <td><a href="#">Non-AC</a></td>
+                                                                                       <td>Free Lunch</td>
+                                                                                       <td>2</td>
+                                                                                       <td class="featured"><a href="#">Featured</a></td>
+                                                                                       <td>12312335</td>
+                                                                                       <td>40$</td>
+                                                                                       <td>
+                                                                                        <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                        <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                       </td>
+                                                                                      </tr>
+                                                                                      <tr>
+                                                                                       <td><img src="{{ asset('vendors/admin/images/hotel3.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
+                                                                                       </td>
+                                                                                       <td>214</td>
+                                                                                       <td><a href="#">Single</a></td>
+                                                                                       <td><a href="#">AC</a></td>
+                                                                                       <td>Free Dinner</td>
+                                                                                       <td>2</td>
+                                                                                       <td class="active"><a href="#">Active</a></td>
+                                                                                       <td>12312335</td>
+                                                                                       <td>25$</td>
+                                                                                       <td>
+                                                                                        <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                        <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                       </td>
+                                                                                      </tr>
+                                                                                      <tr>
+                                                                                       <td><img src="{{ asset('vendors/admin/images/hotel3.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
+                                                                                       </td>
+                                                                                       <td>209</td>
+                                                                                       <td><a href="#">Single</a></td>
+                                                                                       <td><a href="#">AC</a></td>
+                                                                                       <td>Free Dinner</td>
+                                                                                       <td>1</td>
+                                                                                       <td class="active"><a href="#">Active</a></td>
+                                                                                       <td>12312335</td>
+                                                                                       <td>30$</td>
+                                                                                       <td>
+                                                                                        <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                        <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                       </td>
+                                                                                      </tr>
+                                                                                      <tr>
+                                                                                       <td><img src="{{ asset('vendors/admin/images/hotel2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
+                                                                                       </td>
+                                                                                       <td>209</td>
+                                                                                       <td><a href="#">Double</a></td>
+                                                                                       <td><a href="#">AC</a></td>
+                                                                                       <td>Free Lunch</td>
+                                                                                       <td>4</td>
+                                                                                       <td class="expired"><a href="#">Expired</a></td>
+                                                                                       <td>12312335</td>
+                                                                                       <td>45$</td>
+                                                                                       <td>
+                                                                                        <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                        <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                       </td>
+                                                                                      </tr>
+                                                                                      <tr>
+                                                                                       <td><img src="{{ asset('vendors/admin/images/hotel1.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
+                                                                                       <td>212</td>
+                                                                                       <td><a href="#">Double</a></td>
+                                                                                       <td><a href="#">Non-AC</a></td>
+                                                                                       <td>Free Lunch</td>
+                                                                                       <td>4</td>
+                                                                                       <td class="draft"><a href="#">Draft</a></td>
+                                                                                       <td>12312335</td>
+                                                                                       <td>25$</td>
+                                                                                       <td>
+                                                                                        <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                        <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                       </td>
+                                                                                      </tr>
+                                                                                      <tr>
+                                                                                       <td><img src="{{ asset('vendors/admin/images/hotel4.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
+                                                                                       <td>214</td>
+                                                                                       <td><a href="#">Single</a></td>
+                                                                                       <td><a href="#">AC</a></td>
+                                                                                       <td>Free Dinner</td>
+                                                                                       <td>1</td>
+                                                                                       <td class="featured"><a href="#">Featured</a></td>
+                                                                                       <td>12312335</td>
+                                                                                       <td>50$</td>
+                                                                                       <td>
+                                                                                        <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                        <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                       </td>
+                                                                                      </tr>
+                                                                                      <tr>
+                                                                                       <td><img src="{{ asset('vendors/admin/images/hotel4.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
+                                                                                       </td>
+                                                                                       <td>214</td>
+                                                                                       <td><a href="#">Double</a></td>
+                                                                                       <td><a href="#">Non-AC</a></td>
+                                                                                       <td>Free Lunch</td>
+                                                                                       <td>2</td>
+                                                                                       <td class="featured"><a href="#">Featured</a></td>
+                                                                                       <td>12312335</td>
+                                                                                       <td>40$</td>
+                                                                                       <td>
+                                                                                        <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                        <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                       </td>
+                                                                                      </tr>
+                                                                                      <tr>
+                                                                                       <td><img src="{{ asset('vendors/admin/images/hotel3.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
+                                                                                       </td>
+                                                                                       <td>214</td>
+                                                                                       <td><a href="#">Single</a></td>
+                                                                                       <td><a href="#">AC</a></td>
+                                                                                       <td>Free Dinner</td>
+                                                                                       <td>2</td>
+                                                                                       <td class="active"><a href="#">Active</a></td>
+                                                                                       <td>12312335</td>
+                                                                                       <td>25$</td>
+                                                                                       <td>
+                                                                                        <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                        <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                       </td>
+                                                                                      </tr>
+                                                            -->
 
                                 </tbody>
                             </table>
@@ -685,6 +696,43 @@
         $(document).ready(function() {
             $('#example').DataTable();
         });
+    </script>
+
+    <script>
+        function getNextStatus(currentStatus) {
+            switch (currentStatus) {
+                case 'active':
+                    return 'draft';
+                case 'draft':
+                    return 'expired';
+                case 'expired':
+                    return 'featured';
+                case 'featured':
+                    return 'active';
+                default:
+                    return 'active';
+            }
+        }
+
+        function updateStatus(unitId, newStatus) {
+            $.ajax({
+                url: '{{ route('listing-hotel.updateStatus') }}', // Controller Route
+                type: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}', // Send Token
+                    id: unitId,
+                    status: newStatus
+                },
+                success: function(response) {
+                    // alert('Estado actualizado con éxito');
+                    location.reload(); // Reload page
+                },
+                error: function(xhr) {
+                    console.log(xhr.responseText);
+                    alert('Error al actualizar el estado');
+                }
+            });
+        }
     </script>
 
 @endsection

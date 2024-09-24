@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\UnitHotel;
 use App\Models\UnitTour;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -57,6 +58,26 @@ class UnitTourController extends Controller
     {
         //
     }
+
+    /**
+     * Update Status (active/inactive)
+     */
+    public function updateStatus(Request $request)
+    {
+        // search the element by id
+        $unit = UnitTour::findOrFail($request->id);
+
+        // Update status
+        $unit->status = $request->status;
+        $unit->save();
+
+        // Return request
+        return response()->json([
+            'message' => 'Estado actualizado con éxito',
+            'unit' => $unit,
+        ], 200);
+    }
+
 
     /**
      * Show the form for editing the specified resource.
