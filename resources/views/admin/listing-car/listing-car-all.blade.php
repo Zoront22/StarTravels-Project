@@ -74,7 +74,12 @@
                                             <td>{{ $unit->model }}</td>
                                             <td>{{ $unit->capacity }}</td>
                                             <td>${{ $unit->rent }}</td>
-                                            <td class="active"><a href="#">Active</a></td>
+                                            <td class="{{ $unit->status === 'inactive' ? 'expired' : 'active' }}">
+                                                <a href="javascript:void(0);"
+                                                    onclick="updateStatus('{{ $unit->id }}', '{{ $unit->status === 'inactive' ? 'active' : 'inactive' }}')">
+                                                    {{ $unit->status }}
+                                                </a>
+                                            </td>
                                             <td>
                                                 <a href="{{ route('listing-car.edit', $unit->id) }}"><i
                                                         class="fas fa-edit"></i></a>
@@ -93,366 +98,366 @@
                                             </td>
                                         </tr>
                                         <!--
-                                                                                                                                              <tr>
-                                                                                                                                               <td><img src="{{ asset('vendors/admin/images/car2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px"></td>
-                                                                                                                                               <td>120</td>
-                                                                                                                                               <td><a href="#">Business Tour</a></td>
-                                                                                                                                               <td><a href="#">UAE</a></td>
-                                                                                                                                               <td>Lahore</td>
-                                                                                                                                               <td>Corolla</td>
-                                                                                                                                               <td>90</td>
-                                                                                                                                               <td>350$</td>
-                                                                                                                                               <td class="expired"><a href="#">Expired</a></td>
-                                                                                                                                               <td>
-                                                                                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                                                                               </td>
-                                                                                                                                              </tr>
-                                                                                                                                              <tr>
-                                                                                                                                               <td><img src="{{ asset('vendors/admin/images/car3.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
-                                                                                                                                               <td>212</td>
-                                                                                                                                               <td><a href="#">Vacational Tour</a></td>
-                                                                                                                                               <td><a href="#">Canada</a></td>
-                                                                                                                                               <td>Karachi</td>
-                                                                                                                                               <td>Honda Civic</td>
-                                                                                                                                               <td>50</td>
-                                                                                                                                               <td>200$</td>
-                                                                                                                                               <td class="draft"><a href="#">Draft</a></td>
-                                                                                                                                               <td>
-                                                                                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                                                                               </td>
-                                                                                                                                              </tr>
-                                                                                                                                              <tr>
-                                                                                                                                               <td><img src="{{ asset('vendors/admin/images/car1.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
-                                                                                                                                               <td>214</td>
-                                                                                                                                               <td><a href="#">Business Tour</a></td>
-                                                                                                                                               <td><a href="#">Paris</a></td>
-                                                                                                                                               <td>Lahore</td>
-                                                                                                                                               <td>Chiron</td>
-                                                                                                                                               <td>20</td>
-                                                                                                                                               <td>300$</td>
-                                                                                                                                               <td class="featured"><a href="#">Featured</a></td>
-                                                                                                                                               <td>
-                                                                                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                                                                               </td>
-                                                                                                                                              </tr>
-                                                                                                                                              <tr>
-                                                                                                                                               <td><img src="{{ asset('vendors/admin/images/car2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px"></td>
-                                                                                                                                               <td>214</td>
-                                                                                                                                               <td><a href="#">Vacational Tour</a></td>
-                                                                                                                                               <td><a href="#">USA</a></td>
-                                                                                                                                               <td>Karachi</td>
-                                                                                                                                               <td>Cooper</td>
-                                                                                                                                               <td>30</td>
-                                                                                                                                               <td>100$</td>
-                                                                                                                                               <td class="featured"><a href="#">Featured</a></td>
-                                                                                                                                               <td>
-                                                                                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                                                                               </td>
-                                                                                                                                              </tr>
-                                                                                                                                              <tr>
-                                                                                                                                               <td><img src="{{ asset('vendors/admin/images/car1.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px"></td>
-                                                                                                                                               <td>110</td>
-                                                                                                                                               <td><a href="#">Visit</a></td>
-                                                                                                                                               <td><a href="#">USA</a></td>
-                                                                                                                                               <td>Gujranwala</td>
-                                                                                                                                               <td>Toyota Supra</td>
-                                                                                                                                               <td>20</td>
-                                                                                                                                               <td>100$</td>
-                                                                                                                                               <td class="active"><a href="#">Active</a></td>
-                                                                                                                                               <td>
-                                                                                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                                                                               </td>
-                                                                                                                                              </tr>
-                                                                                                                                              <tr>
-                                                                                                                                               <td><img src="{{ asset('vendors/admin/images/car2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px"></td>
-                                                                                                                                               <td>120</td>
-                                                                                                                                               <td><a href="#">Business Tour</a></td>
-                                                                                                                                               <td><a href="#">UAE</a></td>
-                                                                                                                                               <td>Lahore</td>
-                                                                                                                                               <td>Corolla</td>
-                                                                                                                                               <td>90</td>
-                                                                                                                                               <td>350$</td>
-                                                                                                                                               <td class="expired"><a href="#">Expired</a></td>
-                                                                                                                                               <td>
-                                                                                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                                                                               </td>
-                                                                                                                                              </tr>
-                                                                                                                                              <tr>
-                                                                                                                                               <td><img src="{{ asset('vendors/admin/images/car3.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
-                                                                                                                                               <td>212</td>
-                                                                                                                                               <td><a href="#">Vacational Tour</a></td>
-                                                                                                                                               <td><a href="#">Canada</a></td>
-                                                                                                                                               <td>Karachi</td>
-                                                                                                                                               <td>Honda Civic</td>
-                                                                                                                                               <td>50</td>
-                                                                                                                                               <td>200$</td>
-                                                                                                                                               <td class="draft"><a href="#">Draft</a></td>
-                                                                                                                                               <td>
-                                                                                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                                                                               </td>
-                                                                                                                                              </tr>
-                                                                                                                                              <tr>
-                                                                                                                                               <td><img src="{{ asset('vendors/admin/images/car1.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
-                                                                                                                                               <td>214</td>
-                                                                                                                                               <td><a href="#">Business Tour</a></td>
-                                                                                                                                               <td><a href="#">Paris</a></td>
-                                                                                                                                               <td>Lahore</td>
-                                                                                                                                               <td>Chiron</td>
-                                                                                                                                               <td>20</td>
-                                                                                                                                               <td>300$</td>
-                                                                                                                                               <td class="featured"><a href="#">Featured</a></td>
-                                                                                                                                               <td>
-                                                                                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                                                                               </td>
-                                                                                                                                              </tr>
-                                                                                                                                              <tr>
-                                                                                                                                               <td><img src="{{ asset('vendors/admin/images/car2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px"></td>
-                                                                                                                                               <td>214</td>
-                                                                                                                                               <td><a href="#">Vacational Tour</a></td>
-                                                                                                                                               <td><a href="#">USA</a></td>
-                                                                                                                                               <td>Karachi</td>
-                                                                                                                                               <td>Cooper</td>
-                                                                                                                                               <td>30</td>
-                                                                                                                                               <td>100$</td>
-                                                                                                                                               <td class="featured"><a href="#">Featured</a></td>
-                                                                                                                                               <td>
-                                                                                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                                                                               </td>
-                                                                                                                                              </tr>
-                                                                                                                                              <tr>
-                                                                                                                                               <td><img src="{{ asset('vendors/admin/images/car1.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px"></td>
-                                                                                                                                               <td>110</td>
-                                                                                                                                               <td><a href="#">Visit</a></td>
-                                                                                                                                               <td><a href="#">USA</a></td>
-                                                                                                                                               <td>Gujranwala</td>
-                                                                                                                                               <td>Toyota Supra</td>
-                                                                                                                                               <td>20</td>
-                                                                                                                                               <td>100$</td>
-                                                                                                                                               <td class="active"><a href="#">Active</a></td>
-                                                                                                                                               <td>
-                                                                                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                                                                               </td>
-                                                                                                                                              </tr>
-                                                                                                                                              <tr>
-                                                                                                                                               <td><img src="{{ asset('vendors/admin/images/car2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px"></td>
-                                                                                                                                               <td>120</td>
-                                                                                                                                               <td><a href="#">Business Tour</a></td>
-                                                                                                                                               <td><a href="#">UAE</a></td>
-                                                                                                                                               <td>Lahore</td>
-                                                                                                                                               <td>Corolla</td>
-                                                                                                                                               <td>90</td>
-                                                                                                                                               <td>350$</td>
-                                                                                                                                               <td class="expired"><a href="#">Expired</a></td>
-                                                                                                                                               <td>
-                                                                                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                                                                               </td>
-                                                                                                                                              </tr>
-                                                                                                                                              <tr>
-                                                                                                                                               <td><img src="{{ asset('vendors/admin/images/car3.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
-                                                                                                                                               <td>212</td>
-                                                                                                                                               <td><a href="#">Vacational Tour</a></td>
-                                                                                                                                               <td><a href="#">Canada</a></td>
-                                                                                                                                               <td>Karachi</td>
-                                                                                                                                               <td>Honda Civic</td>
-                                                                                                                                               <td>50</td>
-                                                                                                                                               <td>200$</td>
-                                                                                                                                               <td class="draft"><a href="#">Draft</a></td>
-                                                                                                                                               <td>
-                                                                                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                                                                               </td>
-                                                                                                                                              </tr>
-                                                                                                                                              <tr>
-                                                                                                                                               <td><img src="{{ asset('vendors/admin/images/car1.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
-                                                                                                                                               <td>214</td>
-                                                                                                                                               <td><a href="#">Business Tour</a></td>
-                                                                                                                                               <td><a href="#">Paris</a></td>
-                                                                                                                                               <td>Lahore</td>
-                                                                                                                                               <td>Chiron</td>
-                                                                                                                                               <td>20</td>
-                                                                                                                                               <td>300$</td>
-                                                                                                                                               <td class="featured"><a href="#">Featured</a></td>
-                                                                                                                                               <td>
-                                                                                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                                                                               </td>
-                                                                                                                                              </tr>
-                                                                                                                                              <tr>
-                                                                                                                                               <td><img src="{{ asset('vendors/admin/images/car2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px"></td>
-                                                                                                                                               <td>214</td>
-                                                                                                                                               <td><a href="#">Vacational Tour</a></td>
-                                                                                                                                               <td><a href="#">USA</a></td>
-                                                                                                                                               <td>Karachi</td>
-                                                                                                                                               <td>Cooper</td>
-                                                                                                                                               <td>30</td>
-                                                                                                                                               <td>100$</td>
-                                                                                                                                               <td class="featured"><a href="#">Featured</a></td>
-                                                                                                                                               <td>
-                                                                                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                                                                               </td>
-                                                                                                                                              </tr>
-                                                                                                                                              <tr>
-                                                                                                                                               <td><img src="{{ asset('vendors/admin/images/car1.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px"></td>
-                                                                                                                                               <td>110</td>
-                                                                                                                                               <td><a href="#">Visit</a></td>
-                                                                                                                                               <td><a href="#">USA</a></td>
-                                                                                                                                               <td>Gujranwala</td>
-                                                                                                                                               <td>Toyota Supra</td>
-                                                                                                                                               <td>20</td>
-                                                                                                                                               <td>100$</td>
-                                                                                                                                               <td class="active"><a href="#">Active</a></td>
-                                                                                                                                               <td>
-                                                                                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                                                                               </td>
-                                                                                                                                              </tr>
-                                                                                                                                              <tr>
-                                                                                                                                               <td><img src="{{ asset('vendors/admin/images/car2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px"></td>
-                                                                                                                                               <td>120</td>
-                                                                                                                                               <td><a href="#">Business Tour</a></td>
-                                                                                                                                               <td><a href="#">UAE</a></td>
-                                                                                                                                               <td>Lahore</td>
-                                                                                                                                               <td>Corolla</td>
-                                                                                                                                               <td>90</td>
-                                                                                                                                               <td>350$</td>
-                                                                                                                                               <td class="expired"><a href="#">Expired</a></td>
-                                                                                                                                               <td>
-                                                                                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                                                                               </td>
-                                                                                                                                              </tr>
-                                                                                                                                              <tr>
-                                                                                                                                               <td><img src="{{ asset('vendors/admin/images/car3.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
-                                                                                                                                               <td>212</td>
-                                                                                                                                               <td><a href="#">Vacational Tour</a></td>
-                                                                                                                                               <td><a href="#">Canada</a></td>
-                                                                                                                                               <td>Karachi</td>
-                                                                                                                                               <td>Honda Civic</td>
-                                                                                                                                               <td>50</td>
-                                                                                                                                               <td>200$</td>
-                                                                                                                                               <td class="draft"><a href="#">Draft</a></td>
-                                                                                                                                               <td>
-                                                                                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                                                                               </td>
-                                                                                                                                              </tr>
-                                                                                                                                              <tr>
-                                                                                                                                               <td><img src="{{ asset('vendors/admin/images/car1.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
-                                                                                                                                               <td>214</td>
-                                                                                                                                               <td><a href="#">Business Tour</a></td>
-                                                                                                                                               <td><a href="#">Paris</a></td>
-                                                                                                                                               <td>Lahore</td>
-                                                                                                                                               <td>Chiron</td>
-                                                                                                                                               <td>20</td>
-                                                                                                                                               <td>300$</td>
-                                                                                                                                               <td class="featured"><a href="#">Featured</a></td>
-                                                                                                                                               <td>
-                                                                                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                                                                               </td>
-                                                                                                                                              </tr>
-                                                                                                                                              <tr>
-                                                                                                                                               <td><img src="{{ asset('vendors/admin/images/car2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px"></td>
-                                                                                                                                               <td>214</td>
-                                                                                                                                               <td><a href="#">Vacational Tour</a></td>
-                                                                                                                                               <td><a href="#">USA</a></td>
-                                                                                                                                               <td>Karachi</td>
-                                                                                                                                               <td>Cooper</td>
-                                                                                                                                               <td>30</td>
-                                                                                                                                               <td>100$</td>
-                                                                                                                                               <td class="featured"><a href="#">Featured</a></td>
-                                                                                                                                               <td>
-                                                                                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                                                                               </td>
-                                                                                                                                              </tr>
-                                                                                                                                              <tr>
-                                                                                                                                               <td><img src="{{ asset('vendors/admin/images/car1.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px"></td>
-                                                                                                                                               <td>110</td>
-                                                                                                                                               <td><a href="#">Visit</a></td>
-                                                                                                                                               <td><a href="#">USA</a></td>
-                                                                                                                                               <td>Gujranwala</td>
-                                                                                                                                               <td>Toyota Supra</td>
-                                                                                                                                               <td>20</td>
-                                                                                                                                               <td>100$</td>
-                                                                                                                                               <td class="active"><a href="#">Active</a></td>
-                                                                                                                                               <td>
-                                                                                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                                                                               </td>
-                                                                                                                                              </tr>
-                                                                                                                                              <tr>
-                                                                                                                                               <td><img src="{{ asset('vendors/admin/images/car2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px"></td>
-                                                                                                                                               <td>120</td>
-                                                                                                                                               <td><a href="#">Business Tour</a></td>
-                                                                                                                                               <td><a href="#">UAE</a></td>
-                                                                                                                                               <td>Lahore</td>
-                                                                                                                                               <td>Corolla</td>
-                                                                                                                                               <td>90</td>
-                                                                                                                                               <td>350$</td>
-                                                                                                                                               <td class="expired"><a href="#">Expired</a></td>
-                                                                                                                                               <td>
-                                                                                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                                                                               </td>
-                                                                                                                                              </tr>
-                                                                                                                                              <tr>
-                                                                                                                                               <td><img src="{{ asset('vendors/admin/images/car3.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
-                                                                                                                                               <td>212</td>
-                                                                                                                                               <td><a href="#">Vacational Tour</a></td>
-                                                                                                                                               <td><a href="#">Canada</a></td>
-                                                                                                                                               <td>Karachi</td>
-                                                                                                                                               <td>Honda Civic</td>
-                                                                                                                                               <td>50</td>
-                                                                                                                                               <td>200$</td>
-                                                                                                                                               <td class="draft"><a href="#">Draft</a></td>
-                                                                                                                                               <td>
-                                                                                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                                                                               </td>
-                                                                                                                                              </tr>
-                                                                                                                                              <tr>
-                                                                                                                                               <td><img src="{{ asset('vendors/admin/images/car1.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
-                                                                                                                                               <td>214</td>
-                                                                                                                                               <td><a href="#">Business Tour</a></td>
-                                                                                                                                               <td><a href="#">Paris</a></td>
-                                                                                                                                               <td>Lahore</td>
-                                                                                                                                               <td>Chiron</td>
-                                                                                                                                               <td>20</td>
-                                                                                                                                               <td>300$</td>
-                                                                                                                                               <td class="featured"><a href="#">Featured</a></td>
-                                                                                                                                               <td>
-                                                                                                                                                <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                                                                               </td>
-                                                                                                                                              </tr>
-                                                                                                                                              <tr>
-                                                                                                                                               <td><img src="{{ asset('vendors/admin/images/car2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px"></td>
-                                                                                                                                               <td>214</td>
-                                                                                                                                               <td><a href="#">Vacational Tour</a></td>
-                                                                                                                                               <td><a href="#">USA</a></td>
-                                                                                                                                               <td>Karachi</td>
-                                                                                                                                               <td>Cooper</td>
-                                                                                                                                               <td>30</td>
-                                                                                                                                               <td>100$</td>
-                                                                                                                                               <td class="featured"><a href="#">Featured</a></td>
-                                                                                                                                               <td>
-                                                                                                                                                   <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                                                                                   <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                                                                                </tr>
-                                                                                                                                            </td>-->
+                                                                                                                                                                                              <tr>
+                                                                                                                                                                                               <td><img src="{{ asset('vendors/admin/images/car2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px"></td>
+                                                                                                                                                                                               <td>120</td>
+                                                                                                                                                                                               <td><a href="#">Business Tour</a></td>
+                                                                                                                                                                                               <td><a href="#">UAE</a></td>
+                                                                                                                                                                                               <td>Lahore</td>
+                                                                                                                                                                                               <td>Corolla</td>
+                                                                                                                                                                                               <td>90</td>
+                                                                                                                                                                                               <td>350$</td>
+                                                                                                                                                                                               <td class="expired"><a href="#">Expired</a></td>
+                                                                                                                                                                                               <td>
+                                                                                                                                                                                                <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                                                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                                                                                                               </td>
+                                                                                                                                                                                              </tr>
+                                                                                                                                                                                              <tr>
+                                                                                                                                                                                               <td><img src="{{ asset('vendors/admin/images/car3.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
+                                                                                                                                                                                               <td>212</td>
+                                                                                                                                                                                               <td><a href="#">Vacational Tour</a></td>
+                                                                                                                                                                                               <td><a href="#">Canada</a></td>
+                                                                                                                                                                                               <td>Karachi</td>
+                                                                                                                                                                                               <td>Honda Civic</td>
+                                                                                                                                                                                               <td>50</td>
+                                                                                                                                                                                               <td>200$</td>
+                                                                                                                                                                                               <td class="draft"><a href="#">Draft</a></td>
+                                                                                                                                                                                               <td>
+                                                                                                                                                                                                <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                                                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                                                                                                               </td>
+                                                                                                                                                                                              </tr>
+                                                                                                                                                                                              <tr>
+                                                                                                                                                                                               <td><img src="{{ asset('vendors/admin/images/car1.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
+                                                                                                                                                                                               <td>214</td>
+                                                                                                                                                                                               <td><a href="#">Business Tour</a></td>
+                                                                                                                                                                                               <td><a href="#">Paris</a></td>
+                                                                                                                                                                                               <td>Lahore</td>
+                                                                                                                                                                                               <td>Chiron</td>
+                                                                                                                                                                                               <td>20</td>
+                                                                                                                                                                                               <td>300$</td>
+                                                                                                                                                                                               <td class="featured"><a href="#">Featured</a></td>
+                                                                                                                                                                                               <td>
+                                                                                                                                                                                                <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                                                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                                                                                                               </td>
+                                                                                                                                                                                              </tr>
+                                                                                                                                                                                              <tr>
+                                                                                                                                                                                               <td><img src="{{ asset('vendors/admin/images/car2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px"></td>
+                                                                                                                                                                                               <td>214</td>
+                                                                                                                                                                                               <td><a href="#">Vacational Tour</a></td>
+                                                                                                                                                                                               <td><a href="#">USA</a></td>
+                                                                                                                                                                                               <td>Karachi</td>
+                                                                                                                                                                                               <td>Cooper</td>
+                                                                                                                                                                                               <td>30</td>
+                                                                                                                                                                                               <td>100$</td>
+                                                                                                                                                                                               <td class="featured"><a href="#">Featured</a></td>
+                                                                                                                                                                                               <td>
+                                                                                                                                                                                                <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                                                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                                                                                                               </td>
+                                                                                                                                                                                              </tr>
+                                                                                                                                                                                              <tr>
+                                                                                                                                                                                               <td><img src="{{ asset('vendors/admin/images/car1.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px"></td>
+                                                                                                                                                                                               <td>110</td>
+                                                                                                                                                                                               <td><a href="#">Visit</a></td>
+                                                                                                                                                                                               <td><a href="#">USA</a></td>
+                                                                                                                                                                                               <td>Gujranwala</td>
+                                                                                                                                                                                               <td>Toyota Supra</td>
+                                                                                                                                                                                               <td>20</td>
+                                                                                                                                                                                               <td>100$</td>
+                                                                                                                                                                                               <td class="active"><a href="#">Active</a></td>
+                                                                                                                                                                                               <td>
+                                                                                                                                                                                                <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                                                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                                                                                                               </td>
+                                                                                                                                                                                              </tr>
+                                                                                                                                                                                              <tr>
+                                                                                                                                                                                               <td><img src="{{ asset('vendors/admin/images/car2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px"></td>
+                                                                                                                                                                                               <td>120</td>
+                                                                                                                                                                                               <td><a href="#">Business Tour</a></td>
+                                                                                                                                                                                               <td><a href="#">UAE</a></td>
+                                                                                                                                                                                               <td>Lahore</td>
+                                                                                                                                                                                               <td>Corolla</td>
+                                                                                                                                                                                               <td>90</td>
+                                                                                                                                                                                               <td>350$</td>
+                                                                                                                                                                                               <td class="expired"><a href="#">Expired</a></td>
+                                                                                                                                                                                               <td>
+                                                                                                                                                                                                <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                                                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                                                                                                               </td>
+                                                                                                                                                                                              </tr>
+                                                                                                                                                                                              <tr>
+                                                                                                                                                                                               <td><img src="{{ asset('vendors/admin/images/car3.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
+                                                                                                                                                                                               <td>212</td>
+                                                                                                                                                                                               <td><a href="#">Vacational Tour</a></td>
+                                                                                                                                                                                               <td><a href="#">Canada</a></td>
+                                                                                                                                                                                               <td>Karachi</td>
+                                                                                                                                                                                               <td>Honda Civic</td>
+                                                                                                                                                                                               <td>50</td>
+                                                                                                                                                                                               <td>200$</td>
+                                                                                                                                                                                               <td class="draft"><a href="#">Draft</a></td>
+                                                                                                                                                                                               <td>
+                                                                                                                                                                                                <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                                                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                                                                                                               </td>
+                                                                                                                                                                                              </tr>
+                                                                                                                                                                                              <tr>
+                                                                                                                                                                                               <td><img src="{{ asset('vendors/admin/images/car1.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
+                                                                                                                                                                                               <td>214</td>
+                                                                                                                                                                                               <td><a href="#">Business Tour</a></td>
+                                                                                                                                                                                               <td><a href="#">Paris</a></td>
+                                                                                                                                                                                               <td>Lahore</td>
+                                                                                                                                                                                               <td>Chiron</td>
+                                                                                                                                                                                               <td>20</td>
+                                                                                                                                                                                               <td>300$</td>
+                                                                                                                                                                                               <td class="featured"><a href="#">Featured</a></td>
+                                                                                                                                                                                               <td>
+                                                                                                                                                                                                <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                                                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                                                                                                               </td>
+                                                                                                                                                                                              </tr>
+                                                                                                                                                                                              <tr>
+                                                                                                                                                                                               <td><img src="{{ asset('vendors/admin/images/car2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px"></td>
+                                                                                                                                                                                               <td>214</td>
+                                                                                                                                                                                               <td><a href="#">Vacational Tour</a></td>
+                                                                                                                                                                                               <td><a href="#">USA</a></td>
+                                                                                                                                                                                               <td>Karachi</td>
+                                                                                                                                                                                               <td>Cooper</td>
+                                                                                                                                                                                               <td>30</td>
+                                                                                                                                                                                               <td>100$</td>
+                                                                                                                                                                                               <td class="featured"><a href="#">Featured</a></td>
+                                                                                                                                                                                               <td>
+                                                                                                                                                                                                <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                                                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                                                                                                               </td>
+                                                                                                                                                                                              </tr>
+                                                                                                                                                                                              <tr>
+                                                                                                                                                                                               <td><img src="{{ asset('vendors/admin/images/car1.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px"></td>
+                                                                                                                                                                                               <td>110</td>
+                                                                                                                                                                                               <td><a href="#">Visit</a></td>
+                                                                                                                                                                                               <td><a href="#">USA</a></td>
+                                                                                                                                                                                               <td>Gujranwala</td>
+                                                                                                                                                                                               <td>Toyota Supra</td>
+                                                                                                                                                                                               <td>20</td>
+                                                                                                                                                                                               <td>100$</td>
+                                                                                                                                                                                               <td class="active"><a href="#">Active</a></td>
+                                                                                                                                                                                               <td>
+                                                                                                                                                                                                <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                                                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                                                                                                               </td>
+                                                                                                                                                                                              </tr>
+                                                                                                                                                                                              <tr>
+                                                                                                                                                                                               <td><img src="{{ asset('vendors/admin/images/car2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px"></td>
+                                                                                                                                                                                               <td>120</td>
+                                                                                                                                                                                               <td><a href="#">Business Tour</a></td>
+                                                                                                                                                                                               <td><a href="#">UAE</a></td>
+                                                                                                                                                                                               <td>Lahore</td>
+                                                                                                                                                                                               <td>Corolla</td>
+                                                                                                                                                                                               <td>90</td>
+                                                                                                                                                                                               <td>350$</td>
+                                                                                                                                                                                               <td class="expired"><a href="#">Expired</a></td>
+                                                                                                                                                                                               <td>
+                                                                                                                                                                                                <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                                                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                                                                                                               </td>
+                                                                                                                                                                                              </tr>
+                                                                                                                                                                                              <tr>
+                                                                                                                                                                                               <td><img src="{{ asset('vendors/admin/images/car3.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
+                                                                                                                                                                                               <td>212</td>
+                                                                                                                                                                                               <td><a href="#">Vacational Tour</a></td>
+                                                                                                                                                                                               <td><a href="#">Canada</a></td>
+                                                                                                                                                                                               <td>Karachi</td>
+                                                                                                                                                                                               <td>Honda Civic</td>
+                                                                                                                                                                                               <td>50</td>
+                                                                                                                                                                                               <td>200$</td>
+                                                                                                                                                                                               <td class="draft"><a href="#">Draft</a></td>
+                                                                                                                                                                                               <td>
+                                                                                                                                                                                                <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                                                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                                                                                                               </td>
+                                                                                                                                                                                              </tr>
+                                                                                                                                                                                              <tr>
+                                                                                                                                                                                               <td><img src="{{ asset('vendors/admin/images/car1.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
+                                                                                                                                                                                               <td>214</td>
+                                                                                                                                                                                               <td><a href="#">Business Tour</a></td>
+                                                                                                                                                                                               <td><a href="#">Paris</a></td>
+                                                                                                                                                                                               <td>Lahore</td>
+                                                                                                                                                                                               <td>Chiron</td>
+                                                                                                                                                                                               <td>20</td>
+                                                                                                                                                                                               <td>300$</td>
+                                                                                                                                                                                               <td class="featured"><a href="#">Featured</a></td>
+                                                                                                                                                                                               <td>
+                                                                                                                                                                                                <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                                                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                                                                                                               </td>
+                                                                                                                                                                                              </tr>
+                                                                                                                                                                                              <tr>
+                                                                                                                                                                                               <td><img src="{{ asset('vendors/admin/images/car2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px"></td>
+                                                                                                                                                                                               <td>214</td>
+                                                                                                                                                                                               <td><a href="#">Vacational Tour</a></td>
+                                                                                                                                                                                               <td><a href="#">USA</a></td>
+                                                                                                                                                                                               <td>Karachi</td>
+                                                                                                                                                                                               <td>Cooper</td>
+                                                                                                                                                                                               <td>30</td>
+                                                                                                                                                                                               <td>100$</td>
+                                                                                                                                                                                               <td class="featured"><a href="#">Featured</a></td>
+                                                                                                                                                                                               <td>
+                                                                                                                                                                                                <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                                                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                                                                                                               </td>
+                                                                                                                                                                                              </tr>
+                                                                                                                                                                                              <tr>
+                                                                                                                                                                                               <td><img src="{{ asset('vendors/admin/images/car1.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px"></td>
+                                                                                                                                                                                               <td>110</td>
+                                                                                                                                                                                               <td><a href="#">Visit</a></td>
+                                                                                                                                                                                               <td><a href="#">USA</a></td>
+                                                                                                                                                                                               <td>Gujranwala</td>
+                                                                                                                                                                                               <td>Toyota Supra</td>
+                                                                                                                                                                                               <td>20</td>
+                                                                                                                                                                                               <td>100$</td>
+                                                                                                                                                                                               <td class="active"><a href="#">Active</a></td>
+                                                                                                                                                                                               <td>
+                                                                                                                                                                                                <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                                                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                                                                                                               </td>
+                                                                                                                                                                                              </tr>
+                                                                                                                                                                                              <tr>
+                                                                                                                                                                                               <td><img src="{{ asset('vendors/admin/images/car2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px"></td>
+                                                                                                                                                                                               <td>120</td>
+                                                                                                                                                                                               <td><a href="#">Business Tour</a></td>
+                                                                                                                                                                                               <td><a href="#">UAE</a></td>
+                                                                                                                                                                                               <td>Lahore</td>
+                                                                                                                                                                                               <td>Corolla</td>
+                                                                                                                                                                                               <td>90</td>
+                                                                                                                                                                                               <td>350$</td>
+                                                                                                                                                                                               <td class="expired"><a href="#">Expired</a></td>
+                                                                                                                                                                                               <td>
+                                                                                                                                                                                                <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                                                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                                                                                                               </td>
+                                                                                                                                                                                              </tr>
+                                                                                                                                                                                              <tr>
+                                                                                                                                                                                               <td><img src="{{ asset('vendors/admin/images/car3.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
+                                                                                                                                                                                               <td>212</td>
+                                                                                                                                                                                               <td><a href="#">Vacational Tour</a></td>
+                                                                                                                                                                                               <td><a href="#">Canada</a></td>
+                                                                                                                                                                                               <td>Karachi</td>
+                                                                                                                                                                                               <td>Honda Civic</td>
+                                                                                                                                                                                               <td>50</td>
+                                                                                                                                                                                               <td>200$</td>
+                                                                                                                                                                                               <td class="draft"><a href="#">Draft</a></td>
+                                                                                                                                                                                               <td>
+                                                                                                                                                                                                <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                                                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                                                                                                               </td>
+                                                                                                                                                                                              </tr>
+                                                                                                                                                                                              <tr>
+                                                                                                                                                                                               <td><img src="{{ asset('vendors/admin/images/car1.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
+                                                                                                                                                                                               <td>214</td>
+                                                                                                                                                                                               <td><a href="#">Business Tour</a></td>
+                                                                                                                                                                                               <td><a href="#">Paris</a></td>
+                                                                                                                                                                                               <td>Lahore</td>
+                                                                                                                                                                                               <td>Chiron</td>
+                                                                                                                                                                                               <td>20</td>
+                                                                                                                                                                                               <td>300$</td>
+                                                                                                                                                                                               <td class="featured"><a href="#">Featured</a></td>
+                                                                                                                                                                                               <td>
+                                                                                                                                                                                                <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                                                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                                                                                                               </td>
+                                                                                                                                                                                              </tr>
+                                                                                                                                                                                              <tr>
+                                                                                                                                                                                               <td><img src="{{ asset('vendors/admin/images/car2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px"></td>
+                                                                                                                                                                                               <td>214</td>
+                                                                                                                                                                                               <td><a href="#">Vacational Tour</a></td>
+                                                                                                                                                                                               <td><a href="#">USA</a></td>
+                                                                                                                                                                                               <td>Karachi</td>
+                                                                                                                                                                                               <td>Cooper</td>
+                                                                                                                                                                                               <td>30</td>
+                                                                                                                                                                                               <td>100$</td>
+                                                                                                                                                                                               <td class="featured"><a href="#">Featured</a></td>
+                                                                                                                                                                                               <td>
+                                                                                                                                                                                                <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                                                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                                                                                                               </td>
+                                                                                                                                                                                              </tr>
+                                                                                                                                                                                              <tr>
+                                                                                                                                                                                               <td><img src="{{ asset('vendors/admin/images/car1.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px"></td>
+                                                                                                                                                                                               <td>110</td>
+                                                                                                                                                                                               <td><a href="#">Visit</a></td>
+                                                                                                                                                                                               <td><a href="#">USA</a></td>
+                                                                                                                                                                                               <td>Gujranwala</td>
+                                                                                                                                                                                               <td>Toyota Supra</td>
+                                                                                                                                                                                               <td>20</td>
+                                                                                                                                                                                               <td>100$</td>
+                                                                                                                                                                                               <td class="active"><a href="#">Active</a></td>
+                                                                                                                                                                                               <td>
+                                                                                                                                                                                                <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                                                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                                                                                                               </td>
+                                                                                                                                                                                              </tr>
+                                                                                                                                                                                              <tr>
+                                                                                                                                                                                               <td><img src="{{ asset('vendors/admin/images/car2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px"></td>
+                                                                                                                                                                                               <td>120</td>
+                                                                                                                                                                                               <td><a href="#">Business Tour</a></td>
+                                                                                                                                                                                               <td><a href="#">UAE</a></td>
+                                                                                                                                                                                               <td>Lahore</td>
+                                                                                                                                                                                               <td>Corolla</td>
+                                                                                                                                                                                               <td>90</td>
+                                                                                                                                                                                               <td>350$</td>
+                                                                                                                                                                                               <td class="expired"><a href="#">Expired</a></td>
+                                                                                                                                                                                               <td>
+                                                                                                                                                                                                <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                                                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                                                                                                               </td>
+                                                                                                                                                                                              </tr>
+                                                                                                                                                                                              <tr>
+                                                                                                                                                                                               <td><img src="{{ asset('vendors/admin/images/car3.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
+                                                                                                                                                                                               <td>212</td>
+                                                                                                                                                                                               <td><a href="#">Vacational Tour</a></td>
+                                                                                                                                                                                               <td><a href="#">Canada</a></td>
+                                                                                                                                                                                               <td>Karachi</td>
+                                                                                                                                                                                               <td>Honda Civic</td>
+                                                                                                                                                                                               <td>50</td>
+                                                                                                                                                                                               <td>200$</td>
+                                                                                                                                                                                               <td class="draft"><a href="#">Draft</a></td>
+                                                                                                                                                                                               <td>
+                                                                                                                                                                                                <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                                                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                                                                                                               </td>
+                                                                                                                                                                                              </tr>
+                                                                                                                                                                                              <tr>
+                                                                                                                                                                                               <td><img src="{{ asset('vendors/admin/images/car1.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
+                                                                                                                                                                                               <td>214</td>
+                                                                                                                                                                                               <td><a href="#">Business Tour</a></td>
+                                                                                                                                                                                               <td><a href="#">Paris</a></td>
+                                                                                                                                                                                               <td>Lahore</td>
+                                                                                                                                                                                               <td>Chiron</td>
+                                                                                                                                                                                               <td>20</td>
+                                                                                                                                                                                               <td>300$</td>
+                                                                                                                                                                                               <td class="featured"><a href="#">Featured</a></td>
+                                                                                                                                                                                               <td>
+                                                                                                                                                                                                <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                                                                                                                <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                                                                                                               </td>
+                                                                                                                                                                                              </tr>
+                                                                                                                                                                                              <tr>
+                                                                                                                                                                                               <td><img src="{{ asset('vendors/admin/images/car2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px"></td>
+                                                                                                                                                                                               <td>214</td>
+                                                                                                                                                                                               <td><a href="#">Vacational Tour</a></td>
+                                                                                                                                                                                               <td><a href="#">USA</a></td>
+                                                                                                                                                                                               <td>Karachi</td>
+                                                                                                                                                                                               <td>Cooper</td>
+                                                                                                                                                                                               <td>30</td>
+                                                                                                                                                                                               <td>100$</td>
+                                                                                                                                                                                               <td class="featured"><a href="#">Featured</a></td>
+                                                                                                                                                                                               <td>
+                                                                                                                                                                                                   <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                                                                                                                   <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                                                                                                                </tr>
+                                                                                                                                                                                            </td>-->
                                     @endforeach
 
                                 </tbody>
@@ -497,6 +502,28 @@
         $(document).ready(function() {
             $('#example').DataTable();
         });
+    </script>
+
+    <script>
+        function updateStatus(unitId, newStatus) {
+            $.ajax({
+                url: '{{ route('listing-car.updateStatus') }}', // Controller Route
+                type: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}', // Send "crf_token"
+                    id: unitId,
+                    status: newStatus
+                },
+                success: function(response) {
+                    // alert('Estado actualizado con éxito');
+                    location.reload(); // Refresh page
+                },
+                error: function(xhr) {
+                    console.log(xhr.responseText);
+                    alert('Error al actualizar el estado');
+                }
+            });
+        }
     </script>
 
 @endsection

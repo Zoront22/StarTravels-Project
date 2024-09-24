@@ -50,6 +50,8 @@ Route::prefix('admin')->group(function () {
     Route::resource('/listing-car', UnitController::class)->parameters([
         'listing-car' => 'unit',
     ]);
+    Route::post('/listing-car/status', [UnitController::class, 'updateStatus'])->name('listing-car.updateStatus');
+
 
     //Cruise
     Route::resource('/listing-cruise', UnitCruiseController::class)

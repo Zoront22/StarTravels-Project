@@ -25,6 +25,7 @@ class Unit extends Model
         'images',
         'features',
         'details',
+        'status',
     ];
 
     public $timestamps = false;

@@ -96,6 +96,26 @@ class UnitController extends Controller
     }
 
     /**
+     * Update Status (active/inactive)
+     */
+    public function updateStatus(Request $request)
+    {
+        // search the element by id
+        $unit = Unit::findOrFail($request->id);
+
+        // Update status
+        $unit->status = $request->status;
+        $unit->save();
+
+        // Return request
+        return response()->json([
+            'message' => 'Estado actualizado con éxito',
+            'unit' => $unit,
+        ], 200);
+    }
+
+
+    /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
