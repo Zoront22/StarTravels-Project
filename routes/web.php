@@ -63,6 +63,7 @@ Route::prefix('admin')->group(function () {
     Route::resource('/listing-flight', UnitFlightController::class)->parameters([
         'listing-flight' => 'unit',
     ]);
+    Route::post('listing-flight', [UnitFlightController::class, 'updateStatus'])->name('listing-flight.updateStatus');
 
     //Hotel
     Route::resource('/listing-hotel', UnitHotelController::class)->parameters([

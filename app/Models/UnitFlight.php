@@ -27,6 +27,7 @@ class UnitFlight extends Model
         'aircraft',
         'features',
         'details',
+        'status',
     ];
 
     public $timestamps = false;

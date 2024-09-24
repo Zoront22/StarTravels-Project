@@ -75,7 +75,17 @@
                                             <td>{{ $unit->toward }}</td>
                                             <td>{{ $unit->departure_date }}</td>
                                             <td>${{ $unit->price }}</td>
-                                            <td class="active"><a href="#">Active</a></td>
+                                            <td
+                                                class="
+                                                @if ($unit->status === 'draft') draft
+                                                @elseif ($unit->status === 'active') active
+                                                @elseif ($unit->status === 'expired') expired
+                                                @elseif ($unit->status === 'featured') featured @endif">
+                                                <a href="javascript:void(0);"
+                                                    onclick="updateStatus('{{ $unit->id }}', getNextStatus('{{ $unit->status }}'))">
+                                                    {{ ucfirst($unit->status) }}
+                                                </a>
+                                            </td>
                                             <td>
                                                 <a href="{{ route('listing-flight.edit', $unit->id) }}"><i
                                                         class="fas fa-edit"></i></a>
@@ -96,381 +106,381 @@
                                     @endforeach
 
                                     <!--
-                                                                                                                  <tr>
-                                                                                                                   <td><img src="{{ asset('vendors/admin/images/plane2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
-                                                                                                                   </td>
-                                                                                                                   <td>120</td>
-                                                                                                                   <td><a href="#">Business Tour</a></td>
-                                                                                                                   <td><a href="#">Air Canada</a></td>
-                                                                                                                   <td>UAE</td>
-                                                                                                                   <td>England</td>
-                                                                                                                   <td>5/5/2019</td>
-                                                                                                                   <td>350$</td>
-                                                                                                                   <td class="expired"><a href="#">Expired</a></td>
-                                                                                                                   <td>
-                                                                                                                    <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                                                    <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                                                   </td>
-                                                                                                                  </tr>
-                                                                                                                  <tr>
-                                                                                                                   <td><img src="{{ asset('vendors/admin/images/plane1.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
-                                                                                                                   <td>212</td>
-                                                                                                                   <td><a href="#">Vacational Tour</a></td>
-                                                                                                                   <td><a href="#">Alaska Airlines</a></td>
-                                                                                                                   <td>Dubai</td>
-                                                                                                                   <td>Canada</td>
-                                                                                                                   <td>4/3/2019</td>
-                                                                                                                   <td>200$</td>
-                                                                                                                   <td class="draft"><a href="#">Draft</a></td>
-                                                                                                                   <td>
-                                                                                                                    <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                                                    <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                                                   </td>
-                                                                                                                  </tr>
-                                                                                                                  <tr>
-                                                                                                                   <td><img src="{{ asset('vendors/admin/images/plane4.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
-                                                                                                                   <td>214</td>
-                                                                                                                   <td><a href="#">Business Tour</a></td>
-                                                                                                                   <td><a href="#">JetBlue Airways</a></td>
-                                                                                                                   <td>USA</td>
-                                                                                                                   <td>Canada</td>
-                                                                                                                   <td>7/2/2019</td>
-                                                                                                                   <td>300$</td>
-                                                                                                                   <td class="featured"><a href="#">Featured</a></td>
-                                                                                                                   <td>
-                                                                                                                    <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                                                    <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                                                   </td>
-                                                                                                                  </tr>
-                                                                                                                  <tr>
-                                                                                                                   <td><img src="{{ asset('vendors/admin/images/plane4.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
-                                                                                                                   </td>
-                                                                                                                   <td>214</td>
-                                                                                                                   <td><a href="#">Vacational Tour</a></td>
-                                                                                                                   <td><a href="#">American Airlines</a></td>
-                                                                                                                   <td>Canada</td>
-                                                                                                                   <td>USA</td>
-                                                                                                                   <td>9/4/2019</td>
-                                                                                                                   <td>100$</td>
-                                                                                                                   <td class="featured"><a href="#">Featured</a></td>
-                                                                                                                   <td>
-                                                                                                                    <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                                                    <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                                                   </td>
-                                                                                                                  </tr>
-                                                                                                                  <tr>
-                                                                                                                   <td><img src="{{ asset('vendors/admin/images/plane3.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
-                                                                                                                   </td>
-                                                                                                                   <td>110</td>
-                                                                                                                   <td><a href="#">Visit</a></td>
-                                                                                                                   <td><a href="#">American Airlines</a></td>
-                                                                                                                   <td>USA</td>
-                                                                                                                   <td>Paksitan</td>
-                                                                                                                   <td>6/6/2019</td>
-                                                                                                                   <td>100$</td>
-                                                                                                                   <td class="active"><a href="#">Active</a></td>
-                                                                                                                   <td>
-                                                                                                                    <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                                                    <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                                                   </td>
-                                                                                                                  </tr>
-                                                                                                                  <tr>
-                                                                                                                   <td><img src="{{ asset('vendors/admin/images/plane2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
-                                                                                                                   </td>
-                                                                                                                   <td>120</td>
-                                                                                                                   <td><a href="#">Business Tour</a></td>
-                                                                                                                   <td><a href="#">Air Canada</a></td>
-                                                                                                                   <td>UAE</td>
-                                                                                                                   <td>England</td>
-                                                                                                                   <td>5/5/2019</td>
-                                                                                                                   <td>350$</td>
-                                                                                                                   <td class="expired"><a href="#">Expired</a></td>
-                                                                                                                   <td>
-                                                                                                                    <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                                                    <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                                                   </td>
-                                                                                                                  </tr>
-                                                                                                                  <tr>
-                                                                                                                   <td><img src="{{ asset('vendors/admin/images/plane1.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
-                                                                                                                   <td>212</td>
-                                                                                                                   <td><a href="#">Vacational Tour</a></td>
-                                                                                                                   <td><a href="#">Alaska Airlines</a></td>
-                                                                                                                   <td>Dubai</td>
-                                                                                                                   <td>Canada</td>
-                                                                                                                   <td>4/3/2019</td>
-                                                                                                                   <td>200$</td>
-                                                                                                                   <td class="draft"><a href="#">Draft</a></td>
-                                                                                                                   <td>
-                                                                                                                    <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                                                    <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                                                   </td>
-                                                                                                                  </tr>
-                                                                                                                  <tr>
-                                                                                                                   <td><img src="{{ asset('vendors/admin/images/plane4.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
-                                                                                                                   <td>214</td>
-                                                                                                                   <td><a href="#">Business Tour</a></td>
-                                                                                                                   <td><a href="#">JetBlue Airways</a></td>
-                                                                                                                   <td>USA</td>
-                                                                                                                   <td>Canada</td>
-                                                                                                                   <td>7/2/2019</td>
-                                                                                                                   <td>300$</td>
-                                                                                                                   <td class="featured"><a href="#">Featured</a></td>
-                                                                                                                   <td>
-                                                                                                                    <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                                                    <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                                                   </td>
-                                                                                                                  </tr>
-                                                                                                                  <tr>
-                                                                                                                   <td><img src="{{ asset('vendors/admin/images/plane4.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
-                                                                                                                   </td>
-                                                                                                                   <td>214</td>
-                                                                                                                   <td><a href="#">Vacational Tour</a></td>
-                                                                                                                   <td><a href="#">American Airlines</a></td>
-                                                                                                                   <td>Canada</td>
-                                                                                                                   <td>USA</td>
-                                                                                                                   <td>9/4/2019</td>
-                                                                                                                   <td>100$</td>
-                                                                                                                   <td class="featured"><a href="#">Featured</a></td>
-                                                                                                                   <td>
-                                                                                                                    <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                                                    <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                                                   </td>
-                                                                                                                  </tr>
-                                                                                                                  <tr>
-                                                                                                                   <td><img src="{{ asset('vendors/admin/images/plane3.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
-                                                                                                                   </td>
-                                                                                                                   <td>110</td>
-                                                                                                                   <td><a href="#">Visit</a></td>
-                                                                                                                   <td><a href="#">American Airlines</a></td>
-                                                                                                                   <td>USA</td>
-                                                                                                                   <td>Paksitan</td>
-                                                                                                                   <td>6/6/2019</td>
-                                                                                                                   <td>100$</td>
-                                                                                                                   <td class="active"><a href="#">Active</a></td>
-                                                                                                                   <td>
-                                                                                                                    <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                                                    <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                                                   </td>
-                                                                                                                  </tr>
-                                                                                                                  <tr>
-                                                                                                                   <td><img src="{{ asset('vendors/admin/images/plane2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
-                                                                                                                   </td>
-                                                                                                                   <td>120</td>
-                                                                                                                   <td><a href="#">Business Tour</a></td>
-                                                                                                                   <td><a href="#">Air Canada</a></td>
-                                                                                                                   <td>UAE</td>
-                                                                                                                   <td>England</td>
-                                                                                                                   <td>5/5/2019</td>
-                                                                                                                   <td>350$</td>
-                                                                                                                   <td class="expired"><a href="#">Expired</a></td>
-                                                                                                                   <td>
-                                                                                                                    <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                                                    <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                                                   </td>
-                                                                                                                  </tr>
-                                                                                                                  <tr>
-                                                                                                                   <td><img src="{{ asset('vendors/admin/images/plane1.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
-                                                                                                                   <td>212</td>
-                                                                                                                   <td><a href="#">Vacational Tour</a></td>
-                                                                                                                   <td><a href="#">Alaska Airlines</a></td>
-                                                                                                                   <td>Dubai</td>
-                                                                                                                   <td>Canada</td>
-                                                                                                                   <td>4/3/2019</td>
-                                                                                                                   <td>200$</td>
-                                                                                                                   <td class="draft"><a href="#">Draft</a></td>
-                                                                                                                   <td>
-                                                                                                                    <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                                                    <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                                                   </td>
-                                                                                                                  </tr>
-                                                                                                                  <tr>
-                                                                                                                   <td><img src="{{ asset('vendors/admin/images/plane4.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
-                                                                                                                   <td>214</td>
-                                                                                                                   <td><a href="#">Business Tour</a></td>
-                                                                                                                   <td><a href="#">JetBlue Airways</a></td>
-                                                                                                                   <td>USA</td>
-                                                                                                                   <td>Canada</td>
-                                                                                                                   <td>7/2/2019</td>
-                                                                                                                   <td>300$</td>
-                                                                                                                   <td class="featured"><a href="#">Featured</a></td>
-                                                                                                                   <td>
-                                                                                                                    <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                                                    <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                                                   </td>
-                                                                                                                  </tr>
-                                                                                                                  <tr>
-                                                                                                                   <td><img src="{{ asset('vendors/admin/images/plane4.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
-                                                                                                                   </td>
-                                                                                                                   <td>214</td>
-                                                                                                                   <td><a href="#">Vacational Tour</a></td>
-                                                                                                                   <td><a href="#">American Airlines</a></td>
-                                                                                                                   <td>Canada</td>
-                                                                                                                   <td>USA</td>
-                                                                                                                   <td>9/4/2019</td>
-                                                                                                                   <td>100$</td>
-                                                                                                                   <td class="featured"><a href="#">Featured</a></td>
-                                                                                                                   <td>
-                                                                                                                    <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                                                    <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                                                   </td>
-                                                                                                                  </tr>
-                                                                                                                  <tr>
-                                                                                                                   <td><img src="{{ asset('vendors/admin/images/plane3.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
-                                                                                                                   </td>
-                                                                                                                   <td>110</td>
-                                                                                                                   <td><a href="#">Visit</a></td>
-                                                                                                                   <td><a href="#">American Airlines</a></td>
-                                                                                                                   <td>USA</td>
-                                                                                                                   <td>Paksitan</td>
-                                                                                                                   <td>6/6/2019</td>
-                                                                                                                   <td>100$</td>
-                                                                                                                   <td class="active"><a href="#">Active</a></td>
-                                                                                                                   <td>
-                                                                                                                    <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                                                    <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                                                   </td>
-                                                                                                                  </tr>
-                                                                                                                  <tr>
-                                                                                                                   <td><img src="{{ asset('vendors/admin/images/plane2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
-                                                                                                                   </td>
-                                                                                                                   <td>120</td>
-                                                                                                                   <td><a href="#">Business Tour</a></td>
-                                                                                                                   <td><a href="#">Air Canada</a></td>
-                                                                                                                   <td>UAE</td>
-                                                                                                                   <td>England</td>
-                                                                                                                   <td>5/5/2019</td>
-                                                                                                                   <td>350$</td>
-                                                                                                                   <td class="expired"><a href="#">Expired</a></td>
-                                                                                                                   <td>
-                                                                                                                    <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                                                    <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                                                   </td>
-                                                                                                                  </tr>
-                                                                                                                  <tr>
-                                                                                                                   <td><img src="{{ asset('vendors/admin/images/plane1.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
-                                                                                                                   <td>212</td>
-                                                                                                                   <td><a href="#">Vacational Tour</a></td>
-                                                                                                                   <td><a href="#">Alaska Airlines</a></td>
-                                                                                                                   <td>Dubai</td>
-                                                                                                                   <td>Canada</td>
-                                                                                                                   <td>4/3/2019</td>
-                                                                                                                   <td>200$</td>
-                                                                                                                   <td class="draft"><a href="#">Draft</a></td>
-                                                                                                                   <td>
-                                                                                                                    <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                                                    <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                                                   </td>
-                                                                                                                  </tr>
-                                                                                                                  <tr>
-                                                                                                                   <td><img src="{{ asset('vendors/admin/images/plane4.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
-                                                                                                                   <td>214</td>
-                                                                                                                   <td><a href="#">Business Tour</a></td>
-                                                                                                                   <td><a href="#">JetBlue Airways</a></td>
-                                                                                                                   <td>USA</td>
-                                                                                                                   <td>Canada</td>
-                                                                                                                   <td>7/2/2019</td>
-                                                                                                                   <td>300$</td>
-                                                                                                                   <td class="featured"><a href="#">Featured</a></td>
-                                                                                                                   <td>
-                                                                                                                    <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                                                    <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                                                   </td>
-                                                                                                                  </tr>
-                                                                                                                  <tr>
-                                                                                                                   <td><img src="{{ asset('vendors/admin/images/plane4.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
-                                                                                                                   </td>
-                                                                                                                   <td>214</td>
-                                                                                                                   <td><a href="#">Vacational Tour</a></td>
-                                                                                                                   <td><a href="#">American Airlines</a></td>
-                                                                                                                   <td>Canada</td>
-                                                                                                                   <td>USA</td>
-                                                                                                                   <td>9/4/2019</td>
-                                                                                                                   <td>100$</td>
-                                                                                                                   <td class="featured"><a href="#">Featured</a></td>
-                                                                                                                   <td>
-                                                                                                                    <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                                                    <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                                                   </td>
-                                                                                                                  </tr>
-                                                                                                                  <tr>
-                                                                                                                   <td><img src="{{ asset('vendors/admin/images/plane3.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
-                                                                                                                   </td>
-                                                                                                                   <td>110</td>
-                                                                                                                   <td><a href="#">Visit</a></td>
-                                                                                                                   <td><a href="#">American Airlines</a></td>
-                                                                                                                   <td>USA</td>
-                                                                                                                   <td>Paksitan</td>
-                                                                                                                   <td>6/6/2019</td>
-                                                                                                                   <td>100$</td>
-                                                                                                                   <td class="active"><a href="#">Active</a></td>
-                                                                                                                   <td>
-                                                                                                                    <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                                                    <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                                                   </td>
-                                                                                                                  </tr>
-                                                                                                                  <tr>
-                                                                                                                   <td><img src="{{ asset('vendors/admin/images/plane2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
-                                                                                                                   </td>
-                                                                                                                   <td>120</td>
-                                                                                                                   <td><a href="#">Business Tour</a></td>
-                                                                                                                   <td><a href="#">Air Canada</a></td>
-                                                                                                                   <td>UAE</td>
-                                                                                                                   <td>England</td>
-                                                                                                                   <td>5/5/2019</td>
-                                                                                                                   <td>350$</td>
-                                                                                                                   <td class="expired"><a href="#">Expired</a></td>
-                                                                                                                   <td>
-                                                                                                                    <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                                                    <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                                                   </td>
-                                                                                                                  </tr>
-                                                                                                                  <tr>
-                                                                                                                   <td><img src="{{ asset('vendors/admin/images/plane1.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
-                                                                                                                   <td>212</td>
-                                                                                                                   <td><a href="#">Vacational Tour</a></td>
-                                                                                                                   <td><a href="#">Alaska Airlines</a></td>
-                                                                                                                   <td>Dubai</td>
-                                                                                                                   <td>Canada</td>
-                                                                                                                   <td>4/3/2019</td>
-                                                                                                                   <td>200$</td>
-                                                                                                                   <td class="draft"><a href="#">Draft</a></td>
-                                                                                                                   <td>
-                                                                                                                    <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                                                    <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                                                   </td>
-                                                                                                                  </tr>
-                                                                                                                  <tr>
-                                                                                                                   <td><img src="{{ asset('vendors/admin/images/plane4.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
-                                                                                                                   <td>214</td>
-                                                                                                                   <td><a href="#">Business Tour</a></td>
-                                                                                                                   <td><a href="#">JetBlue Airways</a></td>
-                                                                                                                   <td>USA</td>
-                                                                                                                   <td>Canada</td>
-                                                                                                                   <td>7/2/2019</td>
-                                                                                                                   <td>300$</td>
-                                                                                                                   <td class="featured"><a href="#">Featured</a></td>
-                                                                                                                   <td>
-                                                                                                                    <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                                                    <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                                                   </td>
-                                                                                                                  </tr>
-                                                                                                                  <tr>
-                                                                                                                   <td><img src="{{ asset('vendors/admin/images/plane4.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
-                                                                                                                   </td>
-                                                                                                                   <td>214</td>
-                                                                                                                   <td><a href="#">Vacational Tour</a></td>
-                                                                                                                   <td><a href="#">American Airlines</a></td>
-                                                                                                                   <td>Canada</td>
-                                                                                                                   <td>USA</td>
-                                                                                                                   <td>9/4/2019</td>
-                                                                                                                   <td>100$</td>
-                                                                                                                   <td class="featured"><a href="#">Featured</a></td>
-                                                                                                                   <td>
-                                                                                                                    <a href="#"><i class="fas fa-edit"></i></a>
-                                                                                                                    <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                                                                                                   </td>
-                                                                                                                  </tr>
-                                                                                                                                            -->
+                                                                                                                          <tr>
+                                                                                                                           <td><img src="{{ asset('vendors/admin/images/plane2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
+                                                                                                                           </td>
+                                                                                                                           <td>120</td>
+                                                                                                                           <td><a href="#">Business Tour</a></td>
+                                                                                                                           <td><a href="#">Air Canada</a></td>
+                                                                                                                           <td>UAE</td>
+                                                                                                                           <td>England</td>
+                                                                                                                           <td>5/5/2019</td>
+                                                                                                                           <td>350$</td>
+                                                                                                                           <td class="expired"><a href="#">Expired</a></td>
+                                                                                                                           <td>
+                                                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                                           </td>
+                                                                                                                          </tr>
+                                                                                                                          <tr>
+                                                                                                                           <td><img src="{{ asset('vendors/admin/images/plane1.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
+                                                                                                                           <td>212</td>
+                                                                                                                           <td><a href="#">Vacational Tour</a></td>
+                                                                                                                           <td><a href="#">Alaska Airlines</a></td>
+                                                                                                                           <td>Dubai</td>
+                                                                                                                           <td>Canada</td>
+                                                                                                                           <td>4/3/2019</td>
+                                                                                                                           <td>200$</td>
+                                                                                                                           <td class="draft"><a href="#">Draft</a></td>
+                                                                                                                           <td>
+                                                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                                           </td>
+                                                                                                                          </tr>
+                                                                                                                          <tr>
+                                                                                                                           <td><img src="{{ asset('vendors/admin/images/plane4.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
+                                                                                                                           <td>214</td>
+                                                                                                                           <td><a href="#">Business Tour</a></td>
+                                                                                                                           <td><a href="#">JetBlue Airways</a></td>
+                                                                                                                           <td>USA</td>
+                                                                                                                           <td>Canada</td>
+                                                                                                                           <td>7/2/2019</td>
+                                                                                                                           <td>300$</td>
+                                                                                                                           <td class="featured"><a href="#">Featured</a></td>
+                                                                                                                           <td>
+                                                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                                           </td>
+                                                                                                                          </tr>
+                                                                                                                          <tr>
+                                                                                                                           <td><img src="{{ asset('vendors/admin/images/plane4.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
+                                                                                                                           </td>
+                                                                                                                           <td>214</td>
+                                                                                                                           <td><a href="#">Vacational Tour</a></td>
+                                                                                                                           <td><a href="#">American Airlines</a></td>
+                                                                                                                           <td>Canada</td>
+                                                                                                                           <td>USA</td>
+                                                                                                                           <td>9/4/2019</td>
+                                                                                                                           <td>100$</td>
+                                                                                                                           <td class="featured"><a href="#">Featured</a></td>
+                                                                                                                           <td>
+                                                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                                           </td>
+                                                                                                                          </tr>
+                                                                                                                          <tr>
+                                                                                                                           <td><img src="{{ asset('vendors/admin/images/plane3.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
+                                                                                                                           </td>
+                                                                                                                           <td>110</td>
+                                                                                                                           <td><a href="#">Visit</a></td>
+                                                                                                                           <td><a href="#">American Airlines</a></td>
+                                                                                                                           <td>USA</td>
+                                                                                                                           <td>Paksitan</td>
+                                                                                                                           <td>6/6/2019</td>
+                                                                                                                           <td>100$</td>
+                                                                                                                           <td class="active"><a href="#">Active</a></td>
+                                                                                                                           <td>
+                                                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                                           </td>
+                                                                                                                          </tr>
+                                                                                                                          <tr>
+                                                                                                                           <td><img src="{{ asset('vendors/admin/images/plane2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
+                                                                                                                           </td>
+                                                                                                                           <td>120</td>
+                                                                                                                           <td><a href="#">Business Tour</a></td>
+                                                                                                                           <td><a href="#">Air Canada</a></td>
+                                                                                                                           <td>UAE</td>
+                                                                                                                           <td>England</td>
+                                                                                                                           <td>5/5/2019</td>
+                                                                                                                           <td>350$</td>
+                                                                                                                           <td class="expired"><a href="#">Expired</a></td>
+                                                                                                                           <td>
+                                                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                                           </td>
+                                                                                                                          </tr>
+                                                                                                                          <tr>
+                                                                                                                           <td><img src="{{ asset('vendors/admin/images/plane1.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
+                                                                                                                           <td>212</td>
+                                                                                                                           <td><a href="#">Vacational Tour</a></td>
+                                                                                                                           <td><a href="#">Alaska Airlines</a></td>
+                                                                                                                           <td>Dubai</td>
+                                                                                                                           <td>Canada</td>
+                                                                                                                           <td>4/3/2019</td>
+                                                                                                                           <td>200$</td>
+                                                                                                                           <td class="draft"><a href="#">Draft</a></td>
+                                                                                                                           <td>
+                                                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                                           </td>
+                                                                                                                          </tr>
+                                                                                                                          <tr>
+                                                                                                                           <td><img src="{{ asset('vendors/admin/images/plane4.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
+                                                                                                                           <td>214</td>
+                                                                                                                           <td><a href="#">Business Tour</a></td>
+                                                                                                                           <td><a href="#">JetBlue Airways</a></td>
+                                                                                                                           <td>USA</td>
+                                                                                                                           <td>Canada</td>
+                                                                                                                           <td>7/2/2019</td>
+                                                                                                                           <td>300$</td>
+                                                                                                                           <td class="featured"><a href="#">Featured</a></td>
+                                                                                                                           <td>
+                                                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                                           </td>
+                                                                                                                          </tr>
+                                                                                                                          <tr>
+                                                                                                                           <td><img src="{{ asset('vendors/admin/images/plane4.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
+                                                                                                                           </td>
+                                                                                                                           <td>214</td>
+                                                                                                                           <td><a href="#">Vacational Tour</a></td>
+                                                                                                                           <td><a href="#">American Airlines</a></td>
+                                                                                                                           <td>Canada</td>
+                                                                                                                           <td>USA</td>
+                                                                                                                           <td>9/4/2019</td>
+                                                                                                                           <td>100$</td>
+                                                                                                                           <td class="featured"><a href="#">Featured</a></td>
+                                                                                                                           <td>
+                                                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                                           </td>
+                                                                                                                          </tr>
+                                                                                                                          <tr>
+                                                                                                                           <td><img src="{{ asset('vendors/admin/images/plane3.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
+                                                                                                                           </td>
+                                                                                                                           <td>110</td>
+                                                                                                                           <td><a href="#">Visit</a></td>
+                                                                                                                           <td><a href="#">American Airlines</a></td>
+                                                                                                                           <td>USA</td>
+                                                                                                                           <td>Paksitan</td>
+                                                                                                                           <td>6/6/2019</td>
+                                                                                                                           <td>100$</td>
+                                                                                                                           <td class="active"><a href="#">Active</a></td>
+                                                                                                                           <td>
+                                                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                                           </td>
+                                                                                                                          </tr>
+                                                                                                                          <tr>
+                                                                                                                           <td><img src="{{ asset('vendors/admin/images/plane2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
+                                                                                                                           </td>
+                                                                                                                           <td>120</td>
+                                                                                                                           <td><a href="#">Business Tour</a></td>
+                                                                                                                           <td><a href="#">Air Canada</a></td>
+                                                                                                                           <td>UAE</td>
+                                                                                                                           <td>England</td>
+                                                                                                                           <td>5/5/2019</td>
+                                                                                                                           <td>350$</td>
+                                                                                                                           <td class="expired"><a href="#">Expired</a></td>
+                                                                                                                           <td>
+                                                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                                           </td>
+                                                                                                                          </tr>
+                                                                                                                          <tr>
+                                                                                                                           <td><img src="{{ asset('vendors/admin/images/plane1.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
+                                                                                                                           <td>212</td>
+                                                                                                                           <td><a href="#">Vacational Tour</a></td>
+                                                                                                                           <td><a href="#">Alaska Airlines</a></td>
+                                                                                                                           <td>Dubai</td>
+                                                                                                                           <td>Canada</td>
+                                                                                                                           <td>4/3/2019</td>
+                                                                                                                           <td>200$</td>
+                                                                                                                           <td class="draft"><a href="#">Draft</a></td>
+                                                                                                                           <td>
+                                                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                                           </td>
+                                                                                                                          </tr>
+                                                                                                                          <tr>
+                                                                                                                           <td><img src="{{ asset('vendors/admin/images/plane4.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
+                                                                                                                           <td>214</td>
+                                                                                                                           <td><a href="#">Business Tour</a></td>
+                                                                                                                           <td><a href="#">JetBlue Airways</a></td>
+                                                                                                                           <td>USA</td>
+                                                                                                                           <td>Canada</td>
+                                                                                                                           <td>7/2/2019</td>
+                                                                                                                           <td>300$</td>
+                                                                                                                           <td class="featured"><a href="#">Featured</a></td>
+                                                                                                                           <td>
+                                                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                                           </td>
+                                                                                                                          </tr>
+                                                                                                                          <tr>
+                                                                                                                           <td><img src="{{ asset('vendors/admin/images/plane4.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
+                                                                                                                           </td>
+                                                                                                                           <td>214</td>
+                                                                                                                           <td><a href="#">Vacational Tour</a></td>
+                                                                                                                           <td><a href="#">American Airlines</a></td>
+                                                                                                                           <td>Canada</td>
+                                                                                                                           <td>USA</td>
+                                                                                                                           <td>9/4/2019</td>
+                                                                                                                           <td>100$</td>
+                                                                                                                           <td class="featured"><a href="#">Featured</a></td>
+                                                                                                                           <td>
+                                                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                                           </td>
+                                                                                                                          </tr>
+                                                                                                                          <tr>
+                                                                                                                           <td><img src="{{ asset('vendors/admin/images/plane3.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
+                                                                                                                           </td>
+                                                                                                                           <td>110</td>
+                                                                                                                           <td><a href="#">Visit</a></td>
+                                                                                                                           <td><a href="#">American Airlines</a></td>
+                                                                                                                           <td>USA</td>
+                                                                                                                           <td>Paksitan</td>
+                                                                                                                           <td>6/6/2019</td>
+                                                                                                                           <td>100$</td>
+                                                                                                                           <td class="active"><a href="#">Active</a></td>
+                                                                                                                           <td>
+                                                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                                           </td>
+                                                                                                                          </tr>
+                                                                                                                          <tr>
+                                                                                                                           <td><img src="{{ asset('vendors/admin/images/plane2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
+                                                                                                                           </td>
+                                                                                                                           <td>120</td>
+                                                                                                                           <td><a href="#">Business Tour</a></td>
+                                                                                                                           <td><a href="#">Air Canada</a></td>
+                                                                                                                           <td>UAE</td>
+                                                                                                                           <td>England</td>
+                                                                                                                           <td>5/5/2019</td>
+                                                                                                                           <td>350$</td>
+                                                                                                                           <td class="expired"><a href="#">Expired</a></td>
+                                                                                                                           <td>
+                                                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                                           </td>
+                                                                                                                          </tr>
+                                                                                                                          <tr>
+                                                                                                                           <td><img src="{{ asset('vendors/admin/images/plane1.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
+                                                                                                                           <td>212</td>
+                                                                                                                           <td><a href="#">Vacational Tour</a></td>
+                                                                                                                           <td><a href="#">Alaska Airlines</a></td>
+                                                                                                                           <td>Dubai</td>
+                                                                                                                           <td>Canada</td>
+                                                                                                                           <td>4/3/2019</td>
+                                                                                                                           <td>200$</td>
+                                                                                                                           <td class="draft"><a href="#">Draft</a></td>
+                                                                                                                           <td>
+                                                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                                           </td>
+                                                                                                                          </tr>
+                                                                                                                          <tr>
+                                                                                                                           <td><img src="{{ asset('vendors/admin/images/plane4.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
+                                                                                                                           <td>214</td>
+                                                                                                                           <td><a href="#">Business Tour</a></td>
+                                                                                                                           <td><a href="#">JetBlue Airways</a></td>
+                                                                                                                           <td>USA</td>
+                                                                                                                           <td>Canada</td>
+                                                                                                                           <td>7/2/2019</td>
+                                                                                                                           <td>300$</td>
+                                                                                                                           <td class="featured"><a href="#">Featured</a></td>
+                                                                                                                           <td>
+                                                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                                           </td>
+                                                                                                                          </tr>
+                                                                                                                          <tr>
+                                                                                                                           <td><img src="{{ asset('vendors/admin/images/plane4.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
+                                                                                                                           </td>
+                                                                                                                           <td>214</td>
+                                                                                                                           <td><a href="#">Vacational Tour</a></td>
+                                                                                                                           <td><a href="#">American Airlines</a></td>
+                                                                                                                           <td>Canada</td>
+                                                                                                                           <td>USA</td>
+                                                                                                                           <td>9/4/2019</td>
+                                                                                                                           <td>100$</td>
+                                                                                                                           <td class="featured"><a href="#">Featured</a></td>
+                                                                                                                           <td>
+                                                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                                           </td>
+                                                                                                                          </tr>
+                                                                                                                          <tr>
+                                                                                                                           <td><img src="{{ asset('vendors/admin/images/plane3.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
+                                                                                                                           </td>
+                                                                                                                           <td>110</td>
+                                                                                                                           <td><a href="#">Visit</a></td>
+                                                                                                                           <td><a href="#">American Airlines</a></td>
+                                                                                                                           <td>USA</td>
+                                                                                                                           <td>Paksitan</td>
+                                                                                                                           <td>6/6/2019</td>
+                                                                                                                           <td>100$</td>
+                                                                                                                           <td class="active"><a href="#">Active</a></td>
+                                                                                                                           <td>
+                                                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                                           </td>
+                                                                                                                          </tr>
+                                                                                                                          <tr>
+                                                                                                                           <td><img src="{{ asset('vendors/admin/images/plane2.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
+                                                                                                                           </td>
+                                                                                                                           <td>120</td>
+                                                                                                                           <td><a href="#">Business Tour</a></td>
+                                                                                                                           <td><a href="#">Air Canada</a></td>
+                                                                                                                           <td>UAE</td>
+                                                                                                                           <td>England</td>
+                                                                                                                           <td>5/5/2019</td>
+                                                                                                                           <td>350$</td>
+                                                                                                                           <td class="expired"><a href="#">Expired</a></td>
+                                                                                                                           <td>
+                                                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                                           </td>
+                                                                                                                          </tr>
+                                                                                                                          <tr>
+                                                                                                                           <td><img src="{{ asset('vendors/admin/images/plane1.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
+                                                                                                                           <td>212</td>
+                                                                                                                           <td><a href="#">Vacational Tour</a></td>
+                                                                                                                           <td><a href="#">Alaska Airlines</a></td>
+                                                                                                                           <td>Dubai</td>
+                                                                                                                           <td>Canada</td>
+                                                                                                                           <td>4/3/2019</td>
+                                                                                                                           <td>200$</td>
+                                                                                                                           <td class="draft"><a href="#">Draft</a></td>
+                                                                                                                           <td>
+                                                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                                           </td>
+                                                                                                                          </tr>
+                                                                                                                          <tr>
+                                                                                                                           <td><img src="{{ asset('vendors/admin/images/plane4.jpg') }}" alt="table-img" class="img-fluid rounded-circle"></td>
+                                                                                                                           <td>214</td>
+                                                                                                                           <td><a href="#">Business Tour</a></td>
+                                                                                                                           <td><a href="#">JetBlue Airways</a></td>
+                                                                                                                           <td>USA</td>
+                                                                                                                           <td>Canada</td>
+                                                                                                                           <td>7/2/2019</td>
+                                                                                                                           <td>300$</td>
+                                                                                                                           <td class="featured"><a href="#">Featured</a></td>
+                                                                                                                           <td>
+                                                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                                           </td>
+                                                                                                                          </tr>
+                                                                                                                          <tr>
+                                                                                                                           <td><img src="{{ asset('vendors/admin/images/plane4.jpg') }}" alt="table-img" class="img-fluid rounded-circle" width="40px">
+                                                                                                                           </td>
+                                                                                                                           <td>214</td>
+                                                                                                                           <td><a href="#">Vacational Tour</a></td>
+                                                                                                                           <td><a href="#">American Airlines</a></td>
+                                                                                                                           <td>Canada</td>
+                                                                                                                           <td>USA</td>
+                                                                                                                           <td>9/4/2019</td>
+                                                                                                                           <td>100$</td>
+                                                                                                                           <td class="featured"><a href="#">Featured</a></td>
+                                                                                                                           <td>
+                                                                                                                            <a href="#"><i class="fas fa-edit"></i></a>
+                                                                                                                            <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                                                                                                           </td>
+                                                                                                                          </tr>
+                                                                                                                                                    -->
 
                                 </tbody>
                             </table>
@@ -514,6 +524,43 @@
         $(document).ready(function() {
             $('#example').DataTable();
         });
+    </script>
+
+    <script>
+        function getNextStatus(currentStatus) {
+            switch (currentStatus) {
+                case 'active':
+                    return 'draft';
+                case 'draft':
+                    return 'expired';
+                case 'expired':
+                    return 'featured';
+                case 'featured':
+                    return 'active';
+                default:
+                    return 'active';
+            }
+        }
+
+        function updateStatus(unitId, newStatus) {
+            $.ajax({
+                url: '{{ route('listing-flight.updateStatus') }}', // Controller Route
+                type: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}', // Send Token
+                    id: unitId,
+                    status: newStatus
+                },
+                success: function(response) {
+                    // alert('Estado actualizado con éxito');
+                    location.reload(); // Reload page
+                },
+                error: function(xhr) {
+                    console.log(xhr.responseText);
+                    alert('Error al actualizar el estado');
+                }
+            });
+        }
     </script>
 
 @endsection
