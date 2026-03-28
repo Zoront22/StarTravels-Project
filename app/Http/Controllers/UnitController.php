@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 
-use App\Models\Unit ;
+use App\Models\Unit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
@@ -35,19 +35,19 @@ class UnitController extends Controller
     public function store(Request $request)
     {
         $validateData = $request->validate([
-            'name'=> 'required',
-            'country'=>'required',
-            'city'=>'required',
-            'model'=> 'required',
-            'manufacture'=> 'required',
-            'year'=> 'required',
-            'capacity'=> 'required',
+            'name' => 'required',
+            'country' => 'required',
+            'city' => 'required',
+            'model' => 'required',
+            'manufacture' => 'required',
+            'year' => 'required',
+            'capacity' => 'required',
             'driver' => 'required',
-            'rent'=> 'required',
-            'rent_type'=> 'required',
-            'images'=> 'required|image',
-            'features'=> 'required',
-            'details'=> 'required',
+            'rent' => 'required',
+            'rent_type' => 'required',
+            'images' => 'required|image',
+            'features' => 'required',
+            'details' => 'required',
         ]);
 
         // $unit = new Unit();
@@ -56,8 +56,9 @@ class UnitController extends Controller
         // $unit->city = $request->city;
 
         // image submit
-        if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('cars', 'storage');
+        if ($request->hasFile('images')) {
+            $path = $request->file('images')->store('cars', 'public'); // Store the image in the specified directory
+            $validateData['images'] = $path; // Add the image path to the validated
             // $path = storage::disk('cars')->put('image', file_get_contents($request->file($images)->getPathname()) ); // Store the image in the specified director
             // $validateData['images'] = $path; // Add the image path to the validated data
             $url = storage::url($path);
@@ -83,7 +84,7 @@ class UnitController extends Controller
         //     'details'=> $validateData['details'],
         // ]);
 
-        return redirect()->route('listing-car.index')->with('success','form sending');
+        return redirect()->route('listing-car.index')->with('success', 'form sending');
         // return $request->all();
     }
 
@@ -134,22 +135,31 @@ class UnitController extends Controller
     {
         //validate data
         $validateData = $request->validate([
-            'name'=> 'required',
-            'country'=>'required',
-            'city'=>'required',
-            'model'=> 'required',
-            'manufacture'=> 'required',
-            'year'=> 'required',
-            'capacity'=> 'required',
+            'name' => 'required',
+            'country' => 'required',
+            'city' => 'required',
+            'model' => 'required',
+            'manufacture' => 'required',
+            'year' => 'required',
+            'capacity' => 'required',
             'driver' => 'required',
-            'rent'=> 'required',
-            'rent_type'=> 'required',
-            'features'=> 'required',
-            'details'=> 'required',
+            'rent' => 'required',
+            'rent_type' => 'required',
+            'images' => 'images',
+            'features' => 'required',
+            'details' => 'required',
         ]);
 
         //update the registry
         $unit = Unit::find($id)->update(array_merge($request->all(), $validateData));
+
+        if ($request->hasFile('images')) {
+            if ($unit->$image) {
+                storage::disk('public')->delete($unit->image);
+            }
+            $path = $request->file('images')->store('cars', 'public'); // Store the image in the specified directory
+            $validateData['images'] = $path; // Add the image path to the validated
+        }
         //DB::table('unit')->where('id', $id)->update([
         //    'name'=> $validateData['name'],
         //    'country'=> $validateData['country'],
@@ -164,8 +174,9 @@ class UnitController extends Controller
         //    'features'=> $validateData['features'],
         //    'details'=> $validateData['details'],
         //]);
+        $unit->update($validateData);
 
-        return redirect()->route('listing-car.index')->with('success','updated');
+        return redirect()->route('listing-car.index')->with('success', 'updated');
     }
 
     /**
@@ -181,6 +192,6 @@ class UnitController extends Controller
         $unit->delete();
 
         //redirect user
-        return redirect()->route('listing-car.index')->with('success','unit eliminated');
+        return redirect()->route('listing-car.index')->with('success', 'unit eliminated');
     }
 }

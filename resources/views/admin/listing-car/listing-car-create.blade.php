@@ -317,8 +317,8 @@
                             </div><!-- end row -->
 
                             <div action="/upload" class="dropzone needsclick dz-clickable" id="demo-upload">
-                                <i class="fas fa-cloud-upload-alt"><input type="file" name="images" id="image"
-                                        accept="image" class="form-control"></i>
+                                <i class="fas fa-cloud-upload-alt"><input type="file" name="images" id="images"
+                                        accept="image/*" class="form-control"></i>
                                 <div class="dz-message needsclick">
                                     <p>
                                         Drop files here or click to upload.

@@ -65,7 +65,7 @@
 
                                     @foreach ($data as $unit)
                                         <tr>
-                                            <td><img src="{{ asset('storage/cars' . $unit->images) }}" alt="table-img"
+                                            <td><img src="{{ Storage::url($unit->images) }}" alt="table-img"
                                                     class="img-fluid rounded-circle" width="40px"></td>
                                             <td>{{ $unit->id }}</td>
                                             <td><a href="#">{{ $unit->name }}</a></td>
